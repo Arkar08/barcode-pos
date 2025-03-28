@@ -107,7 +107,16 @@ const inputStyle:React.CSSProperties = {
 
 const buttonStyle:React.CSSProperties = {
   height:40,
-  width:200
+  width:250,
+  backgroundColor:"#7070db",
+  color:'white'
+}
+
+const buttonStyle1:React.CSSProperties = {
+  height:40,
+  width:150,
+  backgroundColor:"#7070db",
+  color:'white'
 }
 
 const tableLayout:React.CSSProperties = {
@@ -115,12 +124,21 @@ const tableLayout:React.CSSProperties = {
   height:'calc(100vh - 250px)',
   boxShadow:'1px 1px 2px black',
   marginTop:20,
-  padding:'20px',
+  padding:'10px',
   borderRadius:10
 }
 
 const textStyle:React.CSSProperties = {
   color:'#7070db'
+}
+
+const imageAdd:React.CSSProperties = {
+  width:'25px',
+  height:'25px'
+}
+
+const buttonText:React.CSSProperties = {
+  fontSize:16
 }
 
 const Product = () => {
@@ -129,7 +147,11 @@ const Product = () => {
         <Title level={3} style={textStyle}>Product Listings</Title>
         <Layout style={filderLayout}>
           <Input placeholder="Search Product Name" style={inputStyle}/>
-          <Button type="primary" style={buttonStyle}>New Product</Button>
+          <Button style={buttonStyle1}>Filter</Button>
+          <Button style={buttonStyle}>
+            <img src="/images/add-item.png" alt="userAdd" style={imageAdd}/>
+            <span style={buttonText}>New Product</span>
+          </Button>
         </Layout>
         <Layout style={tableLayout}>
           <Table<DataType> columns={columns} dataSource={data} />

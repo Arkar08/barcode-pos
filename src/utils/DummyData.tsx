@@ -10,8 +10,8 @@ export const dummyData = [
     {
         route:"/users",
         text:"User Listings",
-        image:"images/dashboard (2).png",
-        activeImage:"images/dashboard (3).png"
+        image:"images/customer (1).png",
+        activeImage:"images/customer.png"
     },
     {
         route:"/products",
