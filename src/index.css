@@ -1,0 +1,16 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+.active{
+  background-color: #7070db;
+  color: white !important;
+  transition: all 0.5s ease-in-out;
+}
+.ant-table{
+  height: calc(100vh - 330px) !important;
+  overflow: auto;
+}
