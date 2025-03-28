@@ -149,7 +149,7 @@ const Product = () => {
           <Input placeholder="Search Product Name" style={inputStyle}/>
           <Button style={buttonStyle1}>Filter</Button>
           <Button style={buttonStyle}>
-            <img src="/images/add-item.png" alt="userAdd" style={imageAdd}/>
+            <img src="/images/add-product.png" alt="userAdd" style={imageAdd}/>
             <span style={buttonText}>New Product</span>
           </Button>
         </Layout>

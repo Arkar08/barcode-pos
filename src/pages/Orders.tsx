@@ -225,7 +225,7 @@ const Orders = () => {
         <Input placeholder="Search Product Name" style={inputStyle} />
         <Button style={buttonStyle1}>Filter</Button>
         <Button style={buttonStyle}>
-          <img src="/images/menu.png" alt="userAdd" style={imageAdd} />
+          <img src="/images/add-item.png" alt="userAdd" style={imageAdd} />
           <span style={buttonText}>New Order</span>
         </Button>
       </Layout>
