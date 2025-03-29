@@ -223,7 +223,7 @@ const Supplier = () => {
           <Input placeholder="Search Supplier" style={inputStyle}/>
           <Button style={buttonStyle1}>Filter</Button>
           <Button style={buttonStyle}>
-            <img src="/images/add-user.png" alt="userAdd" style={imageAdd}/>
+            <img src="/images/round (1).png" alt="userAdd" style={imageAdd}/>
             <span style={buttonText}>New Supplier</span>
           </Button>
         </Layout>

@@ -2,20 +2,20 @@ import { Outlet } from "react-router-dom"
 import {Layout } from 'antd';
 import Sidebar from "./Sidebar";
 import { dummyData } from "../utils/DummyData";
+import Navbar from "./Navbar";
+import navbarReducer from "../store/store";
 
 
 const headerStyle: React.CSSProperties = {
-  textAlign: 'center',
-  color: '#fff',
   height: 64,
   paddingInline: 48,
-  lineHeight: '64px',
   backgroundColor: '#7070db',
   borderBottom:'1px solid white'
 };
 
 const siderStyle: React.CSSProperties = {
   backgroundColor: 'white',
+  width:"16%"
 };
 
 const contentStyle: React.CSSProperties = {
@@ -29,11 +29,16 @@ const layoutStyle = {
 
 const { Header, Sider, Content } = Layout;
 const Layouts = () => {
+
+  const active = navbarReducer((state)=>state.active)
+
   return (
     <Layout style={layoutStyle}>
-        <Header style={headerStyle}>Header</Header>
+        <Header style={headerStyle}>
+          <Navbar/>
+        </Header>
         <Layout>
-            <Sider width="16%" style={siderStyle}>
+            <Sider width={active? '3%':'16%'} style={siderStyle}>
               {
                 dummyData.map((data,index)=>{
                   return(

@@ -14,6 +14,12 @@ export const dummyData = [
         activeImage:"images/customer.png"
     },
     {
+        route:"/supplier",
+        text:"Supplier",
+        image:"images/supplier (2).png",
+        activeImage:"images/supplier (3).png"
+    },
+    {
         route:"/products",
         text:"Products",
         image:"images/products1.png",
@@ -26,20 +32,14 @@ export const dummyData = [
         activeImage:"images/categories (1).png"
     },
     {
-        route:"/supplier",
-        text:"Supplier",
-        image:"images/supplier (2).png",
-        activeImage:"images/supplier (3).png"
-    },
-    {
         route:"/orders",
         text:"Orders",
         image:"images/order list.png",
         activeImage:"images/order list 1.png"
     },
     {
-        route:'/purchase',
-        text:"Pruchase",
+        route:'/invoice',
+        text:"Sale Invoice",
         image:"images/purchase.png",
         activeImage:"images/purchase 1.png"
     },

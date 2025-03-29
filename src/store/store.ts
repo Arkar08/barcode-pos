@@ -1,18 +1,18 @@
 import { create } from "zustand";
 
-type CountProps = {
-    count:number
-    addCount:() => void;
+
+type NavbarProps = {
+    active:boolean,
+    menuClick:() => void;
 }
 
-
-const userReducer = create<CountProps>((set)=>(
+const navbarReducer = create<NavbarProps>((set)=>(
     {
-        count:0,
-        addCount:(()=> set((state)=>({
-            count:state.count + 1
+        active:false,
+        menuClick:(()=> set((state)=>({
+            active:!state.active
         })))
     }
 ))
 
-export default userReducer;
+export default navbarReducer;

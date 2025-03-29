@@ -226,7 +226,7 @@ const Orders = () => {
         <Button style={buttonStyle1}>Filter</Button>
         <Button style={buttonStyle}>
           <img src="/images/add-item.png" alt="userAdd" style={imageAdd} />
-          <span style={buttonText}>New Order</span>
+          <span style={buttonText}>Create Order</span>
         </Button>
       </Layout>
       <Layout style={tableLayout}>

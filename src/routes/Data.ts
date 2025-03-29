@@ -8,7 +8,7 @@ import Logout from "../pages/auth/Logout";
 import NotFound from "../pages/NotFound";
 import Supplier from "../pages/Supplier";
 import Orders from "../pages/Orders";
-import Purchase from "../pages/Purchase";
+import SaleInvoice from "../pages/SaleInvoice";
 import UserListing from "../pages/UserListing";
 
 
@@ -55,9 +55,9 @@ export const data = [
                 Component:Orders
             },
             {
-                path:"purchase",
+                path:"invoice",
                 text:"Purchase",
-                Component:Purchase
+                Component:SaleInvoice
             },
             {
                 path:"logout",

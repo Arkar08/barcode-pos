@@ -1,8 +1,9 @@
 
 import {NavLink, useLocation } from "react-router-dom"
+import navbarReducer from "../store/store"
 
 const attribute: React.CSSProperties = {
-    padding:'15px',
+    padding:'15px 10px',
     color:'black',
     fontSize:'16px',
     display:'flex',
@@ -28,6 +29,8 @@ type DataProps = {
 
 const Sidebar = ({data}:DataProps) => {
 
+
+    const active = navbarReducer((state)=>state.active)
    const location = useLocation().pathname;
 
   return (
@@ -36,7 +39,7 @@ const Sidebar = ({data}:DataProps) => {
         }
     >
         <img src={location.includes(data.route) ? data.activeImage:data.image} alt="icon_image" style={iconImage}/>
-        {data.text}
+        <span style={{display: active? 'none':'block'}}>{data.text}</span>
       </NavLink>
   )
 }

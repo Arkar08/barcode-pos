@@ -216,16 +216,16 @@ const buttonText: React.CSSProperties = {
 };
 
 
-const Purchase = () => {
+const SaleInvoice = () => {
   return (
     <Layout>
-      <Title level={3} style={textStyle}>Purchase Listings</Title>
+      <Title level={3} style={textStyle}>Sale Invoice Listings</Title>
       <Layout style={filderLayout}>
-        <Input placeholder="Search Purchase" style={inputStyle}/>
+        <Input placeholder="Search Invoice" style={inputStyle}/>
         <Button style={buttonStyle1}>Filter</Button>
         <Button style={buttonStyle}>
           <img src="/images/add-to-cart.png" alt="userAdd" style={imageAdd}/>
-          <span style={buttonText}>New Category</span>
+          <span style={buttonText}>Create Invoice</span>
         </Button>
       </Layout>
       <Layout style={tableLayout}>
@@ -235,4 +235,4 @@ const Purchase = () => {
   )
 }
 
-export default Purchase
+export default SaleInvoice
