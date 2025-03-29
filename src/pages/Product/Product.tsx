@@ -1,9 +1,10 @@
 import { Button, Input, Layout } from "antd"
 import { Space,Table } from 'antd';
 import type { TableProps } from 'antd';
-import { ProductType } from "../utils/Type";
+import { ProductType } from "../../utils/Type";
 import { Typography } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -102,7 +103,12 @@ const buttonStyle:React.CSSProperties = {
   height:40,
   width:250,
   backgroundColor:"#7070db",
-  color:'white'
+  color:'white',
+  display:'flex',
+  justifyContent:'center',
+  alignItems:'center',
+  gap:10,
+  borderRadius:5
 }
 
 const buttonStyle1:React.CSSProperties = {
@@ -153,10 +159,10 @@ const Product = () => {
         <Layout style={filderLayout}>
           <Input placeholder="Search Product Name" style={inputStyle}/>
           <Button style={buttonStyle1}>Filter</Button>
-          <Button style={buttonStyle}>
+          <Link to='/products/create' style={buttonStyle}>
             <img src="/images/add-product.png" alt="userAdd" style={imageAdd}/>
             <span style={buttonText}>New Product</span>
-          </Button>
+          </Link>
         </Layout>
         <Layout style={tableLayout}>
           <Table<ProductType> columns={columns} dataSource={data} rowKey={(record) => record.productId}/>

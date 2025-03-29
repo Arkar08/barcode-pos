@@ -1,9 +1,10 @@
 import { Button, Input, Layout } from "antd";
 import { Space, Table } from "antd";
 import type { TableProps } from "antd";
-import { InvoiceType } from "../utils/Type";
+import { InvoiceType } from "../../utils/Type";
 import { Typography } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -129,12 +130,17 @@ const inputStyle: React.CSSProperties = {
   height: 40,
 };
 
-const buttonStyle: React.CSSProperties = {
-  height: 40,
-  width: 250,
-  backgroundColor: "#7070db",
-  color: "white",
-};
+const buttonStyle:React.CSSProperties = {
+  height:40,
+  width:250,
+  backgroundColor:"#7070db",
+  color:'white',
+  display:'flex',
+  justifyContent:'center',
+  alignItems:'center',
+  gap:10,
+  borderRadius:5
+}
 
 const buttonStyle1: React.CSSProperties = {
   height: 40,
@@ -183,10 +189,10 @@ const SaleInvoice = () => {
       <Layout style={filderLayout}>
         <Input placeholder="Search Invoice" style={inputStyle}/>
         <Button style={buttonStyle1}>Filter</Button>
-        <Button style={buttonStyle}>
+        <Link to='/invoice/create' style={buttonStyle}>
           <img src="/images/add-to-cart.png" alt="userAdd" style={imageAdd}/>
           <span style={buttonText}>Create Invoice</span>
-        </Button>
+        </Link>
       </Layout>
       <Layout style={tableLayout}>
         <Table<InvoiceType> columns={columns} dataSource={data} rowKey={(record) => record.invoiceId}/>

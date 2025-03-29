@@ -1,9 +1,10 @@
 import { Button, Input, Layout } from "antd"
 import { Space,Table } from 'antd';
 import type { TableProps } from 'antd';
-import { CategoryType } from "../utils/Type";
+import { CategoryType } from "../../utils/Type";
 import { Typography } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -70,8 +71,14 @@ const buttonStyle:React.CSSProperties = {
   height:40,
   width:250,
   backgroundColor:"#7070db",
-  color:'white'
+  color:'white',
+  display:'flex',
+  justifyContent:'center',
+  alignItems:'center',
+  gap:10,
+  borderRadius:5
 }
+
 
 const buttonStyle1:React.CSSProperties = {
   height:40,
@@ -121,10 +128,10 @@ const Category = () => {
       <Layout style={filderLayout}>
         <Input placeholder="Search Category Name" style={inputStyle}/>
         <Button style={buttonStyle1}>Filter</Button>
-        <Button style={buttonStyle}>
+        <Link to='/category/create' style={buttonStyle}>
           <img src="/images/menu.png" alt="userAdd" style={imageAdd}/>
           <span style={buttonText}>New Category</span>
-        </Button>
+        </Link>
       </Layout>
       <Layout style={tableLayout}>
         <Table<CategoryType> columns={columns} dataSource={data} rowKey={(record) => record.categoryId}/>

@@ -1,9 +1,10 @@
 import { Button, Input, Layout } from "antd";
 import { Space, Table } from "antd";
 import type { TableProps } from "antd";
-import { SupplierType } from "../utils/Type";
+import { SupplierType } from "../../utils/Type";
 import { Typography } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -116,12 +117,17 @@ const inputStyle: React.CSSProperties = {
   height: 40,
 };
 
-const buttonStyle: React.CSSProperties = {
-  height: 40,
-  width: 250,
-  backgroundColor: "#7070db",
-  color: "white",
-};
+const buttonStyle:React.CSSProperties = {
+  height:40,
+  width:250,
+  backgroundColor:"#7070db",
+  color:'white',
+  display:'flex',
+  justifyContent:'center',
+  alignItems:'center',
+  gap:10,
+  borderRadius:5
+}
 
 const buttonStyle1: React.CSSProperties = {
   height: 40,
@@ -159,10 +165,10 @@ const Supplier = () => {
         <Layout style={filderLayout}>
           <Input placeholder="Search Supplier" style={inputStyle}/>
           <Button style={buttonStyle1}>Filter</Button>
-          <Button style={buttonStyle}>
+          <Link to='/supplier/create' style={buttonStyle}>
             <img src="/images/round (1).png" alt="userAdd" style={imageAdd}/>
             <span style={buttonText}>New Supplier</span>
-          </Button>
+          </Link>
         </Layout>
         <Layout style={tableLayout}>
           <Table<SupplierType> columns={columns} dataSource={data} rowKey={(record) => record.supplierId}/>

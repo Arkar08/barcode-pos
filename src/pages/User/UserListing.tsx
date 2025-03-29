@@ -1,9 +1,10 @@
 import { Button, Input, Layout } from "antd"
 import { Space,Table } from 'antd';
 import type { TableProps } from 'antd';
-import { UserType } from "../utils/Type";
+import { UserType } from "../../utils/Type";
 import { Typography } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -108,7 +109,12 @@ const buttonStyle:React.CSSProperties = {
   height:40,
   width:250,
   backgroundColor:"#7070db",
-  color:'white'
+  color:'white',
+  display:'flex',
+  justifyContent:'center',
+  alignItems:'center',
+  gap:10,
+  borderRadius:5
 }
 
 const buttonStyle1:React.CSSProperties = {
@@ -159,10 +165,10 @@ const UserListing = () => {
       <Layout style={filderLayout}>
         <Input placeholder="Search Full Name" style={inputStyle}/>
         <Button style={buttonStyle1}>Filter</Button>
-        <Button style={buttonStyle}>
+        <Link to='/users/create' style={buttonStyle}>
           <img src="/images/add-user.png" alt="userAdd" style={imageAdd}/>
           <span style={buttonText}>New User</span>
-        </Button>
+        </Link>
       </Layout>
       <Layout style={tableLayout}>
         <Table<UserType> columns={columns} dataSource={data} rowKey={(record) => record.userId}/>
