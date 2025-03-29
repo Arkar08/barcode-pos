@@ -37,9 +37,9 @@ const columns: TableProps<SupplierType>["columns"] = [
   {
     title: "Action",
     key: "action",
-    render: () => ( //_, record
+    render: (_, record) => (
       <Space size="middle">
-        <EditOutlined style={editStyle} />
+        <Link to={`/supplier/${record.supplierId}`}><EditOutlined style={editStyle} /></Link>
         <DeleteOutlined style={deleteStyle}/>
       </Space>
     ),

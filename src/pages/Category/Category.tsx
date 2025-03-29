@@ -18,9 +18,9 @@ const columns: TableProps<CategoryType>['columns'] = [
   {
     title: 'Action',
     key: 'action',
-    render: () => ( //_, record
+    render: (_, record) => (
       <Space size="middle">
-        <EditOutlined style={editStyle} />
+        <Link to={`/category/${record.categoryId}`}><EditOutlined style={editStyle} /></Link>
         <DeleteOutlined style={deleteStyle}/>
       </Space>
     ),

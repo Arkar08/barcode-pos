@@ -37,9 +37,9 @@ const columns:TableProps<UserType>['columns'] = [
   {
     title: 'Action',
     key: 'action',
-    render: () => ( //_, record
+    render: (_, record) => (
       <Space size="middle">
-        <EditOutlined style={editStyle} />
+        <Link to={`/users/${record.userId}`}><EditOutlined style={editStyle} /></Link>
         <DeleteOutlined style={deleteStyle}/>
       </Space>
     ),

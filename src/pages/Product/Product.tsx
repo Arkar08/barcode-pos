@@ -43,9 +43,9 @@ const columns: TableProps<ProductType>['columns'] = [
   {
     title: 'Action',
     key: 'action',
-    render: () => ( //_, record
+    render: (_, record) => (
       <Space size="middle">
-        <EditOutlined style={editStyle} />
+        <Link to={`/products/${record.productId}`}><EditOutlined style={editStyle} /></Link>
         <DeleteOutlined style={deleteStyle}/>
       </Space>
     ),
