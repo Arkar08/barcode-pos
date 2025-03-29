@@ -86,6 +86,12 @@ const data: OrderType[] = [
     orderId:"1",
     customerName: "John Brown",
     qty:4,
+    products:[
+      {
+        productName:'mongo',
+        unitPrice:3000
+      }
+    ],
     promotion: null,
     totalAmount: 1000,
     payment:'Cash',
@@ -96,6 +102,12 @@ const data: OrderType[] = [
     orderId:"2",
     customerName: "John Brown",
     qty:4,
+    products:[
+      {
+        productName:'mongo',
+        unitPrice:3000
+      }
+    ],
     promotion: null,
     totalAmount: 1000,
     payment:'Cash',
@@ -106,6 +118,12 @@ const data: OrderType[] = [
     orderId:"3",
     customerName: "John Brown",
     qty:4,
+    products:[
+      {
+        productName:'mongo',
+        unitPrice:3000
+      }
+    ],
     promotion: null,
     totalAmount: 1000,
     payment:'Cash',

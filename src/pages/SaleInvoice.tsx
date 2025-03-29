@@ -70,6 +70,12 @@ const data: InvoiceType[] = [
     invoiceId:"1",
     customerName: "John Brown",
     qty:3,
+    products:[
+      {
+        productName:'mongo',
+        unitPrice:3000
+      }
+    ],
     promotion: null,
     totalAmount: 1000,
     payment:'Cash',
@@ -79,6 +85,12 @@ const data: InvoiceType[] = [
     invoiceId:"2",
     customerName: "John Brown",
     qty:3,
+    products:[
+      {
+        productName:'mongo',
+        unitPrice:3000
+      }
+    ],
     promotion: null,
     totalAmount: 1000,
     payment:'Cash',
@@ -88,6 +100,12 @@ const data: InvoiceType[] = [
     invoiceId:"3",
     customerName: "John Brown",
     qty:3,
+    products:[
+      {
+        productName:'mongo',
+        unitPrice:3000
+      }
+    ],
     promotion: null,
     totalAmount: 1000,
     payment:'Cash',

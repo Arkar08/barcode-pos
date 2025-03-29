@@ -1,19 +1,4 @@
-export interface DataType {
-    key: string;
-    name: string;
-    age: number;
-    address: string;
-    tags: string[];
-    animal:string;
-}
-  
-export interface DataType1 {
-    key: string;
-    name: string;
-    age: number;
-    address: string;
-    tags: string[];
-}
+
 
 export interface UserType {
     userId:string;
@@ -51,6 +36,7 @@ export interface CategoryType {
 export interface OrderType {
     orderId:string;
     qty:number;
+    products:ProductOrder[]
     customerName:string;
     totalAmount:number;
     promotion:number | null;
@@ -62,6 +48,7 @@ export interface OrderType {
 export interface InvoiceType {
     invoiceId:string;
     qty:number;
+    products:ProductOrder[]
     customerName:string;
     promotion:number | null;
     payment:'Cash' | 'Bank';
