@@ -58,9 +58,9 @@ const columns: TableProps<InvoiceType>["columns"] = [
   {
     title: "Action",
     key: "action",
-    render: () => ( //_, record
+    render: (_, record) => (
       <Space size="middle">
-        <EyeOutlined style={editStyle} />
+        <Link to={`/invoice/${record.invoiceId}`}><EyeOutlined style={editStyle} /></Link>
       </Space>
     ),
   },

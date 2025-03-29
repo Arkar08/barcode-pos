@@ -74,9 +74,9 @@ const columns: TableProps<OrderType>["columns"] = [
   {
     title: "Action",
     key: "action",
-    render: () => ( //_, record
+    render: (_, record) => (
       <Space size="middle">
-          <EyeOutlined style={editStyle}/>
+          <Link to={`/orders/${record.orderId}`}><EyeOutlined style={editStyle}/></Link>
       </Space>
     ),
   },

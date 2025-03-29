@@ -16,6 +16,12 @@ import CreateSaleInvoice from "../pages/SaleInvoice/CreateSaleInvoice";
 import CreateProduct from "../pages/Product/CreateProduct";
 import CreateOrder from "../pages/Order/CreateOrder";
 import CreateCategory from "../pages/Category/CreateCategory";
+import UpdateUser from "../pages/User/UpdateUser";
+import UpdateSupplier from "../pages/Supplier/UpdateSupplier";
+import ViewInvoice from "../pages/SaleInvoice/ViewInvoice";
+import UpdateProduct from "../pages/Product/UpdateProduct";
+import ViewOrder from "../pages/Order/ViewOrder";
+import UpdateCategory from "../pages/Category/UpdateCategory";
 
 
 
@@ -46,6 +52,11 @@ export const data = [
                 Component:CreateUser
             },
             {
+                path:"users/:id",
+                text:"Update User",
+                Component:UpdateUser
+            },
+            {
                 path:"products",
                 text:"Products",
                 Component:Product
@@ -54,6 +65,11 @@ export const data = [
                 path:"products/create",
                 text:"Create Products",
                 Component:CreateProduct
+            },
+            {
+                path:"products/:id",
+                text:"Update Products",
+                Component:UpdateProduct
             },
             {
                 path:"category",
@@ -66,6 +82,11 @@ export const data = [
                 Component:CreateCategory
             },
             {
+                path:"category/:id",
+                text:"Update Category",
+                Component:UpdateCategory
+            },
+            {
                 path:"supplier",
                 text:"Supplier",
                 Component:Supplier
@@ -74,6 +95,11 @@ export const data = [
                 path:"supplier/create",
                 text:"Create Supplier",
                 Component:CreateSupplier
+            },
+            {
+                path:"supplier/:id",
+                text:"Update Supplier",
+                Component:UpdateSupplier
             },
             {
                 path:"orders",
@@ -86,6 +112,11 @@ export const data = [
                 Component:CreateOrder
             },
             {
+                path:"orders/:id",
+                text:"View Order",
+                Component:ViewOrder
+            },
+            {
                 path:"invoice",
                 text:"Invoice",
                 Component:SaleInvoice
@@ -94,6 +125,11 @@ export const data = [
                 path:"invoice/create",
                 text:"Create Invoice",
                 Component:CreateSaleInvoice
+            },
+            {
+                path:"invoice/:id",
+                text:'View Invoice',
+                Component:ViewInvoice
             },
             {
                 path:"logout",
