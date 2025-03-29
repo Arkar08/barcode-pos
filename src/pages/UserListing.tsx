@@ -12,7 +12,6 @@ const columns:TableProps<UserType>['columns'] = [
     title: 'Full Name',
     dataIndex: 'name',
     key: 'name',
-    // render: (text) => <a>{text}</a>,
   },
   {
     title: 'Email',
@@ -28,21 +27,6 @@ const columns:TableProps<UserType>['columns'] = [
     title: 'State',
     key: 'state',
     dataIndex: 'state',
-    // render: (_, { tags }) => (
-    //   <>
-    //     {tags.map((tag) => {
-    //       let color = tag.length > 5 ? 'geekblue' : 'green';
-    //       if (tag === 'loser') {
-    //         color = 'volcano';
-    //       }
-    //       return (
-    //         <Tag color={color} key={tag}>
-    //           {tag.toUpperCase()}
-    //         </Tag>
-    //       );
-    //     })}
-    //   </>
-    // ),
   },
   {
     title: 'Township',
