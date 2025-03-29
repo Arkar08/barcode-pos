@@ -1,165 +1,97 @@
 import { Button, Input, Layout } from "antd";
-import { Space, Table, Tag } from "antd";
+import { Space, Table } from "antd";
 import type { TableProps } from "antd";
-import { DataType1 } from "../utils/Type";
+import { InvoiceType } from "../utils/Type";
 import { Typography } from "antd";
+import { EyeOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
-const columns: TableProps<DataType1>["columns"] = [
+const columns: TableProps<InvoiceType>["columns"] = [
   {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
+    title: "Invoice No.",
+    dataIndex: "invoiceId",
+    key: "invoiceId",
   },
   {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
+    title: "Customer Name",
+    dataIndex: "customerName",
+    key: "customerName",
   },
   {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
+    title: "Quantity",
+    key: "qty",
+    dataIndex: "qty",
   },
   {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-          if (tag === "loser") {
-            color = "volcano";
+    title: "Promotion",
+    dataIndex: "promotion",
+    key: "promotion",
+    render:(_,record) =>{
+      return (
+        <>
+          {
+            record.promotion === null && (
+              <p style={textStyle1}>-</p>
+            )
           }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
+        </>
+      )
+    }
+  },
+  {
+    title: "Total Amount",
+    dataIndex: "totalAmount",
+    key: "totalAmount",
+  },
+  {
+    title: "Payment",
+    dataIndex: "payment",
+    key: "payment",
+  },
+  {
+    title: "Invoice Date",
+    dataIndex: "invoiceDate",
+    key: "invoiceDate",
   },
   {
     title: "Action",
     key: "action",
-    render: (_, record) => (
+    render: () => ( //_, record
       <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
+        <EyeOutlined style={editStyle} />
       </Space>
     ),
   },
 ];
 
-const data: DataType1[] = [
+const data: InvoiceType[] = [
   {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
+    invoiceId:"1",
+    customerName: "John Brown",
+    qty:3,
+    promotion: null,
+    totalAmount: 1000,
+    payment:'Cash',
+    invoiceDate:'string'
   },
   {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
+    invoiceId:"2",
+    customerName: "John Brown",
+    qty:3,
+    promotion: null,
+    totalAmount: 1000,
+    payment:'Cash',
+    invoiceDate:'string'
   },
   {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-  {
-    key: "4",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "5",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "6",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-  {
-    key: "7",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "8",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "9",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-  {
-    key: "10",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "11",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "12",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-  {
-    key: "13",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "14",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "15",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
+    invoiceId:"3",
+    customerName: "John Brown",
+    qty:3,
+    promotion: null,
+    totalAmount: 1000,
+    payment:'Cash',
+    invoiceDate:'string'
   },
 ];
 
@@ -215,6 +147,16 @@ const buttonText: React.CSSProperties = {
   fontSize: 16,
 };
 
+const editStyle:React.CSSProperties = {
+  color:'blue',
+  fontSize:22,
+  cursor:'pointer'
+}
+
+const textStyle1:React.CSSProperties = {
+  textAlign:'center',
+  fontSize:22
+}
 
 const SaleInvoice = () => {
   return (
@@ -229,7 +171,7 @@ const SaleInvoice = () => {
         </Button>
       </Layout>
       <Layout style={tableLayout}>
-        <Table<DataType1> columns={columns} dataSource={data} />
+        <Table<InvoiceType> columns={columns} dataSource={data} rowKey={(record) => record.invoiceId}/>
       </Layout>
     </Layout>
   )

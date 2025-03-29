@@ -1,90 +1,83 @@
 import { Button, Input, Layout } from "antd"
-import { Space,Table, Tag } from 'antd';
+import { Space,Table } from 'antd';
 import type { TableProps } from 'antd';
-import { DataType } from "../utils/Type";
+import { ProductType } from "../utils/Type";
 import { Typography } from 'antd';
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
 
-const columns: TableProps<DataType>['columns'] = [
+const columns: TableProps<ProductType>['columns'] = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
+    title: 'Product Name',
+    dataIndex: 'productName',
+    key: 'productName',
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: 'Category',
+    dataIndex: 'category',
+    key: 'category',
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
+    title: 'Supplied By',
+    dataIndex: 'suppliedBy',
+    key: 'suppliedBy',
   },
   {
-    title:"Animal",
-    dataIndex:'animal',
-    key:"animal"
+    title:"Stock Level",
+    dataIndex:'stockLevel',
+    key:"stockLevel"
   },
   {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
+    title: 'Unit Price',
+    key: 'unitPrice',
+    dataIndex: 'unitPrice',
+  },
+  {
+    title:"Description",
+    dataIndex:'description',
+    key:"description"
   },
   {
     title: 'Action',
     key: 'action',
-    render: (_, record) => (
+    render: () => ( //_, record
       <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
+        <EditOutlined style={editStyle} />
+        <DeleteOutlined style={deleteStyle}/>
       </Space>
     ),
   },
 ];
 
-const data: DataType[] = [
+const data: ProductType[] = [
   {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-    animal:'hello'
+    productId:"1",
+    productName: 'John Brown',
+    unitPrice: 32,
+    stockLevel: 'New York No. 1 Lake Park',
+    suppliedBy: 'nice',
+    category:'helloworld',
+    description:'hello'
   },
   {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-    animal:'hello'
+    productId:'2',
+    productName: 'Jim Green',
+    unitPrice: 42,
+    stockLevel: 'London No. 1 Lake Park',
+    suppliedBy: 'nice',
+    category:'helloworld',
+    description:'hello'
   },
   {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-    animal:'hello'
+    productId:'3',
+    productName: 'Joe Black',
+    unitPrice: 32,
+    stockLevel: 'Sydney No. 1 Lake Park',
+    suppliedBy: 'nice',
+    category:'helloworld',
+    description:'hello'
   },
 ];
 
@@ -141,6 +134,18 @@ const buttonText:React.CSSProperties = {
   fontSize:16
 }
 
+const deleteStyle:React.CSSProperties = {
+  color:'red',
+  fontSize:22,
+  cursor:'pointer'
+}
+
+const editStyle:React.CSSProperties = {
+  color:'blue',
+  fontSize:22,
+  cursor:'pointer'
+}
+
 const Product = () => {
   return (
     <Layout>
@@ -154,7 +159,7 @@ const Product = () => {
           </Button>
         </Layout>
         <Layout style={tableLayout}>
-          <Table<DataType> columns={columns} dataSource={data} />
+          <Table<ProductType> columns={columns} dataSource={data} rowKey={(record) => record.productId}/>
         </Layout>
     </Layout>
   )

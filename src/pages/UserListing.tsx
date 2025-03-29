@@ -1,81 +1,106 @@
 import { Button, Input, Layout } from "antd"
-import { Space,Table, Tag } from 'antd';
+import { Space,Table } from 'antd';
 import type { TableProps } from 'antd';
-import { DataType1 } from "../utils/Type";
+import { UserType } from "../utils/Type";
 import { Typography } from 'antd';
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
-const columns: TableProps<DataType1>['columns'] = [
+const columns:TableProps<UserType>['columns'] = [
   {
-    title: 'Name',
+    title: 'Full Name',
     dataIndex: 'name',
     key: 'name',
-    render: (text) => <a>{text}</a>,
+    // render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: 'Email',
+    dataIndex: 'email',
+    key: 'email',
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
+    title: 'Phone Number',
+    dataIndex: 'phNumber',
+    key: 'phNumber',
   },
   {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
+    title: 'State',
+    key: 'state',
+    dataIndex: 'state',
+    // render: (_, { tags }) => (
+    //   <>
+    //     {tags.map((tag) => {
+    //       let color = tag.length > 5 ? 'geekblue' : 'green';
+    //       if (tag === 'loser') {
+    //         color = 'volcano';
+    //       }
+    //       return (
+    //         <Tag color={color} key={tag}>
+    //           {tag.toUpperCase()}
+    //         </Tag>
+    //       );
+    //     })}
+    //   </>
+    // ),
+  },
+  {
+    title: 'Township',
+    dataIndex: 'township',
+    key: 'township',
   },
   {
     title: 'Action',
     key: 'action',
-    render: (_, record) => (
+    render: () => ( //_, record
       <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
+        <EditOutlined style={editStyle} />
+        <DeleteOutlined style={deleteStyle}/>
       </Space>
     ),
   },
 ];
 
-const data: DataType1[] = [
+const data: UserType[] = [
   {
-    key: '1',
+    userId:'1',
     name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
+    email: 'john@gmail.com',
+    phNumber: 978595545,
+    state:'Yangon',
+    township:'mingalar'
   },
   {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
+    userId:'2',
+    name: 'John Brown',
+    email: 'john@gmail.com',
+    phNumber: 978595545,
+    state:'Yangon',
+    township:'mingalar'
   },
   {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
+    userId:'3',
+    name: 'John Brown',
+    email: 'john@gmail.com',
+    phNumber: 978595545,
+    state:'Yangon',
+    township:'mingalar'
+  },
+  {
+    userId:'4',
+    name: 'John Brown',
+    email: 'john@gmail.com',
+    phNumber: 978595545,
+    state:'Yangon',
+    township:'mingalar'
+  },
+  {
+    userId:'5',
+    name: 'John Brown',
+    email: 'john@gmail.com',
+    phNumber: 978595545,
+    state:'Yangon',
+    township:'mingalar'
   },
 ];
 
@@ -131,6 +156,18 @@ const buttonText:React.CSSProperties = {
   fontSize:16
 }
 
+const deleteStyle:React.CSSProperties = {
+  color:'red',
+  fontSize:22,
+  cursor:'pointer'
+}
+
+const editStyle:React.CSSProperties = {
+  color:'blue',
+  fontSize:22,
+  cursor:'pointer'
+}
+
 const UserListing = () => {
   return (
     <Layout>
@@ -144,7 +181,7 @@ const UserListing = () => {
         </Button>
       </Layout>
       <Layout style={tableLayout}>
-        <Table<DataType1> columns={columns} dataSource={data} />
+        <Table<UserType> columns={columns} dataSource={data} rowKey={(record) => record.userId}/>
       </Layout>
     </Layout>
   )

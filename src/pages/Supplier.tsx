@@ -1,167 +1,119 @@
 import { Button, Input, Layout } from "antd";
-import { Space, Table, Tag } from "antd";
+import { Space, Table } from "antd";
 import type { TableProps } from "antd";
-import { DataType1 } from "../utils/Type";
+import { SupplierType } from "../utils/Type";
 import { Typography } from "antd";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
-const columns: TableProps<DataType1>["columns"] = [
+const columns: TableProps<SupplierType>["columns"] = [
   {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
+    title: "Supplier Name",
+    dataIndex: "supplierName",
+    key: "supplierName",
   },
   {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
+    title: "Company Name",
+    dataIndex: "companyName",
+    key: "companyName",
   },
   {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
+    title: "Phone Number",
+    dataIndex: "phNumber",
+    key: "phNumber",
   },
   {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-          if (tag === "loser") {
-            color = "volcano";
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
+    title: "State",
+    dataIndex: "state",
+    key: "state",
+  },
+  {
+    title: "Township",
+    key: "township",
+    dataIndex: "township",
+    // render: (_, { tags }) => (
+    //   <>
+    //     {tags.map((tag) => {
+    //       let color = tag.length > 5 ? "geekblue" : "green";
+    //       if (tag === "loser") {
+    //         color = "volcano";
+    //       }
+    //       return (
+    //         <Tag color={color} key={tag}>
+    //           {tag.toUpperCase()}
+    //         </Tag>
+    //       );
+    //     })}
+    //   </>
+    // ),
   },
   {
     title: "Action",
     key: "action",
-    render: (_, record) => (
+    render: () => ( //_, record
       <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
+        <EditOutlined style={editStyle} />
+        <DeleteOutlined style={deleteStyle}/>
       </Space>
     ),
   },
 ];
 
-const data: DataType1[] = [
+const data: SupplierType[] = [
   {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
+    supplierId: "1",
+    supplierName: "John Brown",
+    companyName: "32",
+    phNumber:12345,
+    state: "New York No. 1 Lake Park",
+    township: 'hello',
   },
   {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
+    supplierId: "2",
+    supplierName: "Jim Green",
+    companyName: "42",
+    phNumber:12345,
+    state: "London No. 1 Lake Park",
+    township:'hello',
   },
   {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
+    supplierId: "3",
+    supplierName: "Joe Black",
+    companyName: "32",
+    phNumber:12345,
+    state: "Sydney No. 1 Lake Park",
+    township: 'hello',
   },
   {
-    key: "4",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
+    supplierId: "4",
+    supplierName: "John Brown",
+    companyName: "32",
+    phNumber:12345,
+    state: "New York No. 1 Lake Park",
+    township: 'hello',
   },
   {
-    key: "5",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "6",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-  {
-    key: "7",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "8",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "9",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-  {
-    key: "10",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "11",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "12",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-  {
-    key: "13",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "14",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "15",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
+    supplierId: "5",
+    supplierName: "Jim Green",
+    companyName: "42",
+    phNumber:12345,
+    state: "London No. 1 Lake Park",
+    township:'hello',
   },
 ];
+
+const deleteStyle:React.CSSProperties = {
+  color:'red',
+  fontSize:22,
+  cursor:'pointer'
+}
+
+const editStyle:React.CSSProperties = {
+  color:'blue',
+  fontSize:22,
+  cursor:'pointer'
+}
 
 const filderLayout: React.CSSProperties = {
   height: 80,
@@ -228,7 +180,7 @@ const Supplier = () => {
           </Button>
         </Layout>
         <Layout style={tableLayout}>
-          <Table<DataType1> columns={columns} dataSource={data} />
+          <Table<SupplierType> columns={columns} dataSource={data} rowKey={(record) => record.supplierId}/>
         </Layout>
     </Layout>
   )
