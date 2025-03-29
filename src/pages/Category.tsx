@@ -222,7 +222,7 @@ const Category = () => {
     <Layout>
       <Title level={3} style={textStyle}>Category Listings</Title>
       <Layout style={filderLayout}>
-        <Input placeholder="Search Product Name" style={inputStyle}/>
+        <Input placeholder="Search Category Name" style={inputStyle}/>
         <Button style={buttonStyle1}>Filter</Button>
         <Button style={buttonStyle}>
           <img src="/images/menu.png" alt="userAdd" style={imageAdd}/>

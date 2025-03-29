@@ -222,7 +222,7 @@ const Orders = () => {
         Order Listings
       </Title>
       <Layout style={filderLayout}>
-        <Input placeholder="Search Product Name" style={inputStyle} />
+        <Input placeholder="Search Order" style={inputStyle} />
         <Button style={buttonStyle1}>Filter</Button>
         <Button style={buttonStyle}>
           <img src="/images/add-item.png" alt="userAdd" style={imageAdd} />

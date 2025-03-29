@@ -136,7 +136,7 @@ const UserListing = () => {
     <Layout>
       <Title level={3} style={textStyle}>User Listings</Title>
       <Layout style={filderLayout}>
-        <Input placeholder="Search Product Name" style={inputStyle}/>
+        <Input placeholder="Search Full Name" style={inputStyle}/>
         <Button style={buttonStyle1}>Filter</Button>
         <Button style={buttonStyle}>
           <img src="/images/add-user.png" alt="userAdd" style={imageAdd}/>
