@@ -109,7 +109,7 @@ const CreateSaleInvoice = () => {
   
     const CancelClick = () =>{
       return(
-        navigate('/orders')
+        navigate('/invoice')
       )
     }
   
