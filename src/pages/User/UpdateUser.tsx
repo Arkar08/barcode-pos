@@ -47,7 +47,7 @@ const UpdateUser = () => {
       <Col span={8} className="gutter-row">
         <div>
           <Title level={5}>Enter Password</Title>
-          <Input.Password placeholder="password" className="inputpasswordBox" iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}/>
+          <Input.Password placeholder="Password" className="inputpasswordBox" iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}/>
         </div>
       </Col>
       <Col span={8} className="gutter-row">

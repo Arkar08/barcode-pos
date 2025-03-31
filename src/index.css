@@ -19,13 +19,13 @@
   padding: 12px 0px;
 }
 .inputBox{
-  padding: 11px;
+  padding: 14px;
 }
 .inputpasswordBox{
-  padding: 9px;
+  padding: 11.5px;
 }
 .selectBox{
-  height: 44px;
+  height: 50px;
 }
 .createText{
   color: #7070db !important;
@@ -45,12 +45,12 @@
 }
 .cancel{
   width: 200px;
-  height: 40px;
+  height: 50px;
   letter-spacing: 2px;
 }
 .cancel1{
   width: 200px;
-  height: 40px;
+  height: 50px;
   background-color: #7070db !important;
   letter-spacing: 2px;
 }
@@ -62,7 +62,7 @@
 }
 .btnAdd{
   width: 200px;
-  height: 40px;
+  height: 50px;
 }
 .tableOrder{
   overflow: auto;
