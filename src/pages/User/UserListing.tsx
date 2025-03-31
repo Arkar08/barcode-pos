@@ -35,6 +35,11 @@ const columns:TableProps<UserType>['columns'] = [
     key: 'township',
   },
   {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
     title: 'Action',
     key: 'action',
     render: (_, record) => (

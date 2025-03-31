@@ -15,9 +15,14 @@ const columns: TableProps<SupplierType>["columns"] = [
     key: "supplierName",
   },
   {
-    title: "Company Name",
+    title: "Company's Name",
     dataIndex: "companyName",
     key: "companyName",
+  },
+  {
+    title: "Company's Email",
+    dataIndex: "email",
+    key: "email",
   },
   {
     title: "Phone Number",
@@ -33,6 +38,16 @@ const columns: TableProps<SupplierType>["columns"] = [
     title: "Township",
     key: "township",
     dataIndex: "township",
+  },
+  {
+    title: "Address",
+    key: "address",
+    dataIndex: "address",
+  },
+  {
+    title: "Remarks",
+    key: "remarks",
+    dataIndex: "remarks",
   },
   {
     title: "Action",

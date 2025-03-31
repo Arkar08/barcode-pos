@@ -15,3 +15,77 @@
   height: calc(100vh - 330px) !important;
   overflow: auto;
 }
+.gutter-row{
+  padding: 12px 0px;
+}
+.inputBox{
+  padding: 11px;
+}
+.inputpasswordBox{
+  padding: 9px;
+}
+.selectBox{
+  height: 44px;
+}
+.createText{
+  color: #7070db !important;
+}
+.createContainer{
+  position: relative;
+  height: calc(100vh - 90px);
+}
+.btnGroup{
+  position: absolute;
+  bottom: 5%;
+  left: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.cancel{
+  width: 200px;
+  height: 40px;
+  letter-spacing: 2px;
+}
+.cancel1{
+  width: 200px;
+  height: 40px;
+  background-color: #7070db !important;
+  letter-spacing: 2px;
+}
+:where(.css-dev-only-do-not-override-1a3rktk).ant-input-affix-wrapper{
+  font-size: 18px !important;
+}
+.AddBtn{
+  padding: 30px;
+}
+.btnAdd{
+  width: 200px;
+  height: 40px;
+}
+.tableOrder{
+  overflow: auto;
+
+  .ant-pagination{
+    display: none;
+  }
+
+  .ant-table{
+    height: 170px !important;
+  }
+}
+.scanner{
+  width: 50px;
+  height: 50px;
+}
+.scannerContainer{
+  width: 80px;
+  height: 80px;
+  box-shadow: 1px 1px 3px black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
