@@ -79,13 +79,14 @@ const ViewInvoice = () => {
           <Title level={5}>
             Invoice No - 1123
           </Title>
+          <Title level={5}>Invoice Date - 12/12/2025</Title>
+          
+        </div>
+        <div style={textDetailContainer}>
           <Title level={5}>
             Customer Name - Aung Aung
           </Title>
         </div>
-        <div style={textDetailContainer}>
-            <Title level={5}>Invoice Date - 12/12/2025</Title>
-          </div>
         <div style={productList}>
             <div>
               <Title level={5}>Product Name</Title>
