@@ -29,7 +29,7 @@ const UpdateCategory = () => {
       </Row>
       <div className="btnGroup">
         <Button variant="solid" color="red" className="cancel" onClick={CancelClick}>Cancel</Button>
-        <Button type="primary" className="cancel1" onClick={CancelClick}>Update</Button>
+        <Button type="primary" className="cancel1" onClick={CancelClick}>Save</Button>
       </div>
     </div>
   )
