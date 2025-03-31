@@ -1,10 +1,13 @@
-import { Button, Input, Layout } from "antd"
+import { Button, Input, Layout, Modal } from "antd"
 import { Space,Table } from 'antd';
 import type { TableProps } from 'antd';
 import { ProductType } from "../../utils/Type";
 import { Typography } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import {Popconfirm } from 'antd';
+import { useState } from "react";
+import FilterProduct from "./FilterProduct";
 
 const { Title } = Typography;
 
@@ -46,11 +49,30 @@ const columns: TableProps<ProductType>['columns'] = [
     render: (_, record) => (
       <Space size="middle">
         <Link to={`/products/${record.productId}`}><EditOutlined style={editStyle} /></Link>
-        <DeleteOutlined style={deleteStyle}/>
+        <Popconfirm
+          placement="topRight"
+          title="Delete User"
+          description="Are you sure to delete this user?"
+          onConfirm={()=>confirm(record.productId)}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
+        >
+          <DeleteOutlined style={deleteStyle} />
+        </Popconfirm>
       </Space>
     ),
   },
 ];
+
+const confirm = (value:string) => {
+  console.log(value)
+};
+
+const cancel = () => {
+  console.log('cancel')
+};
+
 
 const data: ProductType[] = [
   {
@@ -153,12 +175,29 @@ const editStyle:React.CSSProperties = {
 }
 
 const Product = () => {
+
+    const [openModal,setOpenModal] = useState(false)
+  
+    const filterProduct = () =>{
+      setOpenModal(true)
+    }
+  
+    const handleOk = () => {
+      console.log('ok')
+      setOpenModal(false)
+    };
+  
+    const handleCancel = () => {
+      console.log('cancel')
+      setOpenModal(false)
+    };
+
   return (
     <Layout>
         <Title level={3} style={textStyle}>Product Listings</Title>
         <Layout style={filderLayout}>
           <Input placeholder="Search Product Name" style={inputStyle}/>
-          <Button style={buttonStyle1}>Filter</Button>
+          <Button style={buttonStyle1} onClick={filterProduct}>Filter</Button>
           <Link to='/products/create' style={buttonStyle}>
             <img src="/images/add-product.png" alt="userAdd" style={imageAdd}/>
             <span style={buttonText}>New Product</span>
@@ -167,6 +206,31 @@ const Product = () => {
         <Layout style={tableLayout}>
           <Table<ProductType> columns={columns} dataSource={data} rowKey={(record) => record.productId}/>
         </Layout>
+        <Modal
+        open={openModal}
+        title="Filter User"
+        onOk={handleOk}
+        onCancel={handleCancel}
+        width={{
+          xs: '90%',
+          sm: '80%',
+          md: '70%',
+          lg: '60%',
+          xl: '50%',
+          xxl: '40%',
+        }}
+        centered
+        footer={[
+          <Button key="back" variant="solid" danger onClick={handleCancel} className="modalBtn">
+            Reset
+          </Button>,
+          <Button key="submit" type="primary"onClick={handleOk} className="modalBtn">
+            Filter
+          </Button>
+        ]}
+      >
+        <FilterProduct />
+      </Modal>
     </Layout>
   )
 }

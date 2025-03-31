@@ -1,10 +1,12 @@
-import { Button, Input, Layout } from "antd"
+import { Input, Layout } from "antd"
 import { Space,Table } from 'antd';
 import type { TableProps } from 'antd';
 import { CategoryType } from "../../utils/Type";
 import { Typography } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import {Popconfirm } from 'antd';
+
 
 const { Title } = Typography;
 
@@ -21,11 +23,30 @@ const columns: TableProps<CategoryType>['columns'] = [
     render: (_, record) => (
       <Space size="middle">
         <Link to={`/category/${record.categoryId}`}><EditOutlined style={editStyle} /></Link>
-        <DeleteOutlined style={deleteStyle}/>
+        <Popconfirm
+          placement="topRight"
+          title="Delete User"
+          description="Are you sure to delete this user?"
+          onConfirm={()=>confirm(record.categoryId)}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
+        >
+          <DeleteOutlined style={deleteStyle} />
+        </Popconfirm>
       </Space>
     ),
   },
 ];
+
+const confirm = (value:string) => {
+  console.log(value)
+};
+
+const cancel = () => {
+  console.log('cancel')
+};
+
 
 const data: CategoryType[] = [
   {
@@ -80,13 +101,6 @@ const buttonStyle:React.CSSProperties = {
 }
 
 
-const buttonStyle1:React.CSSProperties = {
-  height:40,
-  width:150,
-  backgroundColor:"#7070db",
-  color:'white',
-}
-
 const tableLayout:React.CSSProperties = {
   maxHeight:"calc(100vh - 250px)",
   height:'calc(100vh - 250px)',
@@ -127,7 +141,6 @@ const Category = () => {
       <Title level={3} style={textStyle}>Category Listings</Title>
       <Layout style={filderLayout}>
         <Input placeholder="Search Category Name" style={inputStyle}/>
-        <Button style={buttonStyle1}>Filter</Button>
         <Link to='/category/create' style={buttonStyle}>
           <img src="/images/menu.png" alt="userAdd" style={imageAdd}/>
           <span style={buttonText}>New Category</span>

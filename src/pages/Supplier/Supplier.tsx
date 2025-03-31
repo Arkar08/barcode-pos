@@ -1,10 +1,13 @@
-import { Button, Input, Layout } from "antd";
+import { Button, Input, Layout, Modal } from "antd";
 import { Space, Table } from "antd";
 import type { TableProps } from "antd";
 import { SupplierType } from "../../utils/Type";
 import { Typography } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import {Popconfirm } from 'antd';
+import FilterSupplier from "./FilterSupplier";
+import { useState } from "react";
 
 const { Title } = Typography;
 
@@ -55,11 +58,30 @@ const columns: TableProps<SupplierType>["columns"] = [
     render: (_, record) => (
       <Space size="middle">
         <Link to={`/supplier/${record.supplierId}`}><EditOutlined style={editStyle} /></Link>
-        <DeleteOutlined style={deleteStyle}/>
+        <Popconfirm
+          placement="topRight"
+          title="Delete User"
+          description="Are you sure to delete this user?"
+          onConfirm={()=>confirm(record.supplierId)}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
+        >
+          <DeleteOutlined style={deleteStyle} />
+        </Popconfirm>
       </Space>
     ),
   },
 ];
+
+const confirm = (value:string) => {
+  console.log(value)
+};
+
+const cancel = () => {
+  console.log('cancel')
+};
+
 
 const data: SupplierType[] = [
   {
@@ -174,12 +196,29 @@ const buttonText: React.CSSProperties = {
 };
 
 const Supplier = () => {
+
+    const [openModal,setOpenModal] = useState(false)
+  
+    const filterSupplier = () =>{
+      setOpenModal(true)
+    }
+  
+    const handleOk = () => {
+      console.log('ok')
+      setOpenModal(false)
+    };
+  
+    const handleCancel = () => {
+      console.log('cancel')
+      setOpenModal(false)
+    };
+
   return (
     <Layout>
         <Title level={3} style={textStyle}>Supplier Listings</Title>
         <Layout style={filderLayout}>
           <Input placeholder="Search Supplier" style={inputStyle}/>
-          <Button style={buttonStyle1}>Filter</Button>
+          <Button style={buttonStyle1} onClick={filterSupplier}>Filter</Button>
           <Link to='/supplier/create' style={buttonStyle}>
             <img src="/images/round (1).png" alt="userAdd" style={imageAdd}/>
             <span style={buttonText}>New Supplier</span>
@@ -188,6 +227,31 @@ const Supplier = () => {
         <Layout style={tableLayout}>
           <Table<SupplierType> columns={columns} dataSource={data} rowKey={(record) => record.supplierId}/>
         </Layout>
+        <Modal
+        open={openModal}
+        title="Filter User"
+        onOk={handleOk}
+        onCancel={handleCancel}
+        width={{
+          xs: '90%',
+          sm: '80%',
+          md: '70%',
+          lg: '60%',
+          xl: '50%',
+          xxl: '40%',
+        }}
+        centered
+        footer={[
+          <Button key="back" variant="solid" danger onClick={handleCancel} className="modalBtn">
+            Reset
+          </Button>,
+          <Button key="submit" type="primary"onClick={handleOk} className="modalBtn">
+            Filter
+          </Button>
+        ]}
+      >
+        <FilterSupplier />
+      </Modal>
     </Layout>
   )
 }

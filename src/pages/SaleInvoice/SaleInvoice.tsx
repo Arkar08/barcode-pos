@@ -1,10 +1,12 @@
-import { Button, Input, Layout } from "antd";
+import { Button, Input, Layout, Modal } from "antd";
 import { Space, Table } from "antd";
 import type { TableProps } from "antd";
 import { InvoiceType } from "../../utils/Type";
 import { Typography } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import FilterInvoice from "./FilterInvoice";
+import { useState } from "react";
 
 const { Title } = Typography;
 
@@ -183,12 +185,29 @@ const textStyle1:React.CSSProperties = {
 }
 
 const SaleInvoice = () => {
+
+        const [openModal,setOpenModal] = useState(false)
+      
+        const filterInvoice = () =>{
+          setOpenModal(true)
+        }
+      
+        const handleOk = () => {
+          console.log('ok')
+          setOpenModal(false)
+        };
+      
+        const handleCancel = () => {
+          console.log('cancel')
+          setOpenModal(false)
+        };
+
   return (
     <Layout>
       <Title level={3} style={textStyle}>Sale Invoice Listings</Title>
       <Layout style={filderLayout}>
         <Input placeholder="Search Invoice" style={inputStyle}/>
-        <Button style={buttonStyle1}>Filter</Button>
+        <Button style={buttonStyle1} onClick={filterInvoice}>Filter</Button>
         <Link to='/invoice/create' style={buttonStyle}>
           <img src="/images/add-to-cart.png" alt="userAdd" style={imageAdd}/>
           <span style={buttonText}>Create Invoice</span>
@@ -197,6 +216,31 @@ const SaleInvoice = () => {
       <Layout style={tableLayout}>
         <Table<InvoiceType> columns={columns} dataSource={data} rowKey={(record) => record.invoiceId}/>
       </Layout>
+      <Modal
+        open={openModal}
+        title="Filter User"
+        onOk={handleOk}
+        onCancel={handleCancel}
+        width={{
+          xs: '90%',
+          sm: '80%',
+          md: '70%',
+          lg: '60%',
+          xl: '50%',
+          xxl: '40%',
+        }}
+        centered
+        footer={[
+          <Button key="back" variant="solid" danger onClick={handleCancel} className="modalBtn">
+            Reset
+          </Button>,
+          <Button key="submit" type="primary"onClick={handleOk} className="modalBtn">
+            Filter
+          </Button>
+        ]}
+      >
+        <FilterInvoice />
+      </Modal>
     </Layout>
   )
 }

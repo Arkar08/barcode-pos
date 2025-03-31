@@ -1,10 +1,12 @@
-import { Button, Input, Layout } from "antd";
+import { Button, Input, Layout, Modal } from "antd";
 import { Space, Table } from "antd";
 import type { TableProps } from "antd";
 import { OrderType } from "../../utils/Type";
 import { Typography } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import FilterOrder from "./FilterOrder";
 
 const { Title } = Typography;
 
@@ -204,6 +206,23 @@ const editStyle:React.CSSProperties = {
 }
 
 const Orders = () => {
+
+      const [openModal,setOpenModal] = useState(false)
+    
+      const filterOrder = () =>{
+        setOpenModal(true)
+      }
+    
+      const handleOk = () => {
+        console.log('ok')
+        setOpenModal(false)
+      };
+    
+      const handleCancel = () => {
+        console.log('cancel')
+        setOpenModal(false)
+      };
+
   return (
     <Layout>
       <Title level={3} style={textStyle}>
@@ -211,7 +230,7 @@ const Orders = () => {
       </Title>
       <Layout style={filderLayout}>
         <Input placeholder="Search Order" style={inputStyle} />
-        <Button style={buttonStyle1}>Filter</Button>
+        <Button style={buttonStyle1} onClick={filterOrder}>Filter</Button>
         <Link to='/orders/create' style={buttonStyle}>
           <img src="/images/add-item.png" alt="userAdd" style={imageAdd} />
           <span style={buttonText}>Create Order</span>
@@ -220,6 +239,31 @@ const Orders = () => {
       <Layout style={tableLayout}>
         <Table<OrderType> columns={columns} dataSource={data} rowKey={(record) => record.orderId} />
       </Layout>
+      <Modal
+        open={openModal}
+        title="Filter User"
+        onOk={handleOk}
+        onCancel={handleCancel}
+        width={{
+          xs: '90%',
+          sm: '80%',
+          md: '70%',
+          lg: '60%',
+          xl: '50%',
+          xxl: '40%',
+        }}
+        centered
+        footer={[
+          <Button key="back" variant="solid" danger onClick={handleCancel} className="modalBtn">
+            Reset
+          </Button>,
+          <Button key="submit" type="primary"onClick={handleOk} className="modalBtn">
+            Filter
+          </Button>
+        ]}
+      >
+        <FilterOrder />
+      </Modal>
     </Layout>
   );
 };

@@ -11,7 +11,7 @@ const navbarReducer = create<NavbarProps>((set)=>(
         active:false,
         menuClick:(()=> set((state)=>({
             active:!state.active
-        })))
+        }))),
     }
 ))
 
