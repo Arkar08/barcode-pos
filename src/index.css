@@ -132,3 +132,6 @@
     margin-bottom: 20px;
   }
 }
+:where(.css-1a3rktk).ant-typography+h1.ant-typography, :where(.css-1a3rktk).ant-typography+h2.ant-typography, :where(.css-1a3rktk).ant-typography+h3.ant-typography, :where(.css-1a3rktk).ant-typography+h4.ant-typography, :where(.css-1a3rktk).ant-typography+h5.ant-typography{
+  margin-top: 0rem !important;
+}
