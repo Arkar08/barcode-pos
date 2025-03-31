@@ -138,7 +138,7 @@ const CreateSaleInvoice = () => {
           </Col>
           <Col span={8} className="gutter-row">
             <div className="scannerContainer">
-              <img src="/images/scanner.png" alt="scan_photo" className="scanner"/>
+              <img src="/images/barcode.png" alt="scan_photo" className="scanner"/>
             </div>
           </Col>
         </Row>

@@ -78,6 +78,8 @@
 .scanner{
   width: 50px;
   height: 50px;
+  object-fit: contain;
+  object-position: center;
 }
 .scannerContainer{
   width: 80px;
