@@ -1,12 +1,14 @@
 
-import { Button, Typography } from "antd"
+import { Button, Modal, Typography } from "antd"
 import { Col, Row,Table,Space } from 'antd';
 import { Input } from 'antd';
 import { Select } from 'antd';
 import { useNavigate } from "react-router-dom";
 import { OrderType } from "../../utils/Type";
 import type { TableProps } from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import AddProduct2 from "./AddProduct";
 
 const {Title} = Typography;
 
@@ -16,6 +18,11 @@ const editStyle:React.CSSProperties = {
   cursor:'pointer'
 }
 
+const deleteStyle:React.CSSProperties = {
+  color:'red',
+  fontSize:22,
+  cursor:'pointer'
+}
 
 const columns: TableProps<OrderType>["columns"] = [
   {
@@ -44,6 +51,7 @@ const columns: TableProps<OrderType>["columns"] = [
     render: () => ( //_, record
       <Space size="middle">
           <EditOutlined style={editStyle} />
+          <DeleteOutlined style={deleteStyle} />
       </Space>
     ),
   },
@@ -104,6 +112,22 @@ const CreateOrder = () => {
 
   const navigate = useNavigate()
 
+  const [openModal,setOpenModal] = useState(false)
+      
+        const AddProduct = () =>{
+          setOpenModal(true)
+        }
+      
+        const handleOk = () => {
+          console.log('ok')
+          setOpenModal(false)
+        };
+      
+        const handleCancel = () => {
+          console.log('cancel')
+          setOpenModal(false)
+        };
+
   const handleChange = ((value:string)=>{
     console.log(value)
   })
@@ -135,7 +159,32 @@ const CreateOrder = () => {
         </Col>
         <Col span={8} className="gutter-row">
           <div className="AddBtn">
-                <Button type="primary" className="btnAdd"> + Add Product</Button>
+                <Button type="primary" className="btnAdd" onClick={AddProduct}> + Add Product</Button>
+                  <Modal
+                    open={openModal}
+                    title="Filter User"
+                    onOk={handleOk}
+                    onCancel={handleCancel}
+                    width={{
+                      xs: '90%',
+                      sm: '80%',
+                      md: '70%',
+                      lg: '60%',
+                      xl: '50%',
+                      xxl: '40%',
+                    }}
+                    centered
+                    footer={[
+                      <Button key="back" variant="solid" color="red" onClick={handleCancel} className="modalBtn">
+                        Cancel
+                      </Button>,
+                      <Button key="add" variant='solid' color="green" onClick={handleOk} className="modalBtn">
+                        Save
+                      </Button>,
+                    ]}
+                  >
+                    <AddProduct2 />
+                  </Modal>
           </div>
         </Col>
         <Col span={8} className="gutter-row">
@@ -181,7 +230,7 @@ const CreateOrder = () => {
           </Col>
       </Row>
       <div className="btnGroup">
-        <Button variant="solid" danger className="cancel" onClick={CancelClick}>Cancel</Button>
+        <Button variant="solid" color="red" className="cancel" onClick={CancelClick}>Cancel</Button>
         <Button type="primary" className="cancel1" onClick={CancelClick}> Order Booking</Button>
       </div>
     </div>

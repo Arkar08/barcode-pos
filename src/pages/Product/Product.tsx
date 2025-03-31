@@ -221,7 +221,7 @@ const Product = () => {
         }}
         centered
         footer={[
-          <Button key="back" variant="solid" danger onClick={handleCancel} className="modalBtn">
+          <Button key="back" variant="solid" color="red" onClick={handleCancel} className="modalBtn">
             Reset
           </Button>,
           <Button key="submit" type="primary"onClick={handleOk} className="modalBtn">

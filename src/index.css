@@ -106,3 +106,24 @@
   font-size: 22px !important;
   color: #7070db !important;
 }
+.completeBox{
+  height: 50px;
+}
+.completeContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.tableAddOrder{
+  overflow: auto;
+
+  .ant-pagination{
+    display: none;
+  }
+
+  .ant-table{
+    height: 150px !important;
+    margin-bottom: 20px;
+  }
+}

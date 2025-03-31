@@ -28,7 +28,7 @@ const UpdateCategory = () => {
         </Col>
       </Row>
       <div className="btnGroup">
-        <Button variant="solid" danger className="cancel" onClick={CancelClick}>Cancel</Button>
+        <Button variant="solid" color="red" className="cancel" onClick={CancelClick}>Cancel</Button>
         <Button type="primary" className="cancel1" onClick={CancelClick}>Update</Button>
       </div>
     </div>
