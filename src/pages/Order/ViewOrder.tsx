@@ -37,6 +37,28 @@ const textDetailContainer:React.CSSProperties = {
   alignItems:"center"
 }
 
+const productList:React.CSSProperties = {
+  display:"flex",
+  justifyContent:"space-around",
+  marginTop:'20px',
+  height:'300px',
+  overflow:"auto"
+}
+
+const footer:React.CSSProperties = {
+  display:"flex",
+  justifyContent:"end",
+  marginTop:'20px'
+}
+
+const total:React.CSSProperties = {
+  display:"flex",
+  justifyContent:"space-between",
+  alignItems:"center",
+  gap:'20px',
+  marginTop:'10px'
+}
+
 
 const ViewOrder = () => {
 
@@ -67,6 +89,40 @@ const ViewOrder = () => {
             </Title>
           </div>
           <Title level={5}>Delivery Date - 12/12/2025</Title>
+          <div style={productList}>
+            <div>
+              <Title level={5}>Product Name</Title>
+              <Title level={5}>Mango</Title>
+              <Title level={5}>Mango</Title>
+              <Title level={5}>Mango</Title>
+              <Title level={5}>Mango</Title>
+              <Title level={5}>Mango</Title>
+            </div>
+            <div>
+              <Title level={5}>Quantity</Title>
+              <Title level={5}>1</Title>
+              <Title level={5}>1</Title>
+              <Title level={5}>1</Title>
+              <Title level={5}>1</Title>
+              <Title level={5}>1</Title>
+            </div>
+            <div>
+              <Title level={5}>Price</Title>
+              <Title level={5}>10000</Title>
+              <Title level={5}>10000</Title>
+              <Title level={5}>10000</Title>
+              <Title level={5}>10000</Title>
+              <Title level={5}>10000</Title>
+            </div>
+          </div>
+          <div style={footer}>
+            <div>
+              <Title level={5} style={total}><span>Total Price</span> <span>- 10000</span></Title>
+              <Title level={5} style={total}><span>Promotion</span> <span>-10</span></Title>
+              <hr />
+              <Title level={5} style={total}><span>Total Amount</span> <span>- 10000</span></Title>
+            </div>
+          </div>
         </Layout>
       </Layout>
       <div style={btnContainer}>
