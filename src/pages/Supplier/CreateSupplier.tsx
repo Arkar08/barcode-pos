@@ -11,7 +11,7 @@ const CreateSupplier = () => {
 
   const navigate = useNavigate()
 
-  const handleChange = ((value:any)=>{
+  const handleChange = ((value:string)=>{
     console.log(value)
   })
 

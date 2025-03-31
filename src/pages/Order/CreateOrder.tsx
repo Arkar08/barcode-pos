@@ -104,8 +104,7 @@ const CreateOrder = () => {
 
   const navigate = useNavigate()
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleChange = ((value:any)=>{
+  const handleChange = ((value:string)=>{
     console.log(value)
   })
 
