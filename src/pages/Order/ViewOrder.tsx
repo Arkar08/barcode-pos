@@ -88,7 +88,10 @@ const ViewOrder = () => {
               Customer Name - Aung Aung
             </Title>
           </div>
-          <Title level={5}>Delivery Date - 12/12/2025</Title>
+          <div style={textDetailContainer}>
+            <Title level={5}>Order Date - 12/12/2025</Title>
+            <Title level={5}>Delivery Date - 12/12/2025</Title>
+          </div>
           <div style={productList}>
             <div>
               <Title level={5}>Product Name</Title>
