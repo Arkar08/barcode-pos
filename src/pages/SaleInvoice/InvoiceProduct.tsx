@@ -58,7 +58,8 @@ import { useState } from 'react';
       products:[
         {
           productName:'mongo',
-          unitPrice:3000
+          price:3000,
+          qty:1
         }
       ],
       promotion: null,
@@ -73,7 +74,8 @@ import { useState } from 'react';
       products:[
         {
           productName:'mongo',
-          unitPrice:3000
+          price:3000,
+          qty:2
         }
       ],
       promotion: null,
@@ -88,7 +90,8 @@ import { useState } from 'react';
       products:[
         {
           productName:'mongo',
-          unitPrice:3000
+          price:3000,
+          qty:3
         }
       ],
       promotion: null,

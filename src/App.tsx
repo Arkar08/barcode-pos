@@ -1,4 +1,5 @@
 import CategoryProvider from "./context/CategoryContext"
+import FindProvider from "./context/FindContext"
 import InvoiceProvider from "./context/InvoiceContext"
 import OrderProvider from "./context/OrderContext"
 import ProductProvider from "./context/ProductContext"
@@ -8,17 +9,19 @@ import View from "./routes/View"
 function App() {
 
   return (
-    <UserProvider>
-     <InvoiceProvider>
-      <OrderProvider>
-          <ProductProvider>
-            <CategoryProvider>
-              <View />
-            </CategoryProvider>
-          </ProductProvider>
-        </OrderProvider>
-     </InvoiceProvider>
-    </UserProvider>
+    <FindProvider>
+      <UserProvider>
+        <InvoiceProvider>
+          <OrderProvider>
+              <ProductProvider>
+                <CategoryProvider>
+                  <View />
+                </CategoryProvider>
+              </ProductProvider>
+            </OrderProvider>
+        </InvoiceProvider>
+      </UserProvider>
+    </FindProvider>
   )
 }
 

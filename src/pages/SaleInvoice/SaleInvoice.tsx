@@ -94,7 +94,7 @@ const inputStyle: React.CSSProperties = {
 
 const buttonStyle1: React.CSSProperties = {
   height: 40,
-  width: 150,
+  width: 300,
   backgroundColor: "#7070db",
   color: "white",
 };

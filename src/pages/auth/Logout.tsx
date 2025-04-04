@@ -48,8 +48,8 @@ const Logout = () => {
       <div  style={logoutContainer}>
           <h3 style={logoutText}>Are You Want To Logout?</h3>
           <div style={btnGroup}>
-            <Button type="primary" color="red" style={btnCancel}>No</Button>
-            <Button type="primary"  style={btnCancel}>Yes</Button>
+            <Button variant="solid" color="red" style={btnCancel} danger>No</Button>
+            <Button variant="solid" color="green"  style={btnCancel}>Yes</Button>
           </div>
       </div>
     </div>

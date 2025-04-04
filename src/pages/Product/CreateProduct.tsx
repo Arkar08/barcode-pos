@@ -4,7 +4,7 @@ import { Input } from 'antd';
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CategoryContext } from "../../context/CategoryContext";
-import { UserContext } from "../../context/UserContext";
+import { FindContext } from "../../context/FindContext";
 
 const {Title} = Typography;
 
@@ -15,7 +15,7 @@ const CreateProduct = () => {
   const navigate = useNavigate()
 
   const context = useContext(CategoryContext)
-  const context1 = useContext(UserContext)
+  const context1 = useContext(FindContext)
 
   if(!context){
     throw new Error("CategoryContext must be used within a CategoryProvider");
@@ -27,7 +27,7 @@ const CreateProduct = () => {
   }
 
   const {category} = context;
-  const {userList} = context1;
+  const {supplier} = context1;
 
   // const handleChange = ((value:string)=>{
   //   console.log(value)
@@ -55,7 +55,7 @@ const CreateProduct = () => {
             <select style={{ width: '100%' }} className="selectBox">
                 <option value="">Select Supplier</option>
                 {
-                  userList.map((user)=>{
+                  supplier?.map((user)=>{
                     return(
                       <option value={user.userId} key={user.userId}>{user.fullName}</option>
                     )

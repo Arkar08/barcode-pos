@@ -83,6 +83,11 @@
   width: 200px;
   height: 50px;
 }
+.btnAdd1{
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+}
 .tableOrder{
   overflow: auto;
 
@@ -128,12 +133,7 @@
 .completeBox{
   height: 50px;
 }
-.completeContainer{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
+
 .tableAddOrder{
   overflow: auto;
 

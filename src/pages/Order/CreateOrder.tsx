@@ -4,11 +4,12 @@ import { Col, Row,Table,Space } from 'antd';
 import { Input } from 'antd';
 import { Select } from 'antd';
 import { useNavigate } from "react-router-dom";
-import { OrderType } from "../../utils/Type";
+import {ProductOrder } from "../../utils/Type";
 import type { TableProps } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AddProduct2 from "./AddProduct";
+import { FindContext } from "../../context/FindContext";
 
 const {Title} = Typography;
 
@@ -24,21 +25,16 @@ const deleteStyle:React.CSSProperties = {
   cursor:'pointer'
 }
 
-const columns: TableProps<OrderType>["columns"] = [
+const columns: TableProps<ProductOrder>["columns"] = [
   {
     title: "Product Name",
-    dataIndex: "product",
-    key: "product",
+    dataIndex: "productName",
+    key: "productName",
   },
   {
     title: "Quantity",
     key: "qty",
     dataIndex: "qty",
-  },
-  {
-    title: "Promotion",
-    dataIndex: "promotion",
-    key: "promotion",
   },
   {
     title: "Price",
@@ -57,51 +53,21 @@ const columns: TableProps<OrderType>["columns"] = [
   },
 ];
 
-const data: OrderType[] = [
+const data: ProductOrder[] = [
   {
-    orderId:"1",
-    customerName: "John Brown",
     qty:4,
-    products:[
-      {
-        productName:'mongo',
-        unitPrice:3000
-      }
-    ],
-    promotion: null,
-    totalAmount: 1000,
-    payment:'Cash',
-    orderDate:'string'
+    productName:'mongon2',
+    price: 1000
   },
   {
-    orderId:"2",
-    customerName: "John Brown",
     qty:4,
-    products:[
-      {
-        productName:'mongo',
-        unitPrice:3000
-      }
-    ],
-    promotion: null,
-    totalAmount: 1000,
-    payment:'Cash',
-    orderDate:'string'
+    productName:'mongon1',
+    price: 1000
   },
   {
-    orderId:"3",
-    customerName: "John Brown",
     qty:4,
-    products:[
-      {
-        productName:'mongo',
-        unitPrice:3000
-      }
-    ],
-    promotion: null,
-    totalAmount: 1000,
-    payment:'Cash',
-    orderDate:'string'
+    productName:'mongon',
+    price: 1000
   },
 ];
 
@@ -116,6 +82,11 @@ const CreateOrder = () => {
         }
       
         const handleOk = () => {
+          console.log('ok')
+          setOpenModal(false)
+        };
+
+        const handleOk1 = () => {
           console.log('ok')
           setOpenModal(false)
         };
@@ -135,23 +106,32 @@ const CreateOrder = () => {
     )
   }
 
+    const context = useContext(FindContext)
+
+    if(!context){
+      throw new Error("CategoryContext must be used within a CategoryProvider");
+    }
+  
+
+    const{customers} = context;
+
   return (
     <div className="createContainer">
       <Title level={3} className="createText">Create New Order</Title>
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        <Col span={8} className="gutter-row">
+      <Col span={8} className="gutter-row">
           <div>
-            <Title level={5}>Enter Customer Name</Title>
-            <Select
-                style={{ width: '100%' }}
-                className="selectBox"
-                onChange={handleChange}
-                options={[
-                  { value: 'jack', label: 'Jack' },
-                  { value: 'lucy', label: 'Lucy' },
-                  { value: 'Yiminghe', label: 'yiminghe' },
-                ]}
-              />
+            <Title level={5}>Choose CustomerName</Title>
+            <select style={{ width: '100%' }} className="selectBox">
+                <option value="">Select Customer</option>
+                {
+                  customers?.map((user)=>{
+                    return(
+                      <option value={user.userId} key={user.userId}>{user.fullName}</option>
+                    )
+                  })
+                }
+            </select>
           </div>
         </Col>
         <Col span={8} className="gutter-row">
@@ -159,7 +139,7 @@ const CreateOrder = () => {
                 <Button type="primary" className="btnAdd" onClick={AddProduct}> + Add Product</Button>
                   <Modal
                     open={openModal}
-                    title="Filter User"
+                    title="Add Product"
                     onOk={handleOk}
                     onCancel={handleCancel}
                     width={{
@@ -175,9 +155,12 @@ const CreateOrder = () => {
                       <Button key="back" variant="solid" color="red" onClick={handleCancel} className="modalBtn">
                         Cancel
                       </Button>,
-                      <Button key="add" variant='solid' color="green" onClick={handleOk} className="modalBtn">
-                        Save
-                      </Button>,
+                      <Button key="add" variant='solid' color="purple" onClick={handleOk1} className="modalBtn">
+                       Add
+                     </Button>,
+                      <Button key="addAndContinue" variant='solid' color="purple" onClick={handleOk} className="modalBtn">
+                        Add & Continue
+                      </Button>
                     ]}
                   >
                     <AddProduct2 />
@@ -190,7 +173,7 @@ const CreateOrder = () => {
           </div>
         </Col>
       </Row>
-      <Table<OrderType> columns={columns} dataSource={data} rowKey={(record) => record.orderId} className="tableOrder"/>
+      <Table<ProductOrder> columns={columns} dataSource={data} rowKey={(record) => record.productName} className="tableOrder"/>
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         <Col span={8} className="gutter-row">
             <div>

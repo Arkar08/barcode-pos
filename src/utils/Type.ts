@@ -52,8 +52,10 @@ export interface InvoiceType {
 
 export type ProductOrder =  {
     productName:string;
-    unitPrice:number;
+    price:number;
+    qty:number;
 }
+
 
 export type ChildrenType = {
     children:React.ReactNode
@@ -97,4 +99,9 @@ export type InvoiceContextType = {
     invoiceList:InvoiceType[]
     loading:boolean
     error:null
+}
+
+export type FindContextType = {
+    customers:UserType[],
+    supplier:UserType[]
 }
