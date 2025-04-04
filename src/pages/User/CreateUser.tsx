@@ -4,6 +4,7 @@ import { Input } from 'antd';
 import { Select } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const {Title} = Typography;
 
@@ -11,6 +12,7 @@ const {Title} = Typography;
 const CreateUser = () => {
 
   const navigate = useNavigate()
+  const [role,setRole] = useState<string>('')
 
   const handleChange = ((value:string)=>{
     console.log(value)
@@ -21,6 +23,10 @@ const CreateUser = () => {
       navigate('/users')
     )
   }
+
+  const handleRoleChange = ((value:string)=>{
+    setRole(value)
+  })
   
   
 
@@ -46,6 +52,41 @@ const CreateUser = () => {
             <Input placeholder="example@gmail.com" className="inputBox"/>
           </div>
         </Col>
+        <Col span={8} className="gutter-row">
+          <div>
+            <Title level={5}>Choose Role</Title>
+             <Select
+                defaultValue='Select Role'
+                style={{ width: '100%' }}
+                className="selectBox"
+                onChange={handleRoleChange}
+                options={[
+                  {value:"Select Role",label:"Select Role"},
+                  { value: 'admin', label: 'Admin' },
+                  { value: 'supplier', label: 'Supplier' },
+                  { value: 'customer', label: 'Customer' },
+                ]}
+              />
+          </div>
+        </Col>
+       {
+        role === 'supplier' && (
+         <>
+            <Col span={8} className="gutter-row">
+              <div>
+                <Title level={5}>Enter ComanyName</Title>
+                <Input placeholder="companyName" className="inputBox"/>
+              </div>
+            </Col>
+            <Col span={8} className="gutter-row">
+              <div>
+                <Title level={5}>Enter Description</Title>
+                <Input placeholder="description" className="inputBox"/>
+              </div>
+            </Col>
+         </>
+        )
+       }
         <Col span={8} className="gutter-row">
           <div>
             <Title level={5}>Enter Password</Title>

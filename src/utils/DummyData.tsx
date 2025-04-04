@@ -14,12 +14,6 @@ export const dummyData = [
         activeImage:"images/customer.png"
     },
     {
-        route:"/supplier",
-        text:"Supplier",
-        image:"images/supplier (2).png",
-        activeImage:"images/supplier (3).png"
-    },
-    {
         route:"/products",
         text:"Products",
         image:"images/products1.png",

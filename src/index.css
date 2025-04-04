@@ -58,6 +58,10 @@
   height: 40px;
   background-color: #7070db !important;
   letter-spacing: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 :where(.css-dev-only-do-not-override-1a3rktk).ant-input-affix-wrapper{
   font-size: 18px !important;

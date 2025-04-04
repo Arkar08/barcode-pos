@@ -6,18 +6,15 @@ import Product from "../pages/Product/Product";
 import Category from "../pages/Category/Category";
 import Logout from "../pages/auth/Logout";
 import NotFound from "../pages/NotFound/NotFound";
-import Supplier from "../pages/Supplier/Supplier";
 import Orders from "../pages/Order/Orders";
 import SaleInvoice from "../pages/SaleInvoice/SaleInvoice";
 import UserListing from "../pages/User/UserListing";
 import CreateUser from "../pages/User/CreateUser";
-import CreateSupplier from "../pages/Supplier/CreateSupplier";
 import CreateSaleInvoice from "../pages/SaleInvoice/CreateSaleInvoice";
 import CreateProduct from "../pages/Product/CreateProduct";
 import CreateOrder from "../pages/Order/CreateOrder";
 import CreateCategory from "../pages/Category/CreateCategory";
 import UpdateUser from "../pages/User/UpdateUser";
-import UpdateSupplier from "../pages/Supplier/UpdateSupplier";
 import ViewInvoice from "../pages/SaleInvoice/ViewInvoice";
 import UpdateProduct from "../pages/Product/UpdateProduct";
 import ViewOrder from "../pages/Order/ViewOrder";
@@ -85,21 +82,6 @@ export const data = [
                 path:"category/:id",
                 text:"Update Category",
                 Component:UpdateCategory
-            },
-            {
-                path:"supplier",
-                text:"Supplier",
-                Component:Supplier
-            },
-            {
-                path:"supplier/create",
-                text:"Create Supplier",
-                Component:CreateSupplier
-            },
-            {
-                path:"supplier/:id",
-                text:"Update Supplier",
-                Component:UpdateSupplier
             },
             {
                 path:"orders",

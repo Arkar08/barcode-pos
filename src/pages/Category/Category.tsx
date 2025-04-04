@@ -6,6 +6,9 @@ import { Typography } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import {Popconfirm } from 'antd';
+import { useContext } from "react";
+import { CategoryContext } from "../../context/CategoryContext";
+import Axios from "../../api/ApiConfig";
 
 
 const { Title } = Typography;
@@ -39,37 +42,18 @@ const columns: TableProps<CategoryType>['columns'] = [
   },
 ];
 
-const confirm = (value:string) => {
-  console.log(value)
+const confirm = async(value:string) => {
+  await Axios.delete(`category/${value}`).then((data)=>{
+    if(data.data.status === 200){
+      alert(data.data.message)
+      window.location.reload()
+    }
+  })
 };
 
 const cancel = () => {
-  console.log('cancel')
+  window.location.reload();
 };
-
-
-const data: CategoryType[] = [
-  {
-    categoryId:'1',
-    categoryName: 'John Brown',
-  },
-  {
-    categoryId:'2',
-    categoryName: 'John Brown',
-  },
-  {
-    categoryId:'3',
-    categoryName: 'John Brown',
-  },
-  {
-    categoryId:'4',
-    categoryName: 'John Brown',
-  },
-  {
-    categoryId:'5',
-    categoryName: 'John Brown',
-  },
-];
 
 
 const filderLayout:React.CSSProperties = {
@@ -136,6 +120,27 @@ const editStyle:React.CSSProperties = {
 }
 
 const Category = () => {
+
+  const context = useContext(CategoryContext);
+
+  if (!context) {
+    throw new Error("categoryContext must be used within a CountryProvider");
+  }
+
+  const { category,loading ,error} = context;
+
+  if(loading){
+    return (
+      <div>loading</div>
+    )
+  }
+
+  if(error){
+    return(
+      <div>{error}</div>
+    )
+  }
+
   return (
     <Layout>
       <Title level={3} style={textStyle}>Category Listings</Title>
@@ -147,7 +152,7 @@ const Category = () => {
         </Link>
       </Layout>
       <Layout style={tableLayout}>
-        <Table<CategoryType> columns={columns} dataSource={data} rowKey={(record) => record.categoryId}/>
+        <Table<CategoryType> columns={columns} dataSource={category} rowKey={(record) => record.categoryId}/>
       </Layout>
     </Layout>
   )

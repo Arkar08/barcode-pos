@@ -1,20 +1,27 @@
 import { Button, Typography } from "antd"
 import { Col, Row } from 'antd';
 import { Input } from 'antd';
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { CategoryContext } from "../../context/CategoryContext";
 
 const {Title} = Typography;
 
 const CreateCategory = () => {
 
-  const navigate = useNavigate()
+
+    const context = useContext(CategoryContext);
+  
+    if (!context) {
+      throw new Error("categoryContext must be used within a CountryProvider");
+    }
+  
+    const {categoryText,categoryChange,createCategory,error,CancelClick} = context;
+
+    if(error){
+      alert(error)
+    }
 
 
-  const CancelClick = () =>{
-    return(
-      navigate('/category')
-    )
-  }
 
   return (
     <div className="createContainer">
@@ -23,13 +30,13 @@ const CreateCategory = () => {
         <Col span={8} className="gutter-row">
           <div>
             <Title level={5}>Enter Category Name</Title>
-            <Input placeholder="Category Name" className="inputBox"/>
+            <Input placeholder="Category Name" className="inputBox" value={categoryText} onChange={(e)=>categoryChange(e.target.value)}/>
           </div>
         </Col>
       </Row>
       <div className="btnGroup">
         <Button variant="solid" color="red" className="cancel" onClick={CancelClick}>Cancel</Button>
-        <Button type="primary" className="cancel1" onClick={CancelClick}>Create</Button>
+        <Button type="primary" className="cancel1" onClick={createCategory}>Create</Button>
       </div>
     </div>
   )

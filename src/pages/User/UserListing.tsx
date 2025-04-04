@@ -23,9 +23,19 @@ const columns:TableProps<UserType>['columns'] = [
     key: 'email',
   },
   {
+    title: 'Company Name',
+    dataIndex: 'companyName',
+    key: 'companyName',
+  },
+  {
     title: 'Phone Number',
     dataIndex: 'phNumber',
     key: 'phNumber',
+  },
+  {
+    title: 'Role',
+    dataIndex: 'role',
+    key: 'role',
   },
   {
     title: 'State',
@@ -41,6 +51,11 @@ const columns:TableProps<UserType>['columns'] = [
     title: 'Address',
     dataIndex: 'address',
     key: 'address',
+  },
+  {
+    title: 'Description',
+    dataIndex: 'description',
+    key: 'description',
   },
   {
     title: 'Action',
@@ -80,7 +95,11 @@ const data: UserType[] = [
     email: 'john@gmail.com',
     phNumber: 978595545,
     state:'Yangon',
-    township:'mingalar'
+    township:'mingalar',
+    companyName:"testing",
+    description:'testing',
+    role:"admin",
+    address:"testing"
   },
   {
     userId:'2',
@@ -88,7 +107,11 @@ const data: UserType[] = [
     email: 'john@gmail.com',
     phNumber: 978595545,
     state:'Yangon',
-    township:'mingalar'
+    township:'mingalar',
+    companyName:"testing",
+    description:'testing',
+    role:"admin",
+    address:"testing"
   },
   {
     userId:'3',
@@ -96,7 +119,11 @@ const data: UserType[] = [
     email: 'john@gmail.com',
     phNumber: 978595545,
     state:'Yangon',
-    township:'mingalar'
+    township:'mingalar',
+    companyName:"testing",
+    description:'testing',
+    role:"admin",
+    address:"testing"
   },
   {
     userId:'4',
@@ -104,7 +131,11 @@ const data: UserType[] = [
     email: 'john@gmail.com',
     phNumber: 978595545,
     state:'Yangon',
-    township:'mingalar'
+    township:'mingalar',
+    companyName:"testing",
+    description:'testing',
+    role:"admin",
+    address:"testing"
   },
   {
     userId:'5',
@@ -112,7 +143,11 @@ const data: UserType[] = [
     email: 'john@gmail.com',
     phNumber: 978595545,
     state:'Yangon',
-    township:'mingalar'
+    township:'mingalar',
+    companyName:"testing",
+    description:'testing',
+    role:"admin",
+    address:"testing"
   },
 ];
 

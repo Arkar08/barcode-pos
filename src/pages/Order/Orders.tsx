@@ -58,22 +58,6 @@ const columns: TableProps<OrderType>["columns"] = [
     key: "orderDate",
   },
   {
-    title: "Delivery Date",
-    dataIndex: "deliveryDate",
-    key: "deliveryDate",
-    render:(_,record) =>{
-      return (
-        <>
-          {
-            record.deliveryDate === null && (
-              <p style={textStyle1}>-</p>
-            )
-          }
-        </>
-      )
-    }
-  },
-  {
     title: "Action",
     key: "action",
     render: (_, record) => (
@@ -98,8 +82,7 @@ const data: OrderType[] = [
     promotion: null,
     totalAmount: 1000,
     payment:'Cash',
-    orderDate:'string',
-    deliveryDate:null
+    orderDate:'string'
   },
   {
     orderId:"2",
@@ -114,8 +97,7 @@ const data: OrderType[] = [
     promotion: null,
     totalAmount: 1000,
     payment:'Cash',
-    orderDate:'string',
-    deliveryDate:null
+    orderDate:'string'
   },
   {
     orderId:"3",
@@ -130,8 +112,7 @@ const data: OrderType[] = [
     promotion: null,
     totalAmount: 1000,
     payment:'Cash',
-    orderDate:'string',
-    deliveryDate:null
+    orderDate:'string'
   },
 ];
 

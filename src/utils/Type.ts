@@ -4,18 +4,13 @@ export interface UserType {
     userId:string;
     name:string;
     email:string;
-    phNumber:number;
-    state:string;
-    township:string;
-}
-
-export interface SupplierType {
-    supplierId:string;
-    supplierName:string;
     companyName:string;
     phNumber:number;
     state:string;
     township:string;
+    role:string;
+    description:string;
+    address:string;
 }
 
 export interface ProductType {
@@ -41,7 +36,6 @@ export interface OrderType {
     totalAmount:number;
     promotion:number | null;
     payment:'Cash' | 'Bank';
-    deliveryDate:string | null;
     orderDate:string;
 }
 
@@ -59,4 +53,23 @@ export interface InvoiceType {
 export type ProductOrder =  {
     productName:string;
     unitPrice:number;
+}
+
+export type ChildrenType = {
+    children:React.ReactNode
+}
+
+export type CategoryContextType = {
+    category:CategoryType[]
+    loading:boolean
+    error:null
+    categoryText:string
+    categoryChange:(value:string)=>void
+    createCategory:() =>void
+    editCategoryText:string | undefined
+    setEditCategoryText: React.Dispatch<React.SetStateAction<string | undefined>>;
+    editText:string
+    editChange:(value:string)=>void
+    updateCategory:() =>void
+    CancelClick:()=>void
 }

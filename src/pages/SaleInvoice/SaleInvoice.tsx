@@ -132,17 +132,17 @@ const inputStyle: React.CSSProperties = {
   height: 40,
 };
 
-const buttonStyle:React.CSSProperties = {
-  height:40,
-  width:250,
-  backgroundColor:"#7070db",
-  color:'white',
-  display:'flex',
-  justifyContent:'center',
-  alignItems:'center',
-  gap:10,
-  borderRadius:5
-}
+// const buttonStyle:React.CSSProperties = {
+//   height:40,
+//   width:250,
+//   backgroundColor:"#7070db",
+//   color:'white',
+//   display:'flex',
+//   justifyContent:'center',
+//   alignItems:'center',
+//   gap:10,
+//   borderRadius:5
+// }
 
 const buttonStyle1: React.CSSProperties = {
   height: 40,
@@ -164,14 +164,14 @@ const textStyle: React.CSSProperties = {
   color: "#7070db",
 };
 
-const imageAdd: React.CSSProperties = {
-  width: "25px",
-  height: "25px",
-};
+// const imageAdd: React.CSSProperties = {
+//   width: "25px",
+//   height: "25px",
+// };
 
-const buttonText: React.CSSProperties = {
-  fontSize: 16,
-};
+// const buttonText: React.CSSProperties = {
+//   fontSize: 16,
+// };
 
 const editStyle:React.CSSProperties = {
   color:'blue',
@@ -208,10 +208,10 @@ const SaleInvoice = () => {
       <Layout style={filderLayout}>
         <Input placeholder="Search Invoice" style={inputStyle}/>
         <Button style={buttonStyle1} onClick={filterInvoice}>Filter</Button>
-        <Link to='/invoice/create' style={buttonStyle}>
+        {/* <Link to='/invoice/create' style={buttonStyle}>
           <img src="/images/add-to-cart.png" alt="userAdd" style={imageAdd}/>
           <span style={buttonText}>Create Invoice</span>
-        </Link>
+        </Link> */}
       </Layout>
       <Layout style={tableLayout}>
         <Table<InvoiceType> columns={columns} dataSource={data} rowKey={(record) => record.invoiceId}/>
