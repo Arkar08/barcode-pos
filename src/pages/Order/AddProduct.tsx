@@ -64,8 +64,7 @@ import { useState } from 'react';
       promotion: null,
       totalAmount: 1000,
       payment:'Cash',
-      orderDate:'string',
-      deliveryDate:null
+      orderDate:'string'
     },
     {
       orderId:"2",
@@ -80,8 +79,7 @@ import { useState } from 'react';
       promotion: null,
       totalAmount: 1000,
       payment:'Cash',
-      orderDate:'string',
-      deliveryDate:null
+      orderDate:'string'
     },
     {
       orderId:"3",
@@ -96,8 +94,7 @@ import { useState } from 'react';
       promotion: null,
       totalAmount: 1000,
       payment:'Cash',
-      orderDate:'string',
-      deliveryDate:null
+      orderDate:'string'
     },
   ];
   

@@ -71,8 +71,7 @@ const data: OrderType[] = [
     promotion: null,
     totalAmount: 1000,
     payment:'Cash',
-    orderDate:'string',
-    deliveryDate:null
+    orderDate:'string'
   },
   {
     orderId:"2",
@@ -87,8 +86,7 @@ const data: OrderType[] = [
     promotion: null,
     totalAmount: 1000,
     payment:'Cash',
-    orderDate:'string',
-    deliveryDate:null
+    orderDate:'string'
   },
   {
     orderId:"3",
@@ -103,8 +101,7 @@ const data: OrderType[] = [
     promotion: null,
     totalAmount: 1000,
     payment:'Cash',
-    orderDate:'string',
-    deliveryDate:null
+    orderDate:'string'
   },
 ];
 
