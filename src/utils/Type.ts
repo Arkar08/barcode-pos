@@ -2,14 +2,14 @@
 
 export interface UserType {
     userId:string;
-    name:string;
+    fullName:string;
     email:string;
     companyName:string;
-    phNumber:number;
     state:string;
     township:string;
-    role:string;
+    roleName:string;
     description:string;
+    phNumber:number;
     address:string;
 }
 
@@ -72,4 +72,29 @@ export type CategoryContextType = {
     editChange:(value:string)=>void
     updateCategory:() =>void
     CancelClick:()=>void
+}
+
+export type UserContextType = {
+    userList:UserType[]
+    loading:boolean
+    error:null
+}
+
+
+export type ProductContextType = {
+    productList:ProductType[]
+    loading:boolean
+    error:null
+}
+
+export type OrderContextType = {
+    orderList:OrderType[]
+    loading:boolean
+    error:null
+}
+
+export type InvoiceContextType = {
+    invoiceList:InvoiceType[]
+    loading:boolean
+    error:null
 }

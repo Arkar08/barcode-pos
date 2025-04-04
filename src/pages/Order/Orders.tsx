@@ -5,8 +5,9 @@ import { OrderType } from "../../utils/Type";
 import { Typography } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import FilterOrder from "./FilterOrder";
+import { OrderContext } from "../../context/OrderContext";
 
 const { Title } = Typography;
 
@@ -30,17 +31,9 @@ const columns: TableProps<OrderType>["columns"] = [
     title: "Promotion",
     dataIndex: "promotion",
     key: "promotion",
-    render:(_,record) =>{
-      return (
-        <>
-          {
-            record.promotion === 0 && (
-              <p style={textStyle1}>-</p>
-            )
-          }
-        </>
-      )
-    }
+    render: (_, record) => {
+      return <>{record.promotion === 0 && <p style={textStyle1}>-</p>}</>;
+    },
   },
   {
     title: "Total Amount",
@@ -62,57 +55,11 @@ const columns: TableProps<OrderType>["columns"] = [
     key: "action",
     render: (_, record) => (
       <Space size="middle">
-          <Link to={`/orders/${record.orderId}`}><EyeOutlined style={editStyle}/></Link>
+        <Link to={`/orders/${record.orderId}`}>
+          <EyeOutlined style={editStyle} />
+        </Link>
       </Space>
     ),
-  },
-];
-
-const data: OrderType[] = [
-  {
-    orderId:"1",
-    customerName: "John Brown",
-    qty:4,
-    products:[
-      {
-        productName:'mongo',
-        unitPrice:3000
-      }
-    ],
-    promotion: 0,
-    totalAmount: 1000,
-    payment:'Cash',
-    orderDate:'string'
-  },
-  {
-    orderId:"2",
-    customerName: "John Brown",
-    qty:4,
-    products:[
-      {
-        productName:'mongo',
-        unitPrice:3000
-      }
-    ],
-    promotion: 0,
-    totalAmount: 1000,
-    payment:'Cash',
-    orderDate:'string'
-  },
-  {
-    orderId:"3",
-    customerName: "John Brown",
-    qty:4,
-    products:[
-      {
-        productName:'mongo',
-        unitPrice:3000
-      }
-    ],
-    promotion: 0,
-    totalAmount: 1000,
-    payment:'Cash',
-    orderDate:'string'
   },
 ];
 
@@ -132,18 +79,17 @@ const inputStyle: React.CSSProperties = {
   height: 40,
 };
 
-const buttonStyle:React.CSSProperties = {
-  height:40,
-  width:250,
-  backgroundColor:"#7070db",
-  color:'white',
-  display:'flex',
-  justifyContent:'center',
-  alignItems:'center',
-  gap:10,
-  borderRadius:5
-}
-
+const buttonStyle: React.CSSProperties = {
+  height: 40,
+  width: 250,
+  backgroundColor: "#7070db",
+  color: "white",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 10,
+  borderRadius: 5,
+};
 
 const buttonStyle1: React.CSSProperties = {
   height: 40,
@@ -165,10 +111,10 @@ const textStyle: React.CSSProperties = {
   color: "#7070db",
 };
 
-const textStyle1:React.CSSProperties = {
-  textAlign:'center',
-  fontSize:22
-}
+const textStyle1: React.CSSProperties = {
+  textAlign: "center",
+  fontSize: 22,
+};
 
 const imageAdd: React.CSSProperties = {
   width: "25px",
@@ -179,30 +125,44 @@ const buttonText: React.CSSProperties = {
   fontSize: 16,
 };
 
-
-const editStyle:React.CSSProperties = {
-  color:'blue',
-  fontSize:22,
-  cursor:'pointer'
-}
+const editStyle: React.CSSProperties = {
+  color: "blue",
+  fontSize: 22,
+  cursor: "pointer",
+};
 
 const Orders = () => {
+  const [openModal, setOpenModal] = useState(false);
 
-      const [openModal,setOpenModal] = useState(false)
-    
-      const filterOrder = () =>{
-        setOpenModal(true)
-      }
-    
-      const handleOk = () => {
-        console.log('ok')
-        setOpenModal(false)
-      };
-    
-      const handleCancel = () => {
-        console.log('cancel')
-        setOpenModal(false)
-      };
+  const filterOrder = () => {
+    setOpenModal(true);
+  };
+
+  const handleOk = () => {
+    console.log("ok");
+    setOpenModal(false);
+  };
+
+  const handleCancel = () => {
+    console.log("cancel");
+    setOpenModal(false);
+  };
+
+  const context = useContext(OrderContext);
+
+  if (!context) {
+    throw new Error("orderContext must be used within a orderProvider");
+  }
+
+  const { orderList, loading, error } = context;
+
+  if (loading) {
+    return <div>loading</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <Layout>
@@ -211,14 +171,20 @@ const Orders = () => {
       </Title>
       <Layout style={filderLayout}>
         <Input placeholder="Search Order" style={inputStyle} />
-        <Button style={buttonStyle1} onClick={filterOrder}>Filter</Button>
-        <Link to='/orders/create' style={buttonStyle}>
+        <Button style={buttonStyle1} onClick={filterOrder}>
+          Filter
+        </Button>
+        <Link to="/orders/create" style={buttonStyle}>
           <img src="/images/add-item.png" alt="userAdd" style={imageAdd} />
           <span style={buttonText}>Create Order</span>
         </Link>
       </Layout>
       <Layout style={tableLayout}>
-        <Table<OrderType> columns={columns} dataSource={data} rowKey={(record) => record.orderId} />
+        <Table<OrderType>
+          columns={columns}
+          dataSource={orderList}
+          rowKey={(record) => record.orderId}
+        />
       </Layout>
       <Modal
         open={openModal}
@@ -226,21 +192,32 @@ const Orders = () => {
         onOk={handleOk}
         onCancel={handleCancel}
         width={{
-          xs: '90%',
-          sm: '80%',
-          md: '70%',
-          lg: '60%',
-          xl: '50%',
-          xxl: '40%',
+          xs: "90%",
+          sm: "80%",
+          md: "70%",
+          lg: "60%",
+          xl: "50%",
+          xxl: "40%",
         }}
         centered
         footer={[
-          <Button key="back" variant="solid" color="red" onClick={handleCancel} className="modalBtn">
+          <Button
+            key="back"
+            variant="solid"
+            color="red"
+            onClick={handleCancel}
+            className="modalBtn"
+          >
             Reset
           </Button>,
-          <Button key="submit" type="primary"onClick={handleOk} className="modalBtn">
+          <Button
+            key="submit"
+            type="primary"
+            onClick={handleOk}
+            className="modalBtn"
+          >
             Filter
-          </Button>
+          </Button>,
         ]}
       >
         <FilterOrder />

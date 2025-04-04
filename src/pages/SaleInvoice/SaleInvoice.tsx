@@ -6,7 +6,8 @@ import { Typography } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import FilterInvoice from "./FilterInvoice";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { InvoiceContext } from "../../context/InvoiceContext";
 
 const { Title } = Typography;
 
@@ -30,17 +31,9 @@ const columns: TableProps<InvoiceType>["columns"] = [
     title: "Promotion",
     dataIndex: "promotion",
     key: "promotion",
-    render:(_,record) =>{
-      return (
-        <>
-          {
-            record.promotion === null && (
-              <p style={textStyle1}>-</p>
-            )
-          }
-        </>
-      )
-    }
+    render: (_, record) => {
+      return <>{record.promotion === null && <p style={textStyle1}>-</p>}</>;
+    },
   },
   {
     title: "Total Amount",
@@ -62,59 +55,14 @@ const columns: TableProps<InvoiceType>["columns"] = [
     key: "action",
     render: (_, record) => (
       <Space size="middle">
-        <Link to={`/invoice/${record.invoiceId}`}><EyeOutlined style={editStyle} /></Link>
+        <Link to={`/invoice/${record.invoiceId}`}>
+          <EyeOutlined style={editStyle} />
+        </Link>
       </Space>
     ),
   },
 ];
 
-const data: InvoiceType[] = [
-  {
-    invoiceId:"1",
-    customerName: "John Brown",
-    qty:3,
-    products:[
-      {
-        productName:'mongo',
-        unitPrice:3000
-      }
-    ],
-    promotion: null,
-    totalAmount: 1000,
-    payment:'Cash',
-    invoiceDate:'string'
-  },
-  {
-    invoiceId:"2",
-    customerName: "John Brown",
-    qty:3,
-    products:[
-      {
-        productName:'mongo',
-        unitPrice:3000
-      }
-    ],
-    promotion: null,
-    totalAmount: 1000,
-    payment:'Cash',
-    invoiceDate:'string'
-  },
-  {
-    invoiceId:"3",
-    customerName: "John Brown",
-    qty:3,
-    products:[
-      {
-        productName:'mongo',
-        unitPrice:3000
-      }
-    ],
-    promotion: null,
-    totalAmount: 1000,
-    payment:'Cash',
-    invoiceDate:'string'
-  },
-];
 
 const filderLayout: React.CSSProperties = {
   height: 80,
@@ -173,48 +121,71 @@ const textStyle: React.CSSProperties = {
 //   fontSize: 16,
 // };
 
-const editStyle:React.CSSProperties = {
-  color:'blue',
-  fontSize:22,
-  cursor:'pointer'
-}
+const editStyle: React.CSSProperties = {
+  color: "blue",
+  fontSize: 22,
+  cursor: "pointer",
+};
 
-const textStyle1:React.CSSProperties = {
-  textAlign:'center',
-  fontSize:22
-}
+const textStyle1: React.CSSProperties = {
+  textAlign: "center",
+  fontSize: 22,
+};
 
 const SaleInvoice = () => {
+  const [openModal, setOpenModal] = useState(false);
 
-        const [openModal,setOpenModal] = useState(false)
-      
-        const filterInvoice = () =>{
-          setOpenModal(true)
-        }
-      
-        const handleOk = () => {
-          console.log('ok')
-          setOpenModal(false)
-        };
-      
-        const handleCancel = () => {
-          console.log('cancel')
-          setOpenModal(false)
-        };
+  const filterInvoice = () => {
+    setOpenModal(true);
+  };
+
+  const handleOk = () => {
+    console.log("ok");
+    setOpenModal(false);
+  };
+
+  const handleCancel = () => {
+    console.log("cancel");
+    setOpenModal(false);
+  };
+
+  const context = useContext(InvoiceContext);
+
+  if (!context) {
+    throw new Error("invoiceContext must be used within a invoiceProvider");
+  }
+
+  const { invoiceList, loading, error } = context;
+
+  if (loading) {
+    return <div>loading</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <Layout>
-      <Title level={3} style={textStyle}>Sale Invoice Listings</Title>
+      <Title level={3} style={textStyle}>
+        Sale Invoice Listings
+      </Title>
       <Layout style={filderLayout}>
-        <Input placeholder="Search Invoice" style={inputStyle}/>
-        <Button style={buttonStyle1} onClick={filterInvoice}>Filter</Button>
+        <Input placeholder="Search Invoice" style={inputStyle} />
+        <Button style={buttonStyle1} onClick={filterInvoice}>
+          Filter
+        </Button>
         {/* <Link to='/invoice/create' style={buttonStyle}>
           <img src="/images/add-to-cart.png" alt="userAdd" style={imageAdd}/>
           <span style={buttonText}>Create Invoice</span>
         </Link> */}
       </Layout>
       <Layout style={tableLayout}>
-        <Table<InvoiceType> columns={columns} dataSource={data} rowKey={(record) => record.invoiceId}/>
+        <Table<InvoiceType>
+          columns={columns}
+          dataSource={invoiceList}
+          rowKey={(record) => record.invoiceId}
+        />
       </Layout>
       <Modal
         open={openModal}
@@ -222,27 +193,38 @@ const SaleInvoice = () => {
         onOk={handleOk}
         onCancel={handleCancel}
         width={{
-          xs: '90%',
-          sm: '80%',
-          md: '70%',
-          lg: '60%',
-          xl: '50%',
-          xxl: '40%',
+          xs: "90%",
+          sm: "80%",
+          md: "70%",
+          lg: "60%",
+          xl: "50%",
+          xxl: "40%",
         }}
         centered
         footer={[
-          <Button key="back" variant="solid" color="red" onClick={handleCancel} className="modalBtn">
+          <Button
+            key="back"
+            variant="solid"
+            color="red"
+            onClick={handleCancel}
+            className="modalBtn"
+          >
             Reset
           </Button>,
-          <Button key="submit" type="primary"onClick={handleOk} className="modalBtn">
+          <Button
+            key="submit"
+            type="primary"
+            onClick={handleOk}
+            className="modalBtn"
+          >
             Filter
-          </Button>
+          </Button>,
         ]}
       >
         <FilterInvoice />
       </Modal>
     </Layout>
-  )
-}
+  );
+};
 
-export default SaleInvoice
+export default SaleInvoice;

@@ -6,16 +6,17 @@ import { Typography } from 'antd';
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import {Popconfirm } from 'antd';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import FilterUser from "./FilterUser";
+import { UserContext } from "../../context/UserContext";
 
 const { Title } = Typography;
 
 const columns:TableProps<UserType>['columns'] = [
   {
     title: 'Full Name',
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'fullName',
+    key: 'fullName',
   },
   {
     title: 'Email',
@@ -26,36 +27,112 @@ const columns:TableProps<UserType>['columns'] = [
     title: 'Company Name',
     dataIndex: 'companyName',
     key: 'companyName',
+    render:(_,record) =>{
+      return (
+        <>
+          {
+            record.companyName === null ? (
+              <p style={textStyle1}>-</p>
+            ):(
+              <p>{record.companyName}</p>
+            )
+          }
+        </>
+      )
+    }
   },
   {
     title: 'Phone Number',
     dataIndex: 'phNumber',
     key: 'phNumber',
+    render:(_,record) =>{
+      return (
+        <>
+          {
+            !record.phNumber&& (
+              <p style={textStyle1}>-</p>
+            )
+          }
+        </>
+      )
+    }
   },
   {
     title: 'Role',
-    dataIndex: 'role',
-    key: 'role',
+    dataIndex: 'roleName',
+    key: 'roleName',
   },
   {
     title: 'State',
     key: 'state',
     dataIndex: 'state',
+    render:(_,record) =>{
+      return (
+        <>
+          {
+            record.state === null ? (
+              <p style={textStyle1}>-</p>
+            ):(
+              <p>{record.state}</p>
+            )
+          }
+        </>
+      )
+    }
   },
   {
     title: 'Township',
     dataIndex: 'township',
     key: 'township',
+    render:(_,record) =>{
+      return (
+        <>
+          {
+            record.township === null ? (
+              <p style={textStyle1}>-</p>
+            ):(
+              <p>{record.township}</p>
+            )
+          }
+        </>
+      )
+    }
   },
   {
     title: 'Address',
     dataIndex: 'address',
     key: 'address',
+    render:(_,record) =>{
+      return (
+        <>
+          {
+            record.address === null ? (
+              <p style={textStyle1}>-</p>
+            ):(
+              <p>{record.address}</p>
+            )
+          }
+        </>
+      )
+    }
   },
   {
     title: 'Description',
     dataIndex: 'description',
     key: 'description',
+    render:(_,record) =>{
+      return (
+        <>
+          {
+            record.description === null ? (
+              <p style={textStyle1}>-</p>
+            ):(
+              <p>{record.description}</p>
+            )
+          }
+        </>
+      )
+    }
   },
   {
     title: 'Action',
@@ -66,7 +143,7 @@ const columns:TableProps<UserType>['columns'] = [
         <Popconfirm
           placement="topRight"
           title="Delete User"
-          description="Are you sure to delete this user?"
+          description="Are you sure want to delete this user?"
           onConfirm={()=>confirm(record.userId)}
           onCancel={cancel}
           okText="Yes"
@@ -88,68 +165,10 @@ const cancel = () => {
 };
 
 
-const data: UserType[] = [
-  {
-    userId:'1',
-    name: 'John Brown',
-    email: 'john@gmail.com',
-    phNumber: 978595545,
-    state:'Yangon',
-    township:'mingalar',
-    companyName:"testing",
-    description:'testing',
-    role:"admin",
-    address:"testing"
-  },
-  {
-    userId:'2',
-    name: 'John Brown',
-    email: 'john@gmail.com',
-    phNumber: 978595545,
-    state:'Yangon',
-    township:'mingalar',
-    companyName:"testing",
-    description:'testing',
-    role:"admin",
-    address:"testing"
-  },
-  {
-    userId:'3',
-    name: 'John Brown',
-    email: 'john@gmail.com',
-    phNumber: 978595545,
-    state:'Yangon',
-    township:'mingalar',
-    companyName:"testing",
-    description:'testing',
-    role:"admin",
-    address:"testing"
-  },
-  {
-    userId:'4',
-    name: 'John Brown',
-    email: 'john@gmail.com',
-    phNumber: 978595545,
-    state:'Yangon',
-    township:'mingalar',
-    companyName:"testing",
-    description:'testing',
-    role:"admin",
-    address:"testing"
-  },
-  {
-    userId:'5',
-    name: 'John Brown',
-    email: 'john@gmail.com',
-    phNumber: 978595545,
-    state:'Yangon',
-    township:'mingalar',
-    companyName:"testing",
-    description:'testing',
-    role:"admin",
-    address:"testing"
-  },
-];
+const textStyle1:React.CSSProperties = {
+  textAlign:'center',
+  fontSize:22
+}
 
 const filderLayout:React.CSSProperties = {
   height:80,
@@ -224,6 +243,13 @@ const editStyle:React.CSSProperties = {
 const UserListing = () => {
 
   const [openModal,setOpenModal] = useState(false)
+  const context = useContext(UserContext)
+
+  if(!context){
+    throw new Error("categoryContext must be used within a CountryProvider");
+  }
+
+  const {userList,loading,error} = context
 
   const filterUser = () =>{
     setOpenModal(true)
@@ -238,6 +264,20 @@ const UserListing = () => {
     console.log('cancel')
     setOpenModal(false)
   };
+
+  
+  if(loading){
+    return (
+      <div>loading</div>
+    )
+  }
+
+  if(error){
+    return(
+      <div>{error}</div>
+    )
+  }
+
     
   return (
     <Layout>
@@ -251,7 +291,7 @@ const UserListing = () => {
         </Link>
       </Layout>
       <Layout style={tableLayout}>
-        <Table<UserType> columns={columns} dataSource={data} rowKey={(record) => record.userId}/>
+        <Table<UserType> columns={columns} dataSource={userList} rowKey={(record) => record.userId}/>
       </Layout>
       <Modal
         open={openModal}
