@@ -2,7 +2,7 @@ import { Button, Typography } from "antd"
 import { Col, Row } from 'antd';
 import { Input } from 'antd';
 import { useContext, useEffect } from "react";
-import {  useNavigate, useParams } from "react-router-dom";
+import {  Link, useNavigate, useParams } from "react-router-dom";
 import { CategoryContext } from "../../context/CategoryContext";
 
 const {Title} = Typography;
@@ -47,7 +47,7 @@ const UpdateCategory = () => {
       </Row>
       <div className="btnGroup">
         <Button variant="solid" color="red" className="cancel" onClick={CancelClick}>Cancel</Button>
-        <Button type="primary" className="cancel1" onClick={updateCategory}>Save</Button>
+        <Link type="primary" className="cancel1" onClick={updateCategory} to='/category'>Save</Link>
       </div>
     </div>
   )

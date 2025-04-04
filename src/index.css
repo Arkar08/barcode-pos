@@ -47,6 +47,12 @@
   width: 200px;
   height: 40px;
   letter-spacing: 2px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 10px;
 }
 .print{
     width: 140px;
@@ -62,6 +68,7 @@
   justify-content: center;
   align-items: center;
   color: white;
+  border-radius: 10px;
 }
 :where(.css-dev-only-do-not-override-1a3rktk).ant-input-affix-wrapper{
   font-size: 18px !important;

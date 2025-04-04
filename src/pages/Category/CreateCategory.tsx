@@ -1,8 +1,9 @@
-import { Button, Typography } from "antd"
+import { Typography } from "antd"
 import { Col, Row } from 'antd';
 import { Input } from 'antd';
 import { useContext } from "react";
 import { CategoryContext } from "../../context/CategoryContext";
+import { Link } from "react-router-dom";
 
 const {Title} = Typography;
 
@@ -35,8 +36,8 @@ const CreateCategory = () => {
         </Col>
       </Row>
       <div className="btnGroup">
-        <Button variant="solid" color="red" className="cancel" onClick={CancelClick}>Cancel</Button>
-        <Button type="primary" className="cancel1" onClick={createCategory}>Create</Button>
+        <Link  className="cancel" onClick={CancelClick} to='/category'>Cancel</Link>
+        <Link type="primary" className="cancel1" onClick={createCategory} to='/category'>Create</Link>
       </div>
     </div>
   )

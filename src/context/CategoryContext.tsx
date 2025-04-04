@@ -70,7 +70,7 @@ const CategoryProvider = ({children}:ChildrenType)=>{
             if(response.data.status === 201){
                 setLoading(false)
                 alert(response.data.message)
-                window.location.href='/category';
+                window.location.reload()
             }
         } catch (error) {
             setLoading(false)
@@ -104,7 +104,7 @@ const CategoryProvider = ({children}:ChildrenType)=>{
                 setEditCategoryText('')
                 setLoading(false)
                 alert(response.data.message)
-                window.location.href='/category';
+                window.location.reload()
             }
         } catch (error) {
             setLoading(false)
@@ -114,7 +114,6 @@ const CategoryProvider = ({children}:ChildrenType)=>{
 
     const CancelClick = () =>{
         setCategoryText('')
-          window.location.href = '/category'
       }
 
     return(
