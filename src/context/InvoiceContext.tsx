@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { ChildrenType } from "../utils/Type";
 import Axios from "../api/ApiConfig";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const InvoiceContext = createContext({
     invoiceList:[],
     loading:false,
