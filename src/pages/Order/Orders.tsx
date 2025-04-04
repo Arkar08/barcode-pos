@@ -34,7 +34,7 @@ const columns: TableProps<OrderType>["columns"] = [
       return (
         <>
           {
-            record.promotion === null && (
+            record.promotion === 0 && (
               <p style={textStyle1}>-</p>
             )
           }
@@ -79,7 +79,7 @@ const data: OrderType[] = [
         unitPrice:3000
       }
     ],
-    promotion: null,
+    promotion: 0,
     totalAmount: 1000,
     payment:'Cash',
     orderDate:'string'
@@ -94,7 +94,7 @@ const data: OrderType[] = [
         unitPrice:3000
       }
     ],
-    promotion: null,
+    promotion: 0,
     totalAmount: 1000,
     payment:'Cash',
     orderDate:'string'
@@ -109,7 +109,7 @@ const data: OrderType[] = [
         unitPrice:3000
       }
     ],
-    promotion: null,
+    promotion: 0,
     totalAmount: 1000,
     payment:'Cash',
     orderDate:'string'

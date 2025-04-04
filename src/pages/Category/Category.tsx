@@ -46,12 +46,13 @@ const confirm = async(value:string) => {
   await Axios.delete(`category/${value}`).then((data)=>{
     if(data.data.status === 200){
       alert(data.data.message)
+      window.location.href = '/category'
     }
   })
 };
 
 const cancel = () => {
-  console.log('cancel')
+  window.location.href = '/category'
 };
 
 
