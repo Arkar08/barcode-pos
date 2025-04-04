@@ -70,7 +70,7 @@ const CategoryProvider = ({children}:ChildrenType)=>{
             if(response.data.status === 201){
                 setLoading(false)
                 alert(response.data.message)
-                window.location.reload()
+                getCategory()
             }
         } catch (error) {
             setLoading(false)
@@ -104,7 +104,7 @@ const CategoryProvider = ({children}:ChildrenType)=>{
                 setEditCategoryText('')
                 setLoading(false)
                 alert(response.data.message)
-                window.location.reload()
+                getCategory()
             }
         } catch (error) {
             setLoading(false)
