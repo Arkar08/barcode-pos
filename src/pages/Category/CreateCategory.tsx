@@ -29,10 +29,8 @@ const CreateCategory = () => {
       <Title level={3} className="createText">Create New Category</Title>
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         <Col span={8} className="gutter-row">
-          <div>
             <Title level={5}>Enter Category Name</Title>
             <Input placeholder="Category Name" className="inputBox" value={categoryText} onChange={(e)=>categoryChange(e.target.value)}/>
-          </div>
         </Col>
       </Row>
       <div className="btnGroup">

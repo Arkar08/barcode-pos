@@ -16,20 +16,20 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
 
-const {Title} = Typography
+const {Title} = Typography;
 
-const Login = () => {
+const Signup = () => {
   return (
-    <div className="loginContainer">
+<div className="loginContainer">
       <Form
         name="basic"
         layout='vertical'
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
-        className="form"
+        className="form1"
       >
-        <Title level={4} className="loginText">Login</Title>
+        <Title level={4} className="loginText">Signup</Title>
         <div className="btnContainer">
           <Button variant="solid" className="customer">
             CUSTOMER
@@ -40,9 +40,16 @@ const Login = () => {
         </div>
        <div className="inputContainer">
         <Form.Item<FieldType>
-            label="Username Or Email"
+            label="Username"
             name="username"
-            rules={[{ required: true, message: "Please input your username!" },{ required: true,message: "email is not a valid email!"}]}
+            rules={[{ required: true, message: "Please input your username!" }]}
+          >
+            <Input placeholder="Enter Username or Email"/>
+          </Form.Item>
+          <Form.Item<FieldType>
+            label="Email"
+            name="username"
+            rules={[{ required: true,message: "email is not a valid email!"}]}
           >
             <Input placeholder="Enter Username or Email"/>
           </Form.Item>
@@ -57,15 +64,15 @@ const Login = () => {
 
         <Form.Item label={null}>
           <Button type="primary" htmlType="submit" className="loginButton">
-            Login
+            Signup
           </Button>
         </Form.Item>
         <Title level={5}>
-            Don't have an Account ? <Link className="register" to='/auth/signup'>Register</Link>
+            Already have an Account ? <Link className="register" to='/auth/login'>Login</Link>
         </Title>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Signup

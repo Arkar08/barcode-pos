@@ -149,3 +149,67 @@
 :where(.css-1a3rktk).ant-typography+h1.ant-typography, :where(.css-1a3rktk).ant-typography+h2.ant-typography, :where(.css-1a3rktk).ant-typography+h3.ant-typography, :where(.css-1a3rktk).ant-typography+h4.ant-typography, :where(.css-1a3rktk).ant-typography+h5.ant-typography{
   margin-top: 0rem !important;
 }
+
+.loginContainer{
+  position: relative;
+  height: 100vh;
+}
+
+.form{
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 1px 1px 3px black;
+  padding: 20px;
+  position:absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%,10%);
+  border-radius: 10px;
+}
+.form1{
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 1px 1px 3px black;
+  padding: 20px;
+  position:absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%,10%);
+  border-radius: 10px;
+}
+.btnContainer{
+  display: flex;
+  gap: 10px;
+}
+.customer{
+  width: 100%;
+  height: 40px;
+  box-shadow: 1px 1px 1px black;
+}
+.loginText{
+  text-align: center;
+  text-transform: uppercase;
+  color: #7070db !important;
+  padding: 10px;
+  letter-spacing: 3px;
+}
+.loginButton{
+  width: 100%;
+  height: 35px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.inputContainer{
+  margin-top: 10px;
+}
+.register{
+  cursor: pointer;
+}
+.register:hover{
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+:where(.css-dev-only-do-not-override-1a3rktk).ant-input:placeholder-shown{
+  height: 40px;
+}

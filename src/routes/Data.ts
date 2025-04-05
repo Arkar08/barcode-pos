@@ -19,6 +19,7 @@ import ViewInvoice from "../pages/SaleInvoice/ViewInvoice";
 import UpdateProduct from "../pages/Product/UpdateProduct";
 import ViewOrder from "../pages/Order/ViewOrder";
 import UpdateCategory from "../pages/Category/UpdateCategory";
+import Signup from "../pages/auth/Signup";
 
 
 
@@ -27,6 +28,11 @@ export const data = [
         path:"auth/login",
         text:"Login",
         Component:Login
+   },
+   {    
+        path:"auth/signup",
+        text:"Signup",
+        Component:Signup
    },
    {
         path:"/",
