@@ -36,7 +36,7 @@ const Login = () => {
         <Form.Item<FieldType>
             label="Username Or Email"
             name="username"
-            rules={[{ required: true, message: "Please input your username!" },{ required: true,message: "email is not a valid email!"}]}
+            rules={[{ required: true, message: "Please input your username or email!" }]}
           >
             <Input placeholder="Enter Username or Email"/>
           </Form.Item>
