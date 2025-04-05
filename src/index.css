@@ -185,6 +185,7 @@
   width: 100%;
   height: 40px;
   box-shadow: 1px 1px 1px black;
+  border: none;
 }
 .loginText{
   text-align: center;

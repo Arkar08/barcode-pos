@@ -19,6 +19,8 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 const {Title} = Typography
 
 const Login = () => {
+
+
   return (
     <div className="loginContainer">
       <Form
@@ -30,14 +32,6 @@ const Login = () => {
         className="form"
       >
         <Title level={4} className="loginText">Login</Title>
-        <div className="btnContainer">
-          <Button variant="solid" className="customer">
-            CUSTOMER
-          </Button>
-          <Button variant="solid" className="customer">
-            SUPPLIER
-          </Button>
-        </div>
        <div className="inputContainer">
         <Form.Item<FieldType>
             label="Username Or Email"
