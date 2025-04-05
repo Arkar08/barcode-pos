@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 type FieldType = {
   username?: string;
   password?: string;
-  remember?: string;
 };
 
 const onFinish: FormProps<FieldType>["onFinish"] = (values) => {

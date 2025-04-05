@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 type FieldType = {
   username?: string;
   password?: string;
-  remember?: string;
+  email?: string;
 };
 
 const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
@@ -58,7 +58,7 @@ const Signup = () => {
           </Form.Item>
           <Form.Item<FieldType>
             label="Email"
-            name="username"
+            name="email"
             rules={[{ required: true, message: "email is not a valid email!" }]}
           >
             <Input placeholder="Enter Username or Email" />
