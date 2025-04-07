@@ -40,7 +40,7 @@ const textDetailContainer:React.CSSProperties = {
 const productList:React.CSSProperties = {
   display:"flex",
   justifyContent:"space-around",
-  marginTop:'20px',
+  marginTop:'10px',
   height:'300px',
   overflow:"auto"
 }
@@ -90,7 +90,6 @@ const ViewOrder = () => {
             <Title level={5}>
               Customer Name - Aung Aung
             </Title>
-            <Title level={5}>Delivery Date - 12/12/2025</Title>
           </div>
           <div style={productList}>
             <div>
