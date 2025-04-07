@@ -14,18 +14,18 @@ const { Title } = Typography;
 const columns: TableProps<OrderType>["columns"] = [
   {
     title: "Order No.",
-    dataIndex: "orderId",
-    key: "orderId",
+    dataIndex: "orderNo",
+    key: "orderNo",
   },
   {
     title: "Customer Name",
-    dataIndex: "customerName",
-    key: "customerName",
+    dataIndex: "fullName",
+    key: "fullName",
   },
   {
     title: "Quantity",
-    key: "qty",
-    dataIndex: "qty",
+    key: "quantity",
+    dataIndex: "quantity",
   },
   {
     title: "Promotion",

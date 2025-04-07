@@ -7,15 +7,19 @@ import Axios from "../api/ApiConfig";
 export const OrderContext = createContext({
     orderList:[],
     loading:false,
-    error:null
+    error:null,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setActiveQty:(_value:boolean)=>{},
+    activeQty:false
 })
 
 
 const OrderProvider = ({children}:ChildrenType)=>{
 
-    const [orderList,setOrderList] = useState<never[]>([])
+    const [orderList,setOrderList] = useState([])
     const [loading,setLoading] = useState<boolean>(false)
     const [error,setError] = useState(null)
+    const [activeQty,setActiveQty] = useState<boolean>(false)
 
 
     useEffect(()=>{
@@ -37,7 +41,7 @@ const OrderProvider = ({children}:ChildrenType)=>{
     }
 
     return(
-        <OrderContext.Provider value={{orderList,loading,error}}>
+        <OrderContext.Provider value={{orderList,loading,error,setActiveQty,activeQty}}>
             {children}
         </OrderContext.Provider>
     )

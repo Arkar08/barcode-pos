@@ -10,6 +10,7 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useContext, useState } from "react";
 import AddProduct2 from "./AddProduct";
 import { FindContext } from "../../context/FindContext";
+import { OrderContext } from "../../context/OrderContext";
 
 const {Title} = Typography;
 
@@ -107,13 +108,19 @@ const CreateOrder = () => {
   }
 
     const context = useContext(FindContext)
+    const context1 = useContext(OrderContext)
 
     if(!context){
       throw new Error("CategoryContext must be used within a CategoryProvider");
     }
+
+    if(!context1){
+      throw new Error("orderContext must be used within a OrderProvider");
+    }
   
 
     const{customers} = context;
+    const {activeQty} = context1;
 
   return (
     <div className="createContainer">
@@ -125,7 +132,8 @@ const CreateOrder = () => {
             <select style={{ width: '100%' }} className="selectBox">
                 <option value="">Select Customer</option>
                 {
-                  customers?.map((user)=>{
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  customers?.map((user:any)=>{
                     return(
                       <option value={user.userId} key={user.userId}>{user.fullName}</option>
                     )
@@ -155,10 +163,10 @@ const CreateOrder = () => {
                       <Button key="back" variant="solid" color="red" onClick={handleCancel} className="modalBtn">
                         Cancel
                       </Button>,
-                      <Button key="add" variant='solid' color="purple" onClick={handleOk1} className="modalBtn">
+                      <Button key="add" variant='solid' color="purple" onClick={handleOk1} className="modalBtn" disabled={activeQty}>
                        Add
                      </Button>,
-                      <Button key="addAndContinue" variant='solid' color="purple" onClick={handleOk} className="modalBtn">
+                      <Button key="addAndContinue" variant='solid' color="purple" onClick={handleOk} className="modalBtn"  disabled={activeQty}>
                         Add & Continue
                       </Button>
                     ]}

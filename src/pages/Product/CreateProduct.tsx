@@ -55,7 +55,8 @@ const CreateProduct = () => {
             <select style={{ width: '100%' }} className="selectBox">
                 <option value="">Select Supplier</option>
                 {
-                  supplier?.map((user)=>{
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  supplier?.map((user:any)=>{
                     return(
                       <option value={user.userId} key={user.userId}>{user.fullName}</option>
                     )

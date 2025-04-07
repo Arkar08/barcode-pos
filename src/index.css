@@ -214,3 +214,13 @@
 :where(.css-dev-only-do-not-override-1a3rktk).ant-input:placeholder-shown{
   height: 40px;
 }
+.stock{
+  text-align: end;
+  margin-top: 10px;
+}
+.qtyText{
+  color: red !important;
+}
+.qty{
+  margin-top: 10px;
+}

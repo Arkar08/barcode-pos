@@ -5,7 +5,8 @@ import Axios from "../api/ApiConfig";
 // eslint-disable-next-line react-refresh/only-export-components
 export const FindContext = createContext({
     customers:[],
-    supplier:[]
+    supplier:[],
+    productName:[]
 })
 
 
@@ -13,10 +14,12 @@ const FindProvider = ({children}:ChildrenType)=>{
 
     const [customers,setCustomers] = useState<never[]>([])
     const [supplier,setSupplier] = useState<never[]>([])
+    const [productName,setProductName] = useState<never[]>([])
 
     useEffect(()=>{
         getCustomer()
         getSupplier()
+        getProductName()
     },[])
 
     const getCustomer = async()=>{
@@ -39,8 +42,18 @@ const FindProvider = ({children}:ChildrenType)=>{
         })
     }
 
+    const getProductName = async()=>{
+        await Axios.get("find/products").then((res)=>{
+            if(res.data.status === 200){
+                setProductName(res.data.data)
+            }
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+
     return(
-        <FindContext.Provider value={{customers,supplier}}>
+        <FindContext.Provider value={{customers,supplier,productName}}>
             {children}
         </FindContext.Provider>
     )

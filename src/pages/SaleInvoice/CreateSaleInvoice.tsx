@@ -60,12 +60,14 @@ const columns: TableProps<OrderType>["columns"] = [
 const data: OrderType[] = [
   {
     orderId:"1",
-    customerName: "John Brown",
-    qty:4,
+    orderNo:'112',
+    fullName: "John Brown",
+    quantity:4,
     products:[
       {
         productName:'mongo',
-        unitPrice:3000
+        price:3000,
+        qty:1
       }
     ],
     promotion: null,
@@ -75,12 +77,14 @@ const data: OrderType[] = [
   },
   {
     orderId:"2",
-    customerName: "John Brown",
-    qty:4,
+    orderNo:'112',
+    fullName: "John Brown",
+    quantity:4,
     products:[
       {
         productName:'mongo',
-        unitPrice:3000
+        price:3000,
+        qty:1
       }
     ],
     promotion: null,
@@ -90,12 +94,14 @@ const data: OrderType[] = [
   },
   {
     orderId:"3",
-    customerName: "John Brown",
-    qty:4,
+    orderNo:'112',
+    fullName: "John Brown",
+    quantity:4,
     products:[
       {
         productName:'mongo',
-        unitPrice:3000
+        price:3000,
+        qty:1
       }
     ],
     promotion: null,

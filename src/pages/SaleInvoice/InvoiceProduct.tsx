@@ -50,56 +50,6 @@ import { useState } from 'react';
     },
   ];
   
-  const data: OrderType[] = [
-    {
-      orderId:"1",
-      customerName: "John Brown",
-      qty:4,
-      products:[
-        {
-          productName:'mongo',
-          price:3000,
-          qty:1
-        }
-      ],
-      promotion: null,
-      totalAmount: 1000,
-      payment:'Cash',
-      orderDate:'string'
-    },
-    {
-      orderId:"2",
-      customerName: "John Brown",
-      qty:4,
-      products:[
-        {
-          productName:'mongo',
-          price:3000,
-          qty:2
-        }
-      ],
-      promotion: null,
-      totalAmount: 1000,
-      payment:'Cash',
-      orderDate:'string'
-    },
-    {
-      orderId:"3",
-      customerName: "John Brown",
-      qty:4,
-      products:[
-        {
-          productName:'mongo',
-          price:3000,
-          qty:3
-        }
-      ],
-      promotion: null,
-      totalAmount: 1000,
-      payment:'Cash',
-      orderDate:'string'
-    },
-  ];
   
 
 const {Title} = Typography;
@@ -134,7 +84,7 @@ const InvoiceProduct = () => {
         </Row>
         {
           showTable && (
-            <Table<OrderType> columns={columns} dataSource={data} rowKey={(record) => record.orderId} className="tableAddOrder"/>
+            <Table<OrderType> columns={columns}  rowKey={(record) => record.orderId} className="tableAddOrder"/>
           )
         }
       </div>

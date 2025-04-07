@@ -30,13 +30,14 @@ export interface CategoryType {
 
 export interface OrderType {
     orderId:string;
-    qty:number;
-    products:ProductOrder[]
-    customerName:string;
-    totalAmount:number;
-    promotion:number | null;
-    payment:'Cash' | 'Bank';
+    fullName:string;
     orderDate:string;
+    orderNo:string;
+    payment:'Cash' | 'Bank';
+    quantity:number;
+    promotion:number | null;
+    products:ProductOrder[]
+    totalAmount:number;
 }
 
 export interface InvoiceType {
@@ -64,7 +65,7 @@ export type ChildrenType = {
 export type CategoryContextType = {
     category:CategoryType[]
     loading:boolean
-    error:null
+    error:null | string;
     categoryText:string
     categoryChange:(value:string)=>void
     createCategory:() =>void
@@ -79,29 +80,36 @@ export type CategoryContextType = {
 export type UserContextType = {
     userList:UserType[]
     loading:boolean
-    error:null
+    error:null | string;
 }
 
 
 export type ProductContextType = {
     productList:ProductType[]
     loading:boolean
-    error:null
+    error:null | string;
 }
 
 export type OrderContextType = {
     orderList:OrderType[]
     loading:boolean
-    error:null
+    error:null | string;
+    activeQty:boolean
+    setActiveQty:React.Dispatch<React.SetStateAction<boolean | undefined>>;
 }
 
 export type InvoiceContextType = {
     invoiceList:InvoiceType[]
     loading:boolean
-    error:null
+    error:null | string;
+}
+
+type ProductName = {
+    value:string;
 }
 
 export type FindContextType = {
     customers:UserType[],
     supplier:UserType[]
+    productName:ProductName[]
 }

@@ -54,7 +54,8 @@ const UpdateProduct = () => {
             <select style={{ width: '100%' }} className="selectBox">
                 <option value="">Select Supplier</option>
                 {
-                  userList.map((user)=>{
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  userList.map((user:any)=>{
                     return(
                       <option value={user.userId} key={user.userId}>{user.fullName}</option>
                     )
