@@ -52,6 +52,7 @@ export interface InvoiceType {
 }
 
 export type ProductOrder =  {
+    id: string;
     productName:string;
     price:number;
     qty:number;

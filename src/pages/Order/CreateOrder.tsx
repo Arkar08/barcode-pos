@@ -54,24 +54,6 @@ const columns: TableProps<ProductOrder>["columns"] = [
   },
 ];
 
-// const data:ProductOrder[] = [
-//   {
-//     qty:4,
-//     productName:'mongon2',
-//     price: 1000
-//   },
-//   {
-//     qty:4,
-//     productName:'mongon1',
-//     price: 1000
-//   },
-//   {
-//     qty:4,
-//     productName:'mongon',
-//     price: 1000
-//   },
-// ];
-
 const CreateOrder = () => {
 
   const navigate = useNavigate()
@@ -81,48 +63,32 @@ const CreateOrder = () => {
   if(!context2){
     throw new Error("orderContext must be used within a orderProvider");
   }
-  const {orderData} = context2
+  const {orderData,setOrderData} = context2
 
   const [openModal,setOpenModal] = useState(false)
-  const [totalAmount,setTotalAmount] = useState('') 
+  const [totalAmount,setTotalAmount] = useState(0) 
+  const [promotion,setPromotion] = useState(0)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [orders,setOrders] = useState<any[]>([])
+  const [payment,setPayment] = useState("")
       
         const AddProduct = () =>{
           setOpenModal(true)
         }
-      
-        const handleOk = () => {
-          orders.filter((order)=>{
-            if(order.productName === orderData.productName){
-              return;
-            }else{
-              orders.push(orderData)
-              const dataTotal = orders.reduce((acc,sum)=>{
-                return acc + sum
-              },0)
-              console.log(dataTotal)
-              setTotalAmount(dataTotal)
-            }
-          })
-          setOpenModal(false)
-        };
-
+    
         const handleOk1 = () => {
-          orders.filter((order)=>{
-            if(order.productName === orderData.productName){
-              return;
-            }else{
-              orders.push(orderData)
-              const dataTotal = orders.reduce((acc,sum)=>{
-                return acc + sum
-              },0)
-              console.log(dataTotal)
-              setTotalAmount(dataTotal)
-            }
-          })
-
-          setOpenModal(false)
+            localStorage.setItem("orders",JSON.stringify(orderData))
+            const data = localStorage.getItem("orders")
+            if(data){
+              const dummy = JSON.parse(data)
+              setOrders((prev)=>[...prev,dummy])
+              setOrderData({
+                qty:0,
+                productName:'',
+                price:0
+              })
+              setOpenModal(false)
+            }     
         };
       
         const handleCancel = () => {
@@ -131,7 +97,9 @@ const CreateOrder = () => {
         };
 
   const handleChange = ((value:string)=>{
-    console.log(value)
+    if(value !== ''){
+      setPayment(value)
+    }
   })
 
   const CancelClick = () =>{
@@ -139,6 +107,15 @@ const CreateOrder = () => {
       navigate('/orders')
     )
   }
+
+  const promotionChange = ((value:string)=>{
+    setPromotion(Number(value))
+    const total = orders.reduce((acc,sum)=>{
+      return acc + sum.price
+    },0)
+    const sumTotal = total - Number(value)
+    setTotalAmount(sumTotal)
+  })
 
     const context = useContext(FindContext)
     const context1 = useContext(OrderContext)
@@ -155,6 +132,7 @@ const CreateOrder = () => {
     const{customers} = context;
     const {activeQty} = context1;
 
+  
   return (
     <div className="createContainer">
       <Title level={3} className="createText">Create New Order</Title>
@@ -181,7 +159,7 @@ const CreateOrder = () => {
                   <Modal
                     open={openModal}
                     title="Add Product"
-                    onOk={handleOk}
+                    onOk={handleOk1}
                     onCancel={handleCancel}
                     width={{
                       xs: '90%',
@@ -198,10 +176,7 @@ const CreateOrder = () => {
                       </Button>,
                       <Button key="add" variant='solid' color="purple" onClick={handleOk1} className="modalBtn" disabled={activeQty}>
                        Add
-                     </Button>,
-                      <Button key="addAndContinue" variant='solid' color="purple" onClick={handleOk} className="modalBtn"  disabled={activeQty}>
-                        Add & Continue
-                      </Button>
+                     </Button>
                     ]}
                   >
                     <AddProduct2 />
@@ -214,7 +189,7 @@ const CreateOrder = () => {
           </div>
         </Col>
       </Row>
-      <Table<ProductOrder> columns={columns} dataSource={orders} rowKey={(record) => record.productName} className="tableOrder"/>
+      <Table<ProductOrder> columns={columns} dataSource={orders} rowKey={(record) => record.id} className="tableOrder"/>
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         <Col span={8} className="gutter-row">
             <div>
@@ -225,13 +200,13 @@ const CreateOrder = () => {
           <Col span={8} className="gutter-row">
             <div>
               <Title level={5}>Promotion</Title>
-              <Input placeholder="0" className="inputBox" type="number" value={totalAmount}/>
+              <Input placeholder="0" className="inputBox" type="number" value={promotion} onChange={(event)=>promotionChange(event.target.value)}/>
             </div>
           </Col>
           <Col span={8} className="gutter-row">
             <div>
               <Title level={5}>Total Amount</Title>
-              <Input placeholder="Total" className="inputBox" type="number"/>
+              <Input placeholder="Total" className="inputBox" type="number" value={totalAmount}/>
             </div>
           </Col>
           <Col span={8} className="gutter-row">
@@ -241,10 +216,13 @@ const CreateOrder = () => {
                 style={{ width: '100%' }}
                 className="selectBox"
                 onChange={handleChange}
+                value={payment}
                 options={[
-                  { value: 'jack', label: 'Jack' },
-                  { value: 'lucy', label: 'Lucy' },
-                  { value: 'Yiminghe', label: 'yiminghe' },
+                  {value:"",label:"Select Payment"},
+                  { value: 'Cash', label: 'Cash' },
+                  { value: 'Bank', label: 'Bank' },
+                  { value: 'Paypal', label: 'Paypal' },
+                  { value: 'Credit_Card', label: 'Credit_Card' },
                 ]}
               />
             </div>

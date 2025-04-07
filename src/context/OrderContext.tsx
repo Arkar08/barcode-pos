@@ -23,10 +23,12 @@ const OrderProvider = ({children}:ChildrenType)=>{
     const [loading,setLoading] = useState<boolean>(false)
     const [error,setError] = useState(null)
     const [activeQty,setActiveQty] = useState<boolean>(false)
-    const [orderData,setOrderData] = useState({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [orderData,setOrderData] = useState<any>({
         qty:0,
         productName:'',
-        price:0
+        price:0,
+        id:""
     })
 
 

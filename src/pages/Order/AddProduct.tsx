@@ -16,7 +16,6 @@ const AddProduct2 = () => {
       price:0,
       stockLevel:''
     })
-    const [qty,setQty] = useState<number>()
     const context1 = useContext(OrderContext)
   
     if (!context) {
@@ -29,11 +28,12 @@ const AddProduct2 = () => {
     }
 
     const {productName} = context;
-    const {setActiveQty ,activeQty,setOrderData} = context1;
+    const {setActiveQty ,activeQty,setOrderData,orderData} = context1;
 
       const getSearchValue = (inputValue:any, option:any)=>{
           return  option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
       }
+      
       const onSelect = async(value: string) => {
         setOrderData((prev:any) => {
           return {
@@ -57,14 +57,12 @@ const AddProduct2 = () => {
           setStock({
             price:0,
             stockLevel:''
-          
           })
         }
       };
 
       const changeQty = (value:any)=>{
-        if(value > stock.stockLevel){
-          setQty(value)
+        if(Number(value) > Number(stock.stockLevel)){
           setActiveQty(true)
         }else{
           const priceList = Number(stock.price * value) 
@@ -72,11 +70,11 @@ const AddProduct2 = () => {
             return {
               ...prev,
               qty: Number(value),
-              price:priceList
+              price:priceList,
+              id:Math.floor(Math.random() * 1000)
             }
           })
           setActiveQty(false)
-          setQty(value)
         }
       }
 
@@ -92,9 +90,10 @@ const AddProduct2 = () => {
             placeholder="Search Product Name"
             filterOption={getSearchValue}
             onChange={onSelect}
+            value={orderData.productName}
           />
           <Title level={5} className='qty'>Qty</Title>
-          <Input placeholder="0" className="inputBox" type="number" disabled={stock.stockLevel=== ''} value={qty} onChange={(e)=>changeQty(e.target.value)}/>
+          <Input placeholder="0" className="inputBox" type="number" disabled={stock.stockLevel=== ''} value={orderData.qty} onChange={(e)=>changeQty(e.target.value)}/>
           {
             activeQty && (<div>
               <Title level={5} className='qtyText'> *Stock is not enough.</Title>
