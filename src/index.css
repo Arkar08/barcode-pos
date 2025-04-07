@@ -25,10 +25,11 @@
   padding: 11.5px;
 }
 .selectBox{
-  height: 50px;
+  height: 55px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  text-transform: capitalize;
 }
 .createText{
   color: #7070db !important;
@@ -211,9 +212,9 @@
   text-decoration: underline;
   cursor: pointer;
 }
-:where(.css-dev-only-do-not-override-1a3rktk).ant-input:placeholder-shown{
+/* :where(.css-dev-only-do-not-override-1a3rktk).ant-input:placeholder-shown{
   height: 40px;
-}
+} */
 .stock{
   text-align: end;
   margin-top: 10px;
@@ -223,4 +224,7 @@
 }
 .qty{
   margin-top: 10px;
+}
+.boxText{
+  text-transform: capitalize;
 }

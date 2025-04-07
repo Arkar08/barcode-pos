@@ -135,7 +135,7 @@ const CreateOrder = () => {
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   customers?.map((user:any)=>{
                     return(
-                      <option value={user.userId} key={user.userId}>{user.fullName}</option>
+                      <option value={user.userId} key={user.userId} className="boxText">{user.fullName}</option>
                     )
                   })
                 }
