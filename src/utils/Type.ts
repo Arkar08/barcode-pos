@@ -96,6 +96,8 @@ export type OrderContextType = {
     error:null | string;
     activeQty:boolean
     setActiveQty:React.Dispatch<React.SetStateAction<boolean | undefined>>;
+    setOrderData:React.Dispatch<React.SetStateAction <object | undefined>>
+    orderData:ProductOrder
 }
 
 export type InvoiceContextType = {

@@ -40,7 +40,7 @@ const columns: TableProps<ProductOrder>["columns"] = [
   {
     title: "Price",
     dataIndex: "price",
-    key: "price",
+    key: "price"
   },
   {
     title: "Action",
@@ -54,41 +54,74 @@ const columns: TableProps<ProductOrder>["columns"] = [
   },
 ];
 
-const data: ProductOrder[] = [
-  {
-    qty:4,
-    productName:'mongon2',
-    price: 1000
-  },
-  {
-    qty:4,
-    productName:'mongon1',
-    price: 1000
-  },
-  {
-    qty:4,
-    productName:'mongon',
-    price: 1000
-  },
-];
+// const data:ProductOrder[] = [
+//   {
+//     qty:4,
+//     productName:'mongon2',
+//     price: 1000
+//   },
+//   {
+//     qty:4,
+//     productName:'mongon1',
+//     price: 1000
+//   },
+//   {
+//     qty:4,
+//     productName:'mongon',
+//     price: 1000
+//   },
+// ];
 
 const CreateOrder = () => {
 
   const navigate = useNavigate()
 
+  const context2 = useContext(OrderContext)
+
+  if(!context2){
+    throw new Error("orderContext must be used within a orderProvider");
+  }
+  const {orderData} = context2
+
   const [openModal,setOpenModal] = useState(false)
+  const [totalAmount,setTotalAmount] = useState('') 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [orders,setOrders] = useState<any[]>([])
       
         const AddProduct = () =>{
           setOpenModal(true)
         }
       
         const handleOk = () => {
-          console.log('ok')
+          orders.filter((order)=>{
+            if(order.productName === orderData.productName){
+              return;
+            }else{
+              orders.push(orderData)
+              const dataTotal = orders.reduce((acc,sum)=>{
+                return acc + sum
+              },0)
+              console.log(dataTotal)
+              setTotalAmount(dataTotal)
+            }
+          })
           setOpenModal(false)
         };
 
         const handleOk1 = () => {
-          console.log('ok')
+          orders.filter((order)=>{
+            if(order.productName === orderData.productName){
+              return;
+            }else{
+              orders.push(orderData)
+              const dataTotal = orders.reduce((acc,sum)=>{
+                return acc + sum
+              },0)
+              console.log(dataTotal)
+              setTotalAmount(dataTotal)
+            }
+          })
+
           setOpenModal(false)
         };
       
@@ -181,18 +214,18 @@ const CreateOrder = () => {
           </div>
         </Col>
       </Row>
-      <Table<ProductOrder> columns={columns} dataSource={data} rowKey={(record) => record.productName} className="tableOrder"/>
+      <Table<ProductOrder> columns={columns} dataSource={orders} rowKey={(record) => record.productName} className="tableOrder"/>
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         <Col span={8} className="gutter-row">
             <div>
               <Title level={5}>Quantity</Title>
-              <Input placeholder="0" className="inputBox" type="number"/>
+              <Input placeholder="0" className="inputBox" type="number" disabled value={orders.length}/>
             </div>
           </Col>
           <Col span={8} className="gutter-row">
             <div>
               <Title level={5}>Promotion</Title>
-              <Input placeholder="0" className="inputBox" type="number"/>
+              <Input placeholder="0" className="inputBox" type="number" value={totalAmount}/>
             </div>
           </Col>
           <Col span={8} className="gutter-row">

@@ -10,7 +10,10 @@ export const OrderContext = createContext({
     error:null,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setActiveQty:(_value:boolean)=>{},
-    activeQty:false
+    activeQty:false,
+    orderData:{},
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+    setOrderData:(_data: any)=>{}
 })
 
 
@@ -20,6 +23,11 @@ const OrderProvider = ({children}:ChildrenType)=>{
     const [loading,setLoading] = useState<boolean>(false)
     const [error,setError] = useState(null)
     const [activeQty,setActiveQty] = useState<boolean>(false)
+    const [orderData,setOrderData] = useState({
+        qty:0,
+        productName:'',
+        price:0
+    })
 
 
     useEffect(()=>{
@@ -41,7 +49,7 @@ const OrderProvider = ({children}:ChildrenType)=>{
     }
 
     return(
-        <OrderContext.Provider value={{orderList,loading,error,setActiveQty,activeQty}}>
+        <OrderContext.Provider value={{orderList,loading,error,setActiveQty,activeQty,setOrderData,orderData}}>
             {children}
         </OrderContext.Provider>
     )

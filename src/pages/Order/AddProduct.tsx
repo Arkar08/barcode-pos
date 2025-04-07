@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Input, Row ,Typography} from 'antd';
 import { AutoComplete} from 'antd';
 import { useContext, useState } from 'react';
@@ -11,9 +12,11 @@ const {Title} = Typography;
 const AddProduct2 = () => {
 
     const context = useContext(FindContext);
-    const [stock,setStock] = useState<string>('')
+    const [stock,setStock] = useState({
+      price:0,
+      stockLevel:''
+    })
     const [qty,setQty] = useState<number>()
-    const [productValue,setProductValue] = useState('')
     const context1 = useContext(OrderContext)
   
     if (!context) {
@@ -26,37 +29,52 @@ const AddProduct2 = () => {
     }
 
     const {productName} = context;
-    const {setActiveQty ,activeQty} = context1;
+    const {setActiveQty ,activeQty,setOrderData} = context1;
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const getSearchValue = (inputValue:any, option:any)=>{
           return  option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
       }
       const onSelect = async(value: string) => {
-        setProductValue(value)
+        setOrderData((prev:any) => {
+          return {
+            ...prev,
+            productName: value
+          }
+        })
         const productName = {
           productName:value
         }
        if(value !== ''){
           await Axios.post("find/stock",productName).then((res)=>{
             if(res.data.status === 200){
-              setStock(res.data.data[0].stockLevel)
+              setStock(res.data.data[0])
             }
           }).catch((error)=>{
             console.log(error)
           })
        }
         if(value === ''){
-          setStock('')
+          setStock({
+            price:0,
+            stockLevel:''
+          
+          })
         }
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const changeQty = (value:any)=>{
-        if(value > stock){
+        if(value > stock.stockLevel){
           setQty(value)
           setActiveQty(true)
         }else{
+          const priceList = Number(stock.price * value) 
+          setOrderData((prev:any) => {
+            return {
+              ...prev,
+              qty: Number(value),
+              price:priceList
+            }
+          })
           setActiveQty(false)
           setQty(value)
         }
@@ -73,17 +91,16 @@ const AddProduct2 = () => {
             options={productName}
             placeholder="Search Product Name"
             filterOption={getSearchValue}
-            value={productValue}
             onChange={onSelect}
           />
           <Title level={5} className='qty'>Qty</Title>
-          <Input placeholder="0" className="inputBox" type="number" disabled={stock=== ''} value={qty} onChange={(e)=>changeQty(e.target.value)}/>
+          <Input placeholder="0" className="inputBox" type="number" disabled={stock.stockLevel=== ''} value={qty} onChange={(e)=>changeQty(e.target.value)}/>
           {
             activeQty && (<div>
               <Title level={5} className='qtyText'> *Stock is not enough.</Title>
             </div>)
           }
-          <Title level={5} className='stock'>Stock - {stock === '' ? '0':stock.split("",2)}</Title>
+          <Title level={5} className='stock'>Stock - {stock.stockLevel === '' ? '0':stock?.stockLevel.split("",2)}</Title>
         </Col>
       </Row>
     </div>
