@@ -11,7 +11,12 @@ export const OrderContext = createContext({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setActiveQty:(_value:boolean)=>{},
     activeQty:false,
-    orderData:{},
+    orderData:{
+        productName:'',
+        qty:0,
+        id:'',
+        price:0
+    },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
     setOrderData:(_data: any)=>{}
 })

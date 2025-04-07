@@ -67,7 +67,8 @@ const data: OrderType[] = [
       {
         productName:'mongo',
         price:3000,
-        qty:1
+        qty:1,
+        id:"1"
       }
     ],
     promotion: null,
@@ -84,7 +85,9 @@ const data: OrderType[] = [
       {
         productName:'mongo',
         price:3000,
-        qty:1
+        qty:1,
+        id:"1"
+        
       }
     ],
     promotion: null,
@@ -101,7 +104,8 @@ const data: OrderType[] = [
       {
         productName:'mongo',
         price:3000,
-        qty:1
+        qty:1,
+        id:"1"
       }
     ],
     promotion: null,
