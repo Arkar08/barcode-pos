@@ -63,7 +63,7 @@ const data: OrderType[] = [
     orderNo:'112',
     fullName: "John Brown",
     quantity:4,
-    products:[
+    productLists:[
       {
         productName:'mongo',
         price:3000,
@@ -81,7 +81,7 @@ const data: OrderType[] = [
     orderNo:'112',
     fullName: "John Brown",
     quantity:4,
-    products:[
+    productLists:[
       {
         productName:'mongo',
         price:3000,
@@ -100,7 +100,7 @@ const data: OrderType[] = [
     orderNo:'112',
     fullName: "John Brown",
     quantity:4,
-    products:[
+    productLists:[
       {
         productName:'mongo',
         price:3000,

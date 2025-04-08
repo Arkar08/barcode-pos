@@ -4,6 +4,7 @@ import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { OrderContext } from "../../context/OrderContext";
 import { ProductOrder } from "../../utils/Type";
+import { InvoiceContext } from "../../context/InvoiceContext";
 
 const { Title } = Typography;
 
@@ -43,7 +44,7 @@ const textDetailContainer:React.CSSProperties = {
 const productList:React.CSSProperties = {
   marginTop:'10px',
   width:"100%",
-  height:'300px',
+  height:'200px',
   overflowY:"auto",
   overflowX:"hidden"
 }
@@ -92,7 +93,13 @@ const ViewOrder = () => {
     throw new Error("orderContext must be used within a orderProvider");
   }
 
+  const context1 = useContext(InvoiceContext)
+  if(!context1){
+    throw new Error("orderContext must be used within a orderProvider");
+  }
+
   const{setEditId,viewOrder} = context
+  const{createInvoice} = context1;
 
   useEffect(()=>{
     setEditId(id)
@@ -101,10 +108,6 @@ const ViewOrder = () => {
 
   const backToInvoice = () =>{
     navigate("/orders")
-  }
-
-  const createInvoice = () =>{
-    navigate("/invoice")
   }
 
   return (
@@ -117,7 +120,7 @@ const ViewOrder = () => {
           </Title>
           <div style={textDetailContainer}>
             <Title level={5}>
-              Order No - {viewOrder.orderNo}
+              {viewOrder.orderNo}
             </Title>
             <Title level={5}>Order Date - {viewOrder.orderDate}</Title>
           </div>
@@ -127,7 +130,7 @@ const ViewOrder = () => {
             </Title>
           </div>
           <div style={productList}>
-            <Table <ProductOrder>
+              <Table<ProductOrder>
               columns={columns}
               dataSource={viewOrder.productLists}
               rowKey={(record) => record.id}  pagination={false} />
@@ -135,7 +138,7 @@ const ViewOrder = () => {
           <div style={footer}>
             <div>
               <Title level={5} style={total}><span>Total Price-</span> <span>{Number(viewOrder.totalAmount)+ Number(viewOrder.promotion)}</span></Title>
-              <Title level={5} style={total}><span>Promotion-</span> <span>{viewOrder.promotion}</span></Title>
+              <Title level={5} style={total}><span>Promotion-</span> <span>{viewOrder.promotion.replace('.00', '')}</span></Title>
               <hr />
               <Title level={5} style={total}><span>Total Amount-</span> <span>{viewOrder.totalAmount}</span></Title>
             </div>
@@ -143,7 +146,7 @@ const ViewOrder = () => {
         </Layout>
       </Layout>
       <div style={btnContainer}>
-        <Button variant="solid" color="green" className="print" onClick={createInvoice}>Create Invoice</Button>
+        <Button variant="solid" color="green" className="print" onClick={()=>createInvoice(viewOrder.orderId)}>Create Invoice</Button>
       </div>
     </div>
   )

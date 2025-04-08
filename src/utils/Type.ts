@@ -33,22 +33,24 @@ export interface OrderType {
     fullName:string;
     orderDate:string;
     orderNo:string;
-    payment:'Cash' | 'Bank';
+    payment:'Cash' | 'Bank'|'Credit_Card'|'Pay_pal';
     quantity:number;
     promotion:number | null;
-    products:ProductOrder[]
+    productLists:ProductOrder[]
     totalAmount:number;
 }
 
 export interface InvoiceType {
-    invoiceId:string;
-    qty:number;
-    products:ProductOrder[]
-    customerName:string;
-    promotion:number | null;
-    payment:'Cash' | 'Bank';
-    totalAmount:number;
+    fullName:string;
     invoiceDate:string;
+    invoiceId:string;
+    invoiceNo:string;
+    orderNo:string;
+    payment:'Cash' | 'Bank'|'Credit_Card'|'Pay_pal';
+    quantity:string;
+    productLists:ProductOrder[]
+    promotion:string | null;
+    totalAmount:string;
 }
 
 export type ProductOrder =  {
@@ -117,6 +119,9 @@ export type InvoiceContextType = {
     invoiceList:InvoiceType[]
     loading:boolean
     error:null | string;
+    createInvoice:()=>void
+    setEditInvoiceId:React.Dispatch<React.SetStateAction <string | undefined>>,
+    viewInvoice:InvoiceType
 }
 
 type ProductName = {

@@ -12,8 +12,12 @@
   font-weight: 500;
 }
 .ant-table{
-  height: calc(100vh - 330px) !important;
+  max-height: calc(100vh - 330px) !important;
+  height: 100% !important;
   overflow: auto;
+}
+.ant-table:nth-last-child{
+  height: 100% !important;
 }
 .gutter-row{
   padding: 12px 0px;

@@ -14,26 +14,23 @@ const { Title } = Typography;
 const columns: TableProps<InvoiceType>["columns"] = [
   {
     title: "Invoice No.",
-    dataIndex: "invoiceId",
-    key: "invoiceId",
+    dataIndex: "invoiceNo",
+    key: "invoiceNo",
   },
   {
     title: "Customer Name",
-    dataIndex: "customerName",
-    key: "customerName",
+    dataIndex: "fullName",
+    key: "fullName",
   },
   {
     title: "Quantity",
-    key: "qty",
-    dataIndex: "qty",
+    key: "quantity",
+    dataIndex: "quantity",
   },
   {
     title: "Promotion",
     dataIndex: "promotion",
-    key: "promotion",
-    render: (_, record) => {
-      return <>{record.promotion === null && <p style={textStyle1}>-</p>}</>;
-    },
+    key: "promotion"
   },
   {
     title: "Total Amount",
@@ -127,10 +124,7 @@ const editStyle: React.CSSProperties = {
   cursor: "pointer",
 };
 
-const textStyle1: React.CSSProperties = {
-  textAlign: "center",
-  fontSize: 22,
-};
+
 
 const SaleInvoice = () => {
   const [openModal, setOpenModal] = useState(false);
