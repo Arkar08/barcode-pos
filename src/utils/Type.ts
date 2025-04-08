@@ -18,9 +18,9 @@ export interface ProductType {
     productName:string;
     stockLevel:string;
     description:string;
-    suppliedBy:string;
-    category:string;
-    unitPrice:number;
+    userId:string;
+    categoryId:string;
+    price:string;
 }
 
 export interface CategoryType {
@@ -91,6 +91,13 @@ export type ProductContextType = {
     productList:ProductType[]
     loading:boolean
     error:null | string;
+    createProduct:ProductType,
+    handleChange:()=>void;
+    CreateProductList:()=>void;
+    setEditProductId:React.Dispatch<React.SetStateAction<string | undefined>>,
+    editProduct:ProductType,
+    handleEditChange:()=>void;
+    updateProduct:()=>void;
 }
 
 export type order = {

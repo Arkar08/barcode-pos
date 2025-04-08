@@ -9,6 +9,7 @@ import { Popconfirm } from "antd";
 import { useContext, useState } from "react";
 import FilterProduct from "./FilterProduct";
 import { ProductContext } from "../../context/ProductContext";
+import Axios from "../../api/ApiConfig";
 
 const { Title } = Typography;
 
@@ -67,8 +68,13 @@ const columns: TableProps<ProductType>["columns"] = [
   },
 ];
 
-const confirm = (value: string) => {
-  console.log(value);
+const confirm = async(value: string) => {
+  await Axios.delete(`products/${value}`).then((data) => {
+    if (data.data.status === 200) {
+      alert(data.data.message);
+      window.location.href = "/products";
+    }
+  });
 };
 
 const cancel = () => {

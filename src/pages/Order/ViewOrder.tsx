@@ -95,7 +95,7 @@ const ViewOrder = () => {
 
   const context1 = useContext(InvoiceContext)
   if(!context1){
-    throw new Error("orderContext must be used within a orderProvider");
+    throw new Error("invoiceContext must be used within a orderProvider");
   }
 
   const{setEditId,viewOrder} = context
