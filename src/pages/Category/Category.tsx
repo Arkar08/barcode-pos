@@ -48,7 +48,9 @@ const confirm = async (value: string) => {
       alert(data.data.message);
       window.location.href = "/category";
     }
-  });
+  }).catch((error)=>{
+    console.log(error)
+  })
 };
 
 const cancel = () => {

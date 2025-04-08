@@ -74,7 +74,9 @@ const confirm = async(value: string) => {
       alert(data.data.message);
       window.location.href = "/products";
     }
-  });
+  }).catch((error)=>{
+    console.log(error)
+  })
 };
 
 const cancel = () => {
