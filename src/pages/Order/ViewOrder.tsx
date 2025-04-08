@@ -1,8 +1,9 @@
-import { Button, Layout } from "antd"
+import { Button, Layout, Table, TableProps } from "antd"
 import { Typography } from "antd";
 import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { OrderContext } from "../../context/OrderContext";
+import { ProductOrder } from "../../utils/Type";
 
 const { Title } = Typography;
 
@@ -41,6 +42,7 @@ const textDetailContainer:React.CSSProperties = {
 
 const productList:React.CSSProperties = {
   marginTop:'10px',
+  width:"100%",
   height:'300px',
   overflowY:"auto",
   overflowX:"hidden"
@@ -60,25 +62,24 @@ const total:React.CSSProperties = {
   marginTop:'10px'
 }
 
-const productHeader:React.CSSProperties = {
-  display:"flex",
-  justifyContent:"space-evenly",
-  gap:'10px',
-  alignItems:"center",
-  width:"500px",
-}
 
-const productFooter:React.CSSProperties ={
-  display:"flex",
-  justifyContent:"space-evenly",
-  marginTop:'10px',
-  overflow:"auto",
-  width:"500px",
-}
-
-const productText:React.CSSProperties = {
-  padding:'10px'
-}
+const columns: TableProps<ProductOrder>["columns"] = [
+  {
+    title: "Product Name",
+    dataIndex: "productName",
+    key: "productName",
+  },
+  {
+    title: "Quantity",
+    key: "qty",
+    dataIndex: "qty",
+  },
+  {
+    title: "Price",
+    dataIndex: "price",
+    key: "price"
+  }
+];
 
 
 const ViewOrder = () => {
@@ -126,26 +127,10 @@ const ViewOrder = () => {
             </Title>
           </div>
           <div style={productList}>
-            <div style={productHeader}>
-                <p style={productText}>Product Name</p>
-                <p style={productText}>Quantity</p>
-                <p style={productText}>Price</p>
-            </div>
-            <div>
-              {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                viewOrder.productLists?.map((product:any)=>{
-                  return (
-                    <div style={productFooter}>
-                      <p style={productText}>{product.productName}</p>
-                      <p style={productText}>{product.qty}</p>
-                      <p style={productText}>{product.price}</p>
-                    </div>
-                  )
-                })
-              }
-            </div>
-           
+            <Table <ProductOrder>
+              columns={columns}
+              dataSource={viewOrder.productLists}
+              rowKey={(record) => record.id}  pagination={false} />
           </div>
           <div style={footer}>
             <div>
