@@ -62,7 +62,7 @@ const InvoiceProvider = ({children}:ChildrenType)=>{
         }).catch((error)=>{
             setLoading(false)
             console.log(error)
-            setError(error.message)
+            setError(error.response.data.message)
         })
     }
 
@@ -80,7 +80,7 @@ const InvoiceProvider = ({children}:ChildrenType)=>{
         }).catch(error =>{
             setLoading(false)
             console.log(error)
-            setError(error.message)
+            setError(error.response.data.message)
         })
     }
 
@@ -94,7 +94,7 @@ const InvoiceProvider = ({children}:ChildrenType)=>{
         }).catch((error)=>{
             setLoading(false)
             console.log(error)
-            setError(error.message)
+            setError(error.response.data.message)
         })
     }
 

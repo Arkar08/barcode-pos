@@ -51,7 +51,7 @@ const CategoryProvider = ({children}:ChildrenType)=>{
                 }
             }).catch((error)=>{
                 setLoading(false)
-                setError(error)
+                setError(error.response.data.message)
                 console.log(error)
             })
     }
