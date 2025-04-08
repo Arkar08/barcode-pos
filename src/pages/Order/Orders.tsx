@@ -20,35 +20,32 @@ const columns: TableProps<OrderType>["columns"] = [
   {
     title: "Customer Name",
     dataIndex: "fullName",
-    key: "fullName",
+    key: "fullName"
   },
   {
     title: "Quantity",
     key: "quantity",
-    dataIndex: "quantity",
+    dataIndex: "quantity"
   },
   {
     title: "Promotion",
     dataIndex: "promotion",
-    key: "promotion",
-    render: (_, record) => {
-      return <>{record.promotion === 0 && <p style={textStyle1}>-</p>}</>;
-    },
+    key: "promotion"
   },
   {
     title: "Total Amount",
     dataIndex: "totalAmount",
-    key: "totalAmount",
+    key: "totalAmount"
   },
   {
     title: "Payment",
     dataIndex: "payment",
-    key: "payment",
+    key: "payment"
   },
   {
     title: "Order Date",
     dataIndex: "orderDate",
-    key: "orderDate",
+    key: "orderDate"
   },
   {
     title: "Action",
@@ -111,10 +108,6 @@ const textStyle: React.CSSProperties = {
   color: "#7070db",
 };
 
-const textStyle1: React.CSSProperties = {
-  textAlign: "center",
-  fontSize: 22,
-};
 
 const imageAdd: React.CSSProperties = {
   width: "25px",

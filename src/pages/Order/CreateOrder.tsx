@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import {ProductOrder } from "../../utils/Type";
 import type { TableProps } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AddProduct2 from "./AddProduct";
 import { FindContext } from "../../context/FindContext";
 import { OrderContext } from "../../context/OrderContext";
@@ -63,14 +63,14 @@ const CreateOrder = () => {
   if(!context2){
     throw new Error("orderContext must be used within a orderProvider");
   }
-  const {orderData,setOrderData} = context2
+  const {orderData,setOrderData,setPostOrder} = context2
 
   const [openModal,setOpenModal] = useState(false)
   const [totalAmount,setTotalAmount] = useState(0) 
   const [promotion,setPromotion] = useState(0)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [orders,setOrders] = useState<any[]>([])
-  const [payment,setPayment] = useState("")
+  const [active,setActive] = useState(false)
       
         const AddProduct = () =>{
           setOpenModal(true)
@@ -96,11 +96,6 @@ const CreateOrder = () => {
           setOpenModal(false)
         };
 
-  const handleChange = ((value:string)=>{
-    if(value !== ''){
-      setPayment(value)
-    }
-  })
 
   const CancelClick = () =>{
     return(
@@ -108,13 +103,45 @@ const CreateOrder = () => {
     )
   }
 
-  const promotionChange = ((value:string)=>{
-    setPromotion(Number(value))
+  const handlePaymentChange = (value:string)=>{
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setPostOrder((prev:any)=>{
+      return {
+        ...prev,
+        payment:value,
+        promotion:promotion,
+        productLists:orders
+      }
+    })
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const userIdChange = (event:any)=>{
+    if(event.target.value === ''){
+      setActive(false)
+    }else{
+      setActive(true)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return setPostOrder((prev:any)=>{
+          return{
+            ...prev,
+            userId:event.target.value
+          }
+        })
+    }
+  }
+
+  useEffect(()=>{
     const total = orders.reduce((acc,sum)=>{
       return acc + sum.price
     },0)
-    const sumTotal = total - Number(value)
+    const sumTotal = total - promotion;
     setTotalAmount(sumTotal)
+  },[orders, promotion])
+
+
+  const promotionChange = ((value:string)=>{
+    setPromotion(Number(value))
   })
 
     const context = useContext(FindContext)
@@ -130,7 +157,7 @@ const CreateOrder = () => {
   
 
     const{customers} = context;
-    const {activeQty} = context1;
+    const {activeQty,createOrder,postOrder} = context1;
 
   
   return (
@@ -140,7 +167,7 @@ const CreateOrder = () => {
       <Col span={8} className="gutter-row">
           <div>
             <Title level={5}>Choose CustomerName</Title>
-            <select style={{ width: '100%' }} className="selectBox">
+            <select style={{ width: '100%' }} className="selectBox" value={postOrder.userId} name="userId" onChange={(event)=>userIdChange(event)}>
                 <option value="">Select Customer</option>
                 {
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -153,84 +180,96 @@ const CreateOrder = () => {
             </select>
           </div>
         </Col>
-        <Col span={8} className="gutter-row">
-          <div className="AddBtn">
-                <Button type="primary" className="btnAdd" onClick={AddProduct}> + Add Product</Button>
-                  <Modal
-                    open={openModal}
-                    title="Add Product"
-                    onOk={handleOk1}
-                    onCancel={handleCancel}
-                    width={{
-                      xs: '90%',
-                      sm: '80%',
-                      md: '70%',
-                      lg: '60%',
-                      xl: '50%',
-                      xxl: '40%',
-                    }}
-                    centered
-                    footer={[
-                      <Button key="back" variant="solid" color="red" onClick={handleCancel} className="modalBtn">
-                        Cancel
-                      </Button>,
-                      <Button key="add" variant='solid' color="purple" onClick={handleOk1} className="modalBtn" disabled={activeQty}>
-                       Add
-                     </Button>
-                    ]}
-                  >
-                    <AddProduct2 />
-                  </Modal>
-          </div>
-        </Col>
-        <Col span={8} className="gutter-row">
-          <div className="scannerContainer">
+        {
+          active && (
+            <>
+              <Col span={8} className="gutter-row">
+                <div className="AddBtn">
+                      <Button type="primary" className="btnAdd" onClick={AddProduct}> + Add Product</Button>
+                        <Modal
+                          open={openModal}
+                          title="Add Product"
+                          onOk={handleOk1}
+                          onCancel={handleCancel}
+                          width={{
+                            xs: '90%',
+                            sm: '80%',
+                            md: '70%',
+                            lg: '60%',
+                            xl: '50%',
+                            xxl: '40%',
+                          }}
+                          centered
+                          footer={[
+                            <Button key="back" variant="solid" color="red" onClick={handleCancel} className="modalBtn">
+                              Cancel
+                            </Button>,
+                            <Button key="add" variant='solid' color="purple" onClick={handleOk1} className="modalBtn" disabled={activeQty}>
+                            Add
+                          </Button>
+                          ]}
+                        >
+                          <AddProduct2 />
+                        </Modal>
+                </div>
+              </Col>
+              <Col span={8} className="gutter-row">
+                <div className="scannerContainer">
             <img src="/images/barcode.png" alt="scan_photo" className="scanner"/>
-          </div>
-        </Col>
+                </div>
+              </Col>
+            </>
+          )
+        }
       </Row>
-      <Table<ProductOrder> columns={columns} dataSource={orders} rowKey={(record) => record.id} className="tableOrder"/>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        <Col span={8} className="gutter-row">
-            <div>
-              <Title level={5}>Quantity</Title>
-              <Input placeholder="0" className="inputBox" type="number" disabled value={orders.length}/>
-            </div>
-          </Col>
-          <Col span={8} className="gutter-row">
-            <div>
-              <Title level={5}>Promotion</Title>
-              <Input placeholder="0" className="inputBox" type="number" value={promotion} onChange={(event)=>promotionChange(event.target.value)}/>
-            </div>
-          </Col>
-          <Col span={8} className="gutter-row">
-            <div>
-              <Title level={5}>Total Amount</Title>
-              <Input placeholder="Total" className="inputBox" type="number" value={totalAmount}/>
-            </div>
-          </Col>
-          <Col span={8} className="gutter-row">
-            <div>
-              <Title level={5}>Payment Type</Title>
-              <Select
-                style={{ width: '100%' }}
-                className="selectBox"
-                onChange={handleChange}
-                value={payment}
-                options={[
-                  {value:"",label:"Select Payment"},
-                  { value: 'Cash', label: 'Cash' },
-                  { value: 'Bank', label: 'Bank' },
-                  { value: 'Paypal', label: 'Paypal' },
-                  { value: 'Credit_Card', label: 'Credit_Card' },
-                ]}
-              />
-            </div>
-          </Col>
-      </Row>
+      {
+        active && (
+            <>
+              <Table<ProductOrder> columns={columns} dataSource={orders} rowKey={(record) => record.id} className="tableOrder"/>
+              <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                <Col span={8} className="gutter-row">
+                    <div>
+                      <Title level={5}>Quantity</Title>
+                      <Input placeholder="0" className="inputBox" type="number" disabled value={orders.length}/>
+                    </div>
+                  </Col>
+                  <Col span={8} className="gutter-row">
+                    <div>
+                      <Title level={5}>Promotion</Title>
+                      <Input placeholder="0" className="inputBox" type="number" value={promotion} onChange={(event)=>promotionChange(event.target.value)}/>
+                    </div>
+                  </Col>
+                  <Col span={8} className="gutter-row">
+                    <div>
+                      <Title level={5}>Total Amount</Title>
+                      <Input placeholder="Total" className="inputBox" type="number" value={totalAmount} disabled/>
+                    </div>
+                  </Col>
+                  <Col span={8} className="gutter-row">
+                    <div>
+                      <Title level={5}>Payment Type</Title>
+                      <Select
+                        style={{ width: '100%' }}
+                        className="selectBox"
+                        onChange={handlePaymentChange}
+                        value={postOrder.payment}
+                        options={[
+                          {value:"",label:"Select Payment"},
+                          { value: 'Cash', label: 'Cash' },
+                          { value: 'Bank', label: 'Bank' },
+                          { value: 'Paypal', label: 'Paypal' },
+                          { value: 'Credit_Card', label: 'Credit_Card' },
+                        ]}
+                      />
+                    </div>
+                  </Col>
+              </Row>
+            </>
+        )
+      }
       <div className="btnGroup">
         <Button variant="solid" color="red" className="cancel" onClick={CancelClick}>Cancel</Button>
-        <Button type="primary" className="cancel1" onClick={CancelClick}> Order Booking</Button>
+        <Button type="primary" className="cancel1" onClick={createOrder}> Order Booking</Button>
       </div>
     </div>
   )

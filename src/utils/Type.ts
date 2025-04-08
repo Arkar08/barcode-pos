@@ -91,6 +91,13 @@ export type ProductContextType = {
     error:null | string;
 }
 
+export type order = {
+    userId:string
+    productLists:ProductOrder[]
+    promotion:number
+    payment:string;
+}
+
 export type OrderContextType = {
     orderList:OrderType[]
     loading:boolean
@@ -99,6 +106,11 @@ export type OrderContextType = {
     setActiveQty:React.Dispatch<React.SetStateAction<boolean | undefined>>;
     setOrderData:React.Dispatch<React.SetStateAction <object | undefined>>
     orderData:ProductOrder
+    postOrder:order,
+    createOrder:()=>void
+    setPostOrder:React.Dispatch<React.SetStateAction <object | undefined>>
+    setEditId:React.Dispatch<React.SetStateAction <string | undefined>>,
+    viewOrder:OrderType
 }
 
 export type InvoiceContextType = {

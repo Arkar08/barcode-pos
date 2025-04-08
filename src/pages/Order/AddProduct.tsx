@@ -62,20 +62,25 @@ const AddProduct2 = () => {
       };
 
       const changeQty = (value:any)=>{
-        if(Number(value) > Number(stock.stockLevel)){
-          setActiveQty(true)
-        }else{
-          const priceList = Number(stock.price * value) 
-          setOrderData((prev:any) => {
-            return {
-              ...prev,
-              qty: Number(value),
-              price:priceList,
-              id:Math.floor(Math.random() * 1000)
-            }
-          })
-          setActiveQty(false)
-        }
+          if(Number(value) > Number(stock.stockLevel)){
+            setActiveQty(true)
+            setOrderData((prev:any)=>{
+              return {
+                ...prev,qty:Number(value)
+              }
+            })
+          }else{
+            const priceList = Number(stock.price * value) 
+            setOrderData((prev:any) => {
+              return {
+                ...prev,
+                qty: Number(value),
+                price:priceList,
+                id:Math.floor(Math.random() * 1000)
+              }
+            })
+            setActiveQty(false)
+          }
       }
 
   return (
