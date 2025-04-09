@@ -89,6 +89,10 @@ export type UserContextType = {
     handleUserChange:()=>void;
     createUser:()=>void;
     handleRoleChange:()=>void;
+    stateChange:()=>void;
+    township:stateType[],
+    townshipActive:boolean,
+    townshipChange:()=>void;
 }
 
 
@@ -143,9 +147,14 @@ type roleValue = {
     roleName:string;
 }
 
+export type stateType = {
+    stateName:string
+}
+
 export type FindContextType = {
     customers:UserType[],
     supplier:UserType[]
     productName:ProductName[],
-    roles:roleValue[]
+    roles:roleValue[],
+    state:stateType[]
 }

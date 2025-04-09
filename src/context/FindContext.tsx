@@ -7,7 +7,8 @@ export const FindContext = createContext({
     customers:[],
     supplier:[],
     productName:[],
-    roles:[]
+    roles:[],
+    state:[],
 })
 
 
@@ -17,12 +18,14 @@ const FindProvider = ({children}:ChildrenType)=>{
     const [supplier,setSupplier] = useState<never[]>([])
     const [productName,setProductName] = useState<never[]>([])
     const [roles,setRoles] = useState([])
+    const [state,setState] = useState([])
 
     useEffect(()=>{
         getCustomer()
         getSupplier()
         getProductName()
         getRole()
+        getState()
     },[])
 
     const getCustomer = async()=>{
@@ -65,8 +68,21 @@ const FindProvider = ({children}:ChildrenType)=>{
         })
     }
 
+    const getState = async()=>{
+        await Axios.get("find/state").then((res)=>{
+            if(res.data.status === 200){
+                setState(res.data.data)
+            }
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+
+
+
+
     return(
-        <FindContext.Provider value={{customers,supplier,productName,roles}}>
+        <FindContext.Provider value={{customers,supplier,productName,roles,state}}>
             {children}
         </FindContext.Provider>
     )

@@ -25,13 +25,9 @@ const CreateUser = () => {
     throw Error("roleContext does not provide in role Provider")
   }
 
-  const {createUserList,handleUserChange,createUser,handleRoleChange} = context;
-  const{roles} = context1;
+  const {createUserList,handleUserChange,createUser,handleRoleChange,stateChange,townshipActive,township,townshipChange,active} = context;
+  const{roles,state} = context1;
 
-
-  const handleChange = ((value:string)=>{
-    console.log(value)
-  })
 
   const CancelClick = () =>{
     return(
@@ -49,20 +45,26 @@ const CreateUser = () => {
         <Col span={8} className="gutter-row">
           <div>
             <Title level={5}>Enter Full Name</Title>
-            <Input placeholder="Full Name" className="inputBox" value={createUserList.fullName} name="fullName" onChange={handleUserChange}/>
+            <Input placeholder="Full Name" className="inputBox" value={createUserList.fullName} autoComplete="off" name="fullName" onChange={handleUserChange}/>
           </div>
         </Col>
         <Col span={8} className="gutter-row">
           <div>
             <Title level={5}>Enter Email</Title>
-            <Input placeholder="example@gmail.com" className="inputBox" value={createUserList.email} name="email" onChange={handleUserChange}/>
+            <Input placeholder="example@gmail.com" className="inputBox" value={createUserList.email} name="email" autoComplete="off" onChange={handleUserChange}/>
+          </div>
+        </Col>
+        <Col span={8} className="gutter-row">
+          <div>
+            <Title level={5}>Enter Password</Title>
+            <Input.Password placeholder="Password" className="inputpasswordBox" iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} value={createUserList.password} name="password" onChange={handleUserChange}/>
           </div>
         </Col>
         <Col span={8} className="gutter-row">
           <div>
             <Title level={5}>Choose Role</Title>
              <Select
-                defaultValue='Select Role'
+                placeholder='Select Role'
                 style={{ width: '100%' }}
                 className="selectBox"
                 onChange={handleRoleChange}
@@ -72,29 +74,23 @@ const CreateUser = () => {
           </div>
         </Col>
        {
-        createUserList.roleId === '3' && (
+        active && (
          <>
             <Col span={8} className="gutter-row">
               <div>
                 <Title level={5}>Enter ComanyName</Title>
-                <Input placeholder="companyName" className="inputBox" value={createUserList.companyName} name="companyName" onChange={handleUserChange}/>
+                <Input placeholder="companyName" className="inputBox" value={createUserList.companyName} autoComplete="off" name="companyName" onChange={handleUserChange}/>
               </div>
             </Col>
             <Col span={8} className="gutter-row">
               <div>
                 <Title level={5}>Enter Description</Title>
-                <Input placeholder="description" className="inputBox" value={createUserList.description} name="description" onChange={handleUserChange}/>
+                <Input placeholder="description" className="inputBox" value={createUserList.description} autoComplete="off" name="description" onChange={handleUserChange}/>
               </div>
             </Col>
          </>
         )
        }
-        <Col span={8} className="gutter-row">
-          <div>
-            <Title level={5}>Enter Password</Title>
-            <Input.Password placeholder="Password" className="inputpasswordBox" iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} value={createUserList.password} name="password" onChange={handleUserChange}/>
-          </div>
-        </Col>
         <Col span={8} className="gutter-row">
           <div>
             <Title level={5}>Enter Phone Number</Title>
@@ -107,13 +103,9 @@ const CreateUser = () => {
              <Select
                 style={{ width: '100%' }}
                 className="selectBox"
-                onChange={handleChange}
+                onChange={stateChange}
                 value={createUserList.state}
-                options={[
-                  { value: 'jack', label: 'Jack' },
-                  { value: 'lucy', label: 'Lucy' },
-                  { value: 'Yiminghe', label: 'yiminghe' },
-                ]}
+                options={state}
               />
           </div>
         </Col>
@@ -123,20 +115,17 @@ const CreateUser = () => {
              <Select
                  style={{ width: '100%' }}
                 className="selectBox"
-                onChange={handleChange}
+                onChange={townshipChange}
                 value={createUserList.township}
-                options={[
-                  { value: 'jack', label: 'Jack' },
-                  { value: 'lucy', label: 'Lucy' },
-                  { value: 'Yiminghe', label: 'yiminghe' },
-                ]}
+                disabled={townshipActive}
+                options={township}
               />
           </div>
         </Col>
         <Col span={8} className="gutter-row">
           <div>
             <Title level={5}>Enter Address</Title>
-            <Input placeholder="Address" className="inputBox" value={createUserList.address} name="address" onChange={handleUserChange}/>
+            <Input placeholder="Address" className="inputBox" value={createUserList.address} autoComplete="off" name="address" onChange={handleUserChange}/>
           </div>
         </Col>
       </Row>

@@ -24,7 +24,12 @@ export const UserContext = createContext({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     handleUserChange:(_data:any)=>{},
     createUser:()=>{},
-    handleRoleChange:(_value:string)=>{}
+    handleRoleChange:(_value:string)=>{},
+    stateChange:(_value:string)=>{},
+    township:[],
+    townshipActive:true,
+    townshipChange:(_value:string)=>{},
+    active:false
 })
 
 
@@ -45,6 +50,9 @@ const UserProvider = ({children}:ChildrenType)=>{
         companyName:"",
         description:""
     })
+    const [township,setTownship] = useState([])
+    const [townshipActive,setTownshipAcite] = useState(true)
+    const [active,setActive] = useState(false)
 
 
     useEffect(()=>{
@@ -75,11 +83,47 @@ const UserProvider = ({children}:ChildrenType)=>{
         })
     }
 
-    const handleRoleChange = (value:string)=>{
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleRoleChange = (value:any)=>{
+        console.log(value)
+        if(value === 3){
+            setActive(true)
+        }else{
+            setActive (false)
+        }
         setCreateUserList((prev)=>{
             return {
                 ...prev,
                 roleId:value
+            }
+        })
+    }
+
+    const stateChange = async(value:string)=>{
+        if(value !== ''){
+            const data = {
+                stateCode:value
+            }
+            await Axios.post("find/township",data).then((res)=>{
+                if(res.data.status ===200){
+                    setTownshipAcite(false)
+                    setTownship(res.data.data)
+                }
+            })
+            setCreateUserList((prev)=>{
+                return {
+                    ...prev,
+                    state:value
+                }
+            })
+        }
+    }
+
+    const townshipChange = (value:string)=>{
+        setCreateUserList((prev)=>{
+            return {
+                ...prev,
+                township:value
             }
         })
     }
@@ -89,7 +133,7 @@ const UserProvider = ({children}:ChildrenType)=>{
     }
 
     return(
-        <UserContext.Provider value={{userList,error,loading,createUserList,handleUserChange,createUser,handleRoleChange}}>
+        <UserContext.Provider value={{userList,error,loading,createUserList,handleUserChange,createUser,handleRoleChange,stateChange,township,townshipActive,townshipChange,active}}>
             {children}
         </UserContext.Provider>
     )
