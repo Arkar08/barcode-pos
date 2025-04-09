@@ -4,7 +4,8 @@ import { Input } from 'antd';
 import { Select } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { FindContext } from "../../context/FindContext";
 
 const {Title} = Typography;
 
@@ -12,6 +13,7 @@ const UpdateUser = () => {
 
   const navigate = useNavigate()
     const [role,setRole] = useState<string>('')
+      const context1= useContext(FindContext)
 
   const handleChange = ((value:string)=>{
     console.log(value)
@@ -26,7 +28,12 @@ const UpdateUser = () => {
   const handleRoleChange = ((value:string)=>{
     setRole(value)
   })
+
+  if(!context1){
+    throw Error("roleContext does not provide in role Provider")
+  }
   
+  const{roles} = context1;
 
 
   
@@ -61,12 +68,7 @@ const UpdateUser = () => {
                 style={{ width: '100%' }}
                 className="selectBox"
                 onChange={handleRoleChange}
-                options={[
-                  {value:"Select Role",label:"Select Role"},
-                  { value: 'admin', label: 'Admin' },
-                  { value: 'supplier', label: 'Supplier' },
-                  { value: 'customer', label: 'Customer' },
-                ]}
+                options={roles}
               />
           </div>
         </Col>

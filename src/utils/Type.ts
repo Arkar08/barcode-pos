@@ -4,10 +4,11 @@ export interface UserType {
     userId:string;
     fullName:string;
     email:string;
+    password:string;
     companyName:string;
     state:string;
     township:string;
-    roleName:string;
+    roleId:string;
     description:string;
     phNumber:number;
     address:string;
@@ -84,6 +85,10 @@ export type UserContextType = {
     userList:UserType[]
     loading:boolean
     error:null | string;
+    createUserList:UserType;
+    handleUserChange:()=>void;
+    createUser:()=>void;
+    handleRoleChange:()=>void;
 }
 
 
@@ -134,9 +139,13 @@ export type InvoiceContextType = {
 type ProductName = {
     value:string;
 }
+type roleValue = {
+    roleName:string;
+}
 
 export type FindContextType = {
     customers:UserType[],
     supplier:UserType[]
-    productName:ProductName[]
+    productName:ProductName[],
+    roles:roleValue[]
 }

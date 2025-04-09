@@ -291,7 +291,7 @@ const UserListing = () => {
         </Link>
       </Layout>
       <Layout style={tableLayout}>
-        <Table<UserType> columns={columns} dataSource={userList} rowKey={(record) => record.userId}/>
+        <Table<UserType> columns={columns} dataSource={userList} rowKey={(record) => record.email}/>
       </Layout>
       <Modal
         open={openModal}

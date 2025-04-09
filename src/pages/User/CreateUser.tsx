@@ -4,7 +4,9 @@ import { Input } from 'antd';
 import { Select } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+import { FindContext } from "../../context/FindContext";
 
 const {Title} = Typography;
 
@@ -12,7 +14,20 @@ const {Title} = Typography;
 const CreateUser = () => {
 
   const navigate = useNavigate()
-  const [role,setRole] = useState<string>('')
+  const context = useContext(UserContext)
+  const context1= useContext(FindContext)
+
+  if(!context){
+    throw Error("usercontext does not provide in user Provider")
+  }
+
+  if(!context1){
+    throw Error("roleContext does not provide in role Provider")
+  }
+
+  const {createUserList,handleUserChange,createUser,handleRoleChange} = context;
+  const{roles} = context1;
+
 
   const handleChange = ((value:string)=>{
     console.log(value)
@@ -24,9 +39,6 @@ const CreateUser = () => {
     )
   }
 
-  const handleRoleChange = ((value:string)=>{
-    setRole(value)
-  })
   
   
 
@@ -36,20 +48,14 @@ const CreateUser = () => {
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         <Col span={8} className="gutter-row">
           <div>
-            <Title level={5}>Enter First Name</Title>
-            <Input placeholder="First Name" className="inputBox"/>
-          </div>
-        </Col>
-        <Col span={8} className="gutter-row">
-          <div>
-            <Title level={5}>Enter Last Name</Title>
-            <Input placeholder="Last Name" className="inputBox"/>
+            <Title level={5}>Enter Full Name</Title>
+            <Input placeholder="Full Name" className="inputBox" value={createUserList.fullName} name="fullName" onChange={handleUserChange}/>
           </div>
         </Col>
         <Col span={8} className="gutter-row">
           <div>
             <Title level={5}>Enter Email</Title>
-            <Input placeholder="example@gmail.com" className="inputBox"/>
+            <Input placeholder="example@gmail.com" className="inputBox" value={createUserList.email} name="email" onChange={handleUserChange}/>
           </div>
         </Col>
         <Col span={8} className="gutter-row">
@@ -60,28 +66,24 @@ const CreateUser = () => {
                 style={{ width: '100%' }}
                 className="selectBox"
                 onChange={handleRoleChange}
-                options={[
-                  {value:"Select Role",label:"Select Role"},
-                  { value: 'admin', label: 'Admin' },
-                  { value: 'supplier', label: 'Supplier' },
-                  { value: 'customer', label: 'Customer' },
-                ]}
+                value={createUserList.roleId}
+                options={roles}
               />
           </div>
         </Col>
        {
-        role === 'supplier' && (
+        createUserList.roleId === '3' && (
          <>
             <Col span={8} className="gutter-row">
               <div>
                 <Title level={5}>Enter ComanyName</Title>
-                <Input placeholder="companyName" className="inputBox"/>
+                <Input placeholder="companyName" className="inputBox" value={createUserList.companyName} name="companyName" onChange={handleUserChange}/>
               </div>
             </Col>
             <Col span={8} className="gutter-row">
               <div>
                 <Title level={5}>Enter Description</Title>
-                <Input placeholder="description" className="inputBox"/>
+                <Input placeholder="description" className="inputBox" value={createUserList.description} name="description" onChange={handleUserChange}/>
               </div>
             </Col>
          </>
@@ -90,13 +92,13 @@ const CreateUser = () => {
         <Col span={8} className="gutter-row">
           <div>
             <Title level={5}>Enter Password</Title>
-            <Input.Password placeholder="Password" className="inputpasswordBox" iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}/>
+            <Input.Password placeholder="Password" className="inputpasswordBox" iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} value={createUserList.password} name="password" onChange={handleUserChange}/>
           </div>
         </Col>
         <Col span={8} className="gutter-row">
           <div>
             <Title level={5}>Enter Phone Number</Title>
-            <Input placeholder="09123456789" className="inputBox" type="number"/>
+            <Input placeholder="09123456789" className="inputBox" type="number" value={createUserList.phNumber} name="phNumber" onChange={handleUserChange}/>
           </div>
         </Col>
         <Col span={8} className="gutter-row">
@@ -106,6 +108,7 @@ const CreateUser = () => {
                 style={{ width: '100%' }}
                 className="selectBox"
                 onChange={handleChange}
+                value={createUserList.state}
                 options={[
                   { value: 'jack', label: 'Jack' },
                   { value: 'lucy', label: 'Lucy' },
@@ -121,6 +124,7 @@ const CreateUser = () => {
                  style={{ width: '100%' }}
                 className="selectBox"
                 onChange={handleChange}
+                value={createUserList.township}
                 options={[
                   { value: 'jack', label: 'Jack' },
                   { value: 'lucy', label: 'Lucy' },
@@ -132,13 +136,13 @@ const CreateUser = () => {
         <Col span={8} className="gutter-row">
           <div>
             <Title level={5}>Enter Address</Title>
-            <Input placeholder="Address" className="inputBox"/>
+            <Input placeholder="Address" className="inputBox" value={createUserList.address} name="address" onChange={handleUserChange}/>
           </div>
         </Col>
       </Row>
       <div className="btnGroup">
         <Button variant="solid" color="red" className="cancel" onClick={CancelClick}>Cancel</Button>
-        <Button type="primary" className="cancel1" onClick={CancelClick}>Create</Button>
+        <Button type="primary" className="cancel1" onClick={createUser}>Create</Button>
       </div>
     </div>
   )
