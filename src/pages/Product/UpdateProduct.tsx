@@ -4,8 +4,8 @@ import { Input } from 'antd';
 import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CategoryContext } from "../../context/CategoryContext";
-import { UserContext } from "../../context/UserContext";
 import { ProductContext } from "../../context/ProductContext";
+import { FindContext } from "../../context/FindContext";
 
 const {Title} = Typography;
 
@@ -13,7 +13,7 @@ const {Title} = Typography;
 const UpdateProduct = () => {
 
     const context = useContext(CategoryContext)
-    const context1 = useContext(UserContext)
+    const context1 = useContext(FindContext)
     const context2 = useContext(ProductContext)
   
     if(!context){
@@ -31,7 +31,7 @@ const UpdateProduct = () => {
   
   
     const {category} = context;
-    const {userList} = context1;
+    const {supplier} = context1;
     const {setEditProductId,editProduct,handleEditChange,updateProduct} = context2;
 
     const {id} = useParams()
@@ -70,7 +70,7 @@ const UpdateProduct = () => {
                 <option value="">Select Supplier</option>
                 {
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  userList.map((user:any)=>{
+                  supplier.map((user:any)=>{
                     return(
                       <option value={user.userId} key={user.userId}>{user.fullName}</option>
                     )
