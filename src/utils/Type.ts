@@ -93,6 +93,11 @@ export type UserContextType = {
     township:stateType[],
     townshipActive:boolean,
     townshipChange:()=>void;
+    setEditId:React.Dispatch<React.SetStateAction<string | undefined>>,
+    editUserChange:()=>void;
+    updateUser:()=>void;
+    stateEditChange:()=>void;
+    editTownship:()=>void;
 }
 
 

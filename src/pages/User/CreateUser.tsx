@@ -68,7 +68,7 @@ const CreateUser = () => {
                 style={{ width: '100%' }}
                 className="selectBox"
                 onChange={handleRoleChange}
-                value={createUserList.roleId}
+                value={createUserList.role}
                 options={roles}
               />
           </div>

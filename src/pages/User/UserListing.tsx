@@ -9,6 +9,7 @@ import {Popconfirm } from 'antd';
 import { useContext, useState } from "react";
 import FilterUser from "./FilterUser";
 import { UserContext } from "../../context/UserContext";
+import Axios from "../../api/ApiConfig";
 
 const { Title } = Typography;
 
@@ -49,8 +50,10 @@ const columns:TableProps<UserType>['columns'] = [
       return (
         <>
           {
-            !record.phNumber&& (
+            !record.phNumber? (
               <p style={textStyle1}>-</p>
+            ):(
+              <p>{record.phNumber}</p>
             )
           }
         </>
@@ -156,8 +159,15 @@ const columns:TableProps<UserType>['columns'] = [
   },
 ];
 
-const confirm = (value:string) => {
-  console.log(value)
+const confirm = async(value:string) => {
+  await Axios.delete(`users/${value}`).then((data) => {
+    if (data.data.status === 200) {
+      alert(data.data.message);
+      window.location.href = "/users";
+    }
+  }).catch((error)=>{
+    console.log(error)
+  })
 };
 
 const cancel = () => {
