@@ -1,6 +1,8 @@
 import type { FormProps } from "antd";
 import { Button, Form, Input, Typography } from "antd";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 type FieldType = {
   username?: string;
@@ -18,6 +20,15 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 const {Title} = Typography
 
 const Login = () => {
+
+  const context = useContext(AuthContext)
+
+  if(!context){
+    throw Error("auth context does not provide in auth provider.")
+  }
+
+  const {loginUser} = context;
+  console.log(loginUser)
 
 
   return (
