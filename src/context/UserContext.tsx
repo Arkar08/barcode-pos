@@ -48,7 +48,8 @@ export const UserContext = createContext({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     editUserChange:(_data:any)=>{},
     updateUser:()=>{},
-    editTownship:[]
+    editTownship:[],
+    townshipEditChange:(_value:string)=>{}
 })
 
 
@@ -223,6 +224,15 @@ const UserProvider = ({children}:ChildrenType)=>{
         }
     }
 
+    const townshipEditChange = (value:string)=>{
+        setEditUser((prev)=>{
+            return {
+                ...prev,
+                township:value
+            }
+        })
+    }
+
     const getTownship = async()=>{
         await Axios.get('find/township1').then((res)=>{
             if(res.data.status ===200){
@@ -248,7 +258,7 @@ const UserProvider = ({children}:ChildrenType)=>{
     }
 
     return(
-        <UserContext.Provider value={{userList,error,loading,createUserList,handleUserChange,createUser,handleRoleChange,stateChange,township,townshipActive,townshipChange,active,setEditId,editUser,editUserChange,updateUser,stateEditChange,editTownship}}>
+        <UserContext.Provider value={{userList,error,loading,createUserList,handleUserChange,createUser,handleRoleChange,stateChange,township,townshipActive,townshipChange,active,setEditId,editUser,editUserChange,updateUser,stateEditChange,editTownship,townshipEditChange}}>
             {children}
         </UserContext.Provider>
     )

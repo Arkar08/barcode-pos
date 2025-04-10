@@ -98,6 +98,7 @@ export type UserContextType = {
     updateUser:()=>void;
     stateEditChange:()=>void;
     editTownship:()=>void;
+    townshipEditChange:()=>void;
 }
 
 

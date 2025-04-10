@@ -17,9 +17,6 @@ const UpdateUser = () => {
       const context1= useContext(FindContext)
       const context = useContext(UserContext)
 
-  const handleChange = ((value:string)=>{
-    console.log(value)
-  })
 
   const CancelClick = () =>{
     return(
@@ -31,7 +28,7 @@ const UpdateUser = () => {
     throw Error("userContext does not provide in userContext Provider")
   }
 
-  const {setEditId,editUser,editUserChange,updateUser,townshipActive,stateEditChange,editTownship} = context;
+  const {setEditId,editUser,editUserChange,updateUser,townshipActive,stateEditChange,editTownship,townshipEditChange} = context;
 
 
   useEffect(()=>{
@@ -125,7 +122,7 @@ const UpdateUser = () => {
            <Select
                style={{ width: '100%' }}
               className="selectBox"
-              onChange={handleChange}
+              onChange={townshipEditChange}
               value={editUser.township}
               disabled={townshipActive}
               options={editTownship}
