@@ -137,7 +137,7 @@ const OrderProvider = ({children}:ChildrenType)=>{
             setLoading(false)
         }).catch((error)=>{
             setLoading(false)
-            console.log(error)
+            alert(error.response.data.message)
             setError(error.response.data.message)
         })
     }

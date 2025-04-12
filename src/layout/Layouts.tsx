@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+import {Outlet } from "react-router-dom"
 import {Layout } from 'antd';
 import Sidebar from "./Sidebar";
 import { dummyData } from "../utils/DummyData";
@@ -26,6 +26,7 @@ const layoutStyle = {
   overflow: 'hidden',
   height:'100vh'
 };
+
 
 const { Header, Sider, Content } = Layout;
 const Layouts = () => {

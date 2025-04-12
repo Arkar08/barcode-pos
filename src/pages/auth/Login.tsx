@@ -1,25 +1,15 @@
-import type { FormProps } from "antd";
 import { Button, Form, Input, Typography } from "antd";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { FieldType } from "../../utils/Type";
 
-type FieldType = {
-  username?: string;
-  password?: string;
-};
 
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-  console.log("Success:", values);
-};
 
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
 
 const {Title} = Typography
 
-const Login = () => {
+export default function Login(){
 
   const context = useContext(AuthContext)
 
@@ -27,8 +17,9 @@ const Login = () => {
     throw Error("auth context does not provide in auth provider.")
   }
 
-  const {loginUser} = context;
-  console.log(loginUser)
+  const {onFinish,onFinishFailed} = context;
+
+
 
 
   return (
@@ -72,4 +63,3 @@ const Login = () => {
   );
 };
 
-export default Login;

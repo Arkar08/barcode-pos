@@ -77,18 +77,27 @@ const CreateOrder = () => {
         }
     
         const handleOk1 = () => {
-            localStorage.setItem("orders",JSON.stringify(orderData))
-            const data = localStorage.getItem("orders")
-            if(data){
-              const dummy = JSON.parse(data)
-              setOrders((prev)=>[...prev,dummy])
+            if(orderData.qty !== 0 && orderData.productName !== ''){
+              localStorage.setItem("orders",JSON.stringify(orderData))
+              const data = localStorage.getItem("orders")
+              if(data){
+                const dummy = JSON.parse(data)
+                setOrders((prev)=>[...prev,dummy])
+                setOrderData({
+                  qty:0,
+                  productName:'',
+                  price:0
+                })
+                setOpenModal(false)
+              }   
+            }else{
               setOrderData({
                 qty:0,
                 productName:'',
                 price:0
               })
               setOpenModal(false)
-            }     
+            }
         };
       
         const handleCancel = () => {
@@ -215,7 +224,7 @@ const CreateOrder = () => {
               </Col>
               <Col span={8} className="gutter-row">
                 <div className="scannerContainer">
-            <img src="/images/barcode.png" alt="scan_photo" className="scanner"/>
+                  <img src="/images/barcode.png" alt="scan_photo" className="scanner"/>
                 </div>
               </Col>
             </>

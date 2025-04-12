@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Input, Row ,Typography} from 'antd';
-import { AutoComplete} from 'antd';
 import { useContext, useState } from 'react';
 import { FindContext } from '../../context/FindContext';
 import Axios from '../../api/ApiConfig';
@@ -29,12 +28,8 @@ const AddProduct2 = () => {
 
     const {productName} = context;
     const {setActiveQty ,activeQty,setOrderData,orderData} = context1;
-
-      const getSearchValue = (inputValue:any, option:any)=>{
-          return  option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-      }
       
-      const onSelect = async(value: string) => {
+      const onSelect = async(value:any) => {
         setOrderData((prev:any) => {
           return {
             ...prev,
@@ -44,7 +39,7 @@ const AddProduct2 = () => {
         const productName = {
           productName:value
         }
-       if(value !== ''){
+       if(value !== '' || orderData.productName !== ''){
           await Axios.post("find/stock",productName).then((res)=>{
             if(res.data.status === 200){
               setStock(res.data.data[0])
@@ -88,15 +83,16 @@ const AddProduct2 = () => {
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         <Col span={24} className="gutter-row">
           <Title level={5}>Product Name</Title>
-          <AutoComplete
-            className='completeBox'
-            style={{ width: '100%' }}
-            options={productName}
-            placeholder="Search Product Name"
-            filterOption={getSearchValue}
-            onChange={onSelect}
-            value={orderData.productName}
-          />
+          <select value={orderData.productName} onChange={(event)=>onSelect(event.target.value)} className='completeBox' style={{ width: '100%' }}>
+            <option value="">Choose Product Name</option>
+            {
+              productName.map((product:any)=>{
+                return (
+                  <option value={product.value} key={product.id}>{product.value}</option>
+                )
+              })
+            }
+          </select>
           <Title level={5} className='qty'>Qty</Title>
           <Input placeholder="0" className="inputBox" type="number" disabled={stock.stockLevel=== ''} value={orderData.qty} onChange={(e)=>changeQty(e.target.value)}/>
           {
@@ -104,7 +100,7 @@ const AddProduct2 = () => {
               <Title level={5} className='qtyText'> *Stock is not enough.</Title>
             </div>)
           }
-          <Title level={5} className='stock'>Stock - {stock.stockLevel === '' ? '0':stock?.stockLevel.split("",2)}</Title>
+          <Title level={5} className='stock'>Stock - {orderData.productName === '' ? '0':stock.stockLevel.split("",2)}</Title>
         </Col>
       </Row>
     </div>

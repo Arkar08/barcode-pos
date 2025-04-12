@@ -35,7 +35,7 @@ const NotFound = () => {
   const navigate = useNavigate()
 
   const backToHome = () =>{
-    navigate("/dashboard")
+    navigate("/auth/login")
   }
 
   return (
@@ -43,7 +43,7 @@ const NotFound = () => {
       <h3 style={notFoundText}>404 Not Found Page</h3>
       <Button variant="outlined" style={backButton} onClick={backToHome}>
         <img src="/images/left-arrow.png" alt="back_arrow"  style={backArrow}/>
-        <span>Back To Dashboard</span>
+        <span>Back To Login</span>
       </Button>
     </div>
   )

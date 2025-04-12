@@ -164,3 +164,7 @@ export type FindContextType = {
     roles:roleValue[],
     state:stateType[]
 }
+export type FieldType = {
+    username?: string;
+    password?: string;
+  };

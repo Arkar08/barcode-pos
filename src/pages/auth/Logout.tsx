@@ -1,4 +1,6 @@
 import { Button } from "antd"
+import { useContext } from "react"
+import { AuthContext } from "../../context/AuthContext"
 
 
 const btnCancel:React.CSSProperties = {
@@ -17,7 +19,7 @@ const btnGroup:React.CSSProperties = {
   marginBottom:'20px'
 }
 
-const logout:React.CSSProperties = {
+const logoutStyle:React.CSSProperties = {
   position: 'relative',
   height: '100vh'
 }
@@ -42,14 +44,25 @@ const logoutContainer:React.CSSProperties = {
   borderRadius: '10px'
 }
 
+
+
 const Logout = () => {
+
+  const context = useContext(AuthContext)
+
+  if(!context){
+    throw Error('authcontext does not provide authProvider.')
+  }
+
+  const {logout}  = context;
+
   return (
-    <div  style={logout}>
+    <div  style={logoutStyle}>
       <div  style={logoutContainer}>
           <h3 style={logoutText}>Are You Want To Logout?</h3>
           <div style={btnGroup}>
             <Button variant="solid" color="red" style={btnCancel} danger>No</Button>
-            <Button variant="solid" color="green"  style={btnCancel}>Yes</Button>
+            <Button variant="solid" color="green"  style={btnCancel} onClick={logout}>Yes</Button>
           </div>
       </div>
     </div>

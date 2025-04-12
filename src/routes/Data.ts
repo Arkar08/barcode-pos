@@ -20,7 +20,7 @@ import UpdateProduct from "../pages/Product/UpdateProduct";
 import ViewOrder from "../pages/Order/ViewOrder";
 import UpdateCategory from "../pages/Category/UpdateCategory";
 import Signup from "../pages/auth/Signup";
-
+import ProtectedRoute from "../providers/ProtectedRoute";
 
 
 export const data = [
@@ -37,8 +37,12 @@ export const data = [
    {
         path:"/",
         text:"Layouts",
-        Component:Layouts,
+        Component:ProtectedRoute,
         children:[
+            {
+                index:true,
+                Component:Layouts,
+            },
             {
                 path:"dashboard",
                 text:"Dashboard",
