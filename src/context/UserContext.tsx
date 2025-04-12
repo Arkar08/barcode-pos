@@ -260,8 +260,10 @@ const UserProvider = ({children}:ChildrenType)=>{
         })
     }
 
+    const postvalue = {userList,error,loading,createUserList,handleUserChange,createUser,handleRoleChange,stateChange,township,townshipActive,townshipChange,active,setEditId,editUser,editUserChange,updateUser,stateEditChange,editTownship,townshipEditChange}
+
     return(
-        <UserContext.Provider value={{userList,error,loading,createUserList,handleUserChange,createUser,handleRoleChange,stateChange,township,townshipActive,townshipChange,active,setEditId,editUser,editUserChange,updateUser,stateEditChange,editTownship,townshipEditChange}}>
+        <UserContext.Provider value={postvalue}>
             {children}
         </UserContext.Provider>
     )

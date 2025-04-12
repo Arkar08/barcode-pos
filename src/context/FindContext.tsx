@@ -81,11 +81,11 @@ const FindProvider = ({children}:ChildrenType)=>{
         })
     }
 
-
+    const postValue = {customers,supplier,productName,roles,state}
 
 
     return(
-        <FindContext.Provider value={{customers,supplier,productName,roles,state}}>
+        <FindContext.Provider value={postValue}>
             {children}
         </FindContext.Provider>
     )

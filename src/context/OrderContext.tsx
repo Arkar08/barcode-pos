@@ -145,8 +145,10 @@ const OrderProvider = ({children}:ChildrenType)=>{
         })
     }
 
+    const postValue = {orderList,loading,error,setActiveQty,activeQty,setOrderData,orderData,createOrder,postOrder,setPostOrder,setEditId,viewOrder}
+
     return(
-        <OrderContext.Provider value={{orderList,loading,error,setActiveQty,activeQty,setOrderData,orderData,createOrder,postOrder,setPostOrder,setEditId,viewOrder}}>
+        <OrderContext.Provider value={postValue}>
             {children}
         </OrderContext.Provider>
     )

@@ -154,9 +154,10 @@ const ProductProvider = ({children}:ChildrenType)=>{
         })
     }
 
+    const postValue = {productList,loading,error,createProduct,handleChange,CreateProductList,setEditProductId,editProduct,handleEditChange,updateProduct}
 
     return(
-        <ProductContext.Provider value={{productList,loading,error,createProduct,handleChange,CreateProductList,setEditProductId,editProduct,handleEditChange,updateProduct}}>
+        <ProductContext.Provider value={postValue}>
             {children}
         </ProductContext.Provider>
     )

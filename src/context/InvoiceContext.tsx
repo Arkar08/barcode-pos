@@ -102,8 +102,10 @@ const InvoiceProvider = ({children}:ChildrenType)=>{
         })
     }
 
+    const postValue = {invoiceList,loading,error,createInvoice,setEditInvoiceId,viewInvoice}
+
     return(
-        <InvoiceContext.Provider value={{invoiceList,loading,error,createInvoice,setEditInvoiceId,viewInvoice}}>
+        <InvoiceContext.Provider value={postValue}>
             {children}
         </InvoiceContext.Provider>
     )

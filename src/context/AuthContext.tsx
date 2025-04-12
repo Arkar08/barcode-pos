@@ -53,7 +53,9 @@ const AuthProvider = ({children}:ChildrenType)=>{
         })
       }
 
-    return <AuthContext.Provider value={{onFinish,onFinishFailed,role,logout}}>
+      const postValue = {onFinish,onFinishFailed,role,logout}
+
+    return <AuthContext.Provider value={postValue}>
         {children}
     </AuthContext.Provider>
 }

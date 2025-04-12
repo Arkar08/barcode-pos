@@ -119,8 +119,10 @@ const CategoryProvider = ({children}:ChildrenType)=>{
         setCategoryText('')
       }
 
+      const postValue = {category,loading,error,categoryText,categoryChange,createCategory,setEditCategoryText,editCategoryText,editText,editChange,updateCategory,CancelClick}
+
     return(
-        <CategoryContext.Provider value={{category,loading,error,categoryText,categoryChange,createCategory,setEditCategoryText,editCategoryText,editText,editChange,updateCategory,CancelClick}}>
+        <CategoryContext.Provider value={postValue}>
             {children}
         </CategoryContext.Provider>
     )
