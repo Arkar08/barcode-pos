@@ -241,3 +241,6 @@
 .boxText{
   text-transform: capitalize;
 }
+.inputEmail{
+  padding: 8px !important;
+}

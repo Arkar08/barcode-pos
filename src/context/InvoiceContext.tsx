@@ -98,6 +98,8 @@ const InvoiceProvider = ({children}:ChildrenType)=>{
         }).catch((error)=>{
             setLoading(false)
             console.log(error)
+            alert(error.response.data.message)
+            window.location.href = '/invoice'
             setError(error.response.data.message)
         })
     }

@@ -39,7 +39,7 @@ export default function Login(){
             name="username"
             rules={[{ required: true, message: "Please input your username or email!" }]}
           >
-            <Input placeholder="Enter Username or Email"/>
+            <Input placeholder="Enter Username or Email" className="inputEmail"/>
           </Form.Item>
           <Form.Item<FieldType>
             label="Password"

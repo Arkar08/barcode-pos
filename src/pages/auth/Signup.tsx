@@ -1,39 +1,32 @@
-import type { FormProps } from "antd";
 import { Button, Form, Input, Typography } from "antd";
-import { useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { FieldType1 } from "../../utils/Type";
 
-type FieldType = {
-  username?: string;
-  password?: string;
-  email?: string;
-};
 
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-  console.log("Success:", values);
-};
 
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
 
 const { Title } = Typography;
 
 const Signup = () => {
 
-    const [activeButton,setActiveButton] = useState<boolean>(false)
-
-    const handleActive = ()=>{
-        setActiveButton(!activeButton)
+    const context = useContext(AuthContext)
+  
+    if(!context){
+      throw Error("auth context does not provide in auth provider.")
     }
+  
+    const {onFinish1,onFinishFailed1,handleActive,activeButton} = context;
+
 
   return (
     <div className="loginContainer">
       <Form
         name="basic"
         layout="vertical"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        onFinish={onFinish1}
+        onFinishFailed={onFinishFailed1}
         autoComplete="off"
         className="form1"
       >
@@ -42,28 +35,28 @@ const Signup = () => {
         </Title>
         <div className="btnContainer">
           <Button variant="solid" className="customer" style={{background: activeButton? '':'#7070db',color:activeButton ? '':'white'}} onClick={handleActive}>
-            CUSTOMER
+            Admin
           </Button>
           <Button variant="solid" className="customer" style={{background: activeButton? '#7070db':'',color:activeButton ? 'white':''}} onClick={handleActive}>
             SUPPLIER
           </Button>
         </div>
         <div className="inputContainer">
-          <Form.Item<FieldType>
+          <Form.Item<FieldType1>
             label="Username"
             name="username"
             rules={[{ required: true, message: "Please input your username!" }]}
           >
-            <Input placeholder="Enter Username or Email" />
+            <Input placeholder="Enter Username or Email" className="inputEmail"/>
           </Form.Item>
-          <Form.Item<FieldType>
+          <Form.Item<FieldType1>
             label="Email"
             name="email"
             rules={[{ required: true, message: "email is not a valid email!" }]}
           >
-            <Input placeholder="Enter Username or Email" />
+            <Input placeholder="Enter Username or Email" className="inputEmail"/>
           </Form.Item>
-          <Form.Item<FieldType>
+          <Form.Item<FieldType1>
             label="Password"
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}

@@ -194,6 +194,8 @@ const UserProvider = ({children}:ChildrenType)=>{
         }).catch((error)=>{
             setLoading(false)
             console.log(error)
+            alert(error.response.data.message)
+            window.location.href = '/users'
             setError(error.response.data.message)
         })
     }

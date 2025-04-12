@@ -168,3 +168,10 @@ export type FieldType = {
     username?: string;
     password?: string;
   };
+
+  export type FieldType1 = {
+    username?: string;
+    password?: string;
+    email?: string;
+  };
+  
