@@ -179,6 +179,7 @@ const UserProvider = ({children}:ChildrenType)=>{
             }
         }).catch((error)=>{
             console.log(error)
+            alert(error.response.data.message)
             setError(error.response.data.message)
         })
     }
