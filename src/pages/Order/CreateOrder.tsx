@@ -86,7 +86,8 @@ const CreateOrder = () => {
                 setOrderData({
                   qty:0,
                   productName:'',
-                  price:0
+                  price:0,
+                  id:""
                 })
                 setOpenModal(false)
               }   
@@ -94,14 +95,20 @@ const CreateOrder = () => {
               setOrderData({
                 qty:0,
                 productName:'',
-                price:0
+                price:0,
+                id:""
               })
               setOpenModal(false)
             }
         };
       
         const handleCancel = () => {
-          console.log('cancel')
+          setOrderData({
+            qty:0,
+            productName:'',
+            price:0,
+            id:""
+          })
           setOpenModal(false)
         };
 
