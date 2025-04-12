@@ -171,7 +171,6 @@ const UserProvider = ({children}:ChildrenType)=>{
     }
 
     const createUser = async()=>{
-        console.log(createUserList)
         await Axios.post("users",createUserList).then((res)=>{
             if(res.data.status ===201){
                 alert(res.data.message)
