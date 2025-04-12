@@ -21,11 +21,14 @@ const FindProvider = ({children}:ChildrenType)=>{
     const [state,setState] = useState([])
 
     useEffect(()=>{
-        getCustomer()
-        getSupplier()
-        getProductName()
-        getRole()
-        getState()
+        const token = localStorage.getItem('token')
+        if(token){
+            getCustomer()
+            getSupplier()
+            getProductName()
+            getRole()
+            getState()
+        }
     },[])
 
     const getCustomer = async()=>{

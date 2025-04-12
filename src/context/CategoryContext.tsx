@@ -32,10 +32,13 @@ const CategoryProvider = ({children}:ChildrenType)=>{
 
 
     useEffect(()=>{
+        const token = localStorage.getItem('token')
+       if(token){
         getCategory()
         if(editCategoryText !== ''){
             EditCategory()
         }
+       }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[editCategoryText])
 

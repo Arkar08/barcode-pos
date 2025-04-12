@@ -60,9 +60,12 @@ const ProductProvider = ({children}:ChildrenType)=>{
 
 
     useEffect(()=>{
-        getProduct()
-        if(editProductId !== ''){
-            getProductId()
+        const token = localStorage.getItem('token')
+        if(token){
+            getProduct()
+            if(editProductId !== ''){
+                getProductId()
+            }
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[editProductId])

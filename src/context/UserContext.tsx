@@ -91,10 +91,13 @@ const UserProvider = ({children}:ChildrenType)=>{
 
 
     useEffect(()=>{
-        getUser()
-        if(editId !== ''){
-            getUserId()
-            getTownship()
+        const token = localStorage.getItem('token')
+        if(token){
+            getUser()
+            if(editId !== ''){
+                getUserId()
+                getTownship()
+            }
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[editId])

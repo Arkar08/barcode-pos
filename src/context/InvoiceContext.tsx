@@ -45,9 +45,12 @@ const InvoiceProvider = ({children}:ChildrenType)=>{
 
 
     useEffect(()=>{
-        getInvoice()
-        if(editInvoiceId !== ''){
-            editInvoice()
+        const token = localStorage.getItem('token')
+        if(token){
+            getInvoice()
+            if(editInvoiceId !== ''){
+                editInvoice()
+            }
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[editInvoiceId])

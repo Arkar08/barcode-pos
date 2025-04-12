@@ -78,9 +78,12 @@ const OrderProvider = ({children}:ChildrenType)=>{
 
 
       useEffect(()=>{
-        getOrder()
-        if(editId !== ''){
-            editOrder()
+        const token = localStorage.getItem('token')
+        if(token){
+            getOrder()
+            if(editId !== ''){
+                editOrder()
+            }
         }
       // eslint-disable-next-line react-hooks/exhaustive-deps
       },[editId])
